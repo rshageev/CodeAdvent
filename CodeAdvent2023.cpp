@@ -1,14 +1,9 @@
 import utils;
 
-import std;
-
-namespace stdr = std::ranges;
-namespace stdv = std::ranges::views;
+import AoC_2015.Day3;
 
 int main()
 {
-    for (const auto& line : ReadLines("input_10.txt") | stdv::filter(not_empty))
-    {
-        std::cout << line << '\n';
-    }
+    std::cout << "Part 1: " << Solve_1("2015/input_3.txt") << '\n';
+    std::cout << "Part 2: " << Solve_2("2015/input_3.txt") << '\n';
 }

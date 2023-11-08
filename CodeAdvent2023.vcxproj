@@ -20,6 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CodeAdvent2023.cpp" />
+    <ClCompile Include="solutions\2015\Day1.ixx" />
+    <ClCompile Include="solutions\2015\Day2.ixx" />
+    <ClCompile Include="solutions\2015\Day3.ixx" />
     <ClCompile Include="utils\FileUtils.cpp" />
     <ClCompile Include="utils\Math.ixx" />
     <ClCompile Include="utils\ParseUtils.cpp" />

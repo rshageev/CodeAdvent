@@ -19,6 +19,9 @@
     <Filter Include="Source Files\solutions">
       <UniqueIdentifier>{4aa6f74c-fe99-42e8-9b60-cd0e40f2c442}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\2015">
+      <UniqueIdentifier>{13fa1638-42b4-4885-a219-d3c7ccd06e58}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CodeAdvent2023.cpp">
@@ -35,6 +38,15 @@
     </ClCompile>
     <ClCompile Include="utils\Math.ixx">
       <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\2015\Day1.ixx">
+      <Filter>Source Files\solutions\2015</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\2015\Day2.ixx">
+      <Filter>Source Files\solutions\2015</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\2015\Day3.ixx">
+      <Filter>Source Files\solutions\2015</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
