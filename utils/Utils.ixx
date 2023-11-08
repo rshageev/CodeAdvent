@@ -4,6 +4,7 @@ export import std;
 
 export import :Math;
 export import :Array2D;
+export import :RectViews;
 
 export
 {
@@ -37,4 +38,18 @@ export
 	inline constexpr pred_not_empty not_empty;
 	inline constexpr pred_is_empty is_empty;
 	inline constexpr to_int_fn to_int;
+
+	/* Directions */
+	enum class Dir : char {
+		None  = 0,
+		Left  = 1,
+		Right = 2,
+		Up    = 3,
+		Down  = 4
+	};
+
+	constexpr Point DirToOffset(Dir dir) {
+		constexpr Point Offsets[] = { {0,0}, {-1,0}, {1,0}, {0,1}, {0,-1} };
+		return Offsets[std::to_underlying(dir)];
+	}
 }

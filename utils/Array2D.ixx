@@ -37,20 +37,6 @@ export
 			: Array2D(Rect{ 0, 0, w, h }, fill_value)
 		{}
 
-		Array2D(std::initializer_list<ilist> elem_list)
-		{
-			area.h = static_cast<int>(std::size(elem_list));
-			area.w = (area.h == 0) ? 0 : static_cast<int>(std::size(*elem_list.begin()));
-
-			if (area.w > 0)
-			{
-				data.reset(new Elem[area.w * area.h]);
-
-				auto data_view = elem_list | std::views::reverse | std::views::join;
-				std::copy(data_view.begin(), data_view.end(), begin());
-			}
-		}
-
 		// Move and copy
 
 		Array2D(const Array2D& rhs)
@@ -134,6 +120,15 @@ export
 
 		std::ranges::copy(data, out.begin());
 
+		return out;
+	}
+
+	template<class T, class Pred>
+	auto TransformArray2D(const Array2D<T>& arr, Pred pred)
+	{
+		using RetType = std::invoke_result_t<Pred, T>;
+		Array2D<RetType> out(arr.Area());
+		std::transform(arr.begin(), arr.end(), out.begin(), pred);
 		return out;
 	}
 }

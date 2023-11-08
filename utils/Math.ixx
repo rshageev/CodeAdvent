@@ -13,7 +13,7 @@ export
 		T x = {};
 		T y = {};
 
-		auto operator<=> (const TPoint&) const = default;
+		constexpr auto operator<=> (const TPoint&) const = default;
 
 		TPoint& operator+= (const TPoint& pt) { x += pt.x; y += pt.y; return *this; }
 		TPoint& operator-= (const TPoint& pt) { x -= pt.x; y -= pt.y; return *this; }

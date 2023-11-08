@@ -22,6 +22,9 @@
     <Filter Include="Source Files\solutions\2015">
       <UniqueIdentifier>{13fa1638-42b4-4885-a219-d3c7ccd06e58}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\2021">
+      <UniqueIdentifier>{5dc9e44b-c795-401f-9613-25716a94b142}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CodeAdvent2023.cpp">
@@ -39,17 +42,26 @@
     <ClCompile Include="utils\Math.ixx">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2015\Day1.ixx">
+    <ClCompile Include="solutions\2015\Task_2015_1.ixx">
       <Filter>Source Files\solutions\2015</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2015\Day2.ixx">
+    <ClCompile Include="solutions\2015\Task_2015_2.ixx">
       <Filter>Source Files\solutions\2015</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2015\Day3.ixx">
+    <ClCompile Include="solutions\2015\Task_2015_3.ixx">
       <Filter>Source Files\solutions\2015</Filter>
     </ClCompile>
     <ClCompile Include="utils\Array2D.ixx">
       <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\2021\Task_2021_25.ixx">
+      <Filter>Source Files\solutions\2021</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RectViews.ixx">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\2021\Task_2021_1.ixx">
+      <Filter>Source Files\solutions\2021</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
