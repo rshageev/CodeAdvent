@@ -2,7 +2,8 @@ export module utils;
 
 export import std;
 
-export import :math;
+export import :Math;
+export import :Array2D;
 
 export
 {
