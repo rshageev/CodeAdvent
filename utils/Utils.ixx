@@ -16,8 +16,9 @@ export
 	std::vector<std::string> ReadLines(const std::filesystem::path& filename);
 
 	/* Parsing */
-	std::optional<int> ToInt(std::string_view str);
-	std::tuple<int, std::string_view> ReadInt(std::string_view str, int def = 0);
+	int ReadInt(std::string_view& str, int def = 0);
+	std::string_view ReadWord(std::string_view& str, const char* delims = " ,.;");
+	bool Skip(std::string_view& str, std::string_view prefix);
 
 	/* Predicates */
 	struct pred_not_empty {
