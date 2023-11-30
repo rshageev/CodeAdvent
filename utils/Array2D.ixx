@@ -131,4 +131,29 @@ export
 		std::transform(arr.begin(), arr.end(), out.begin(), pred);
 		return out;
 	}
+
+	template<class T>
+	void CopyArray2D(const Array2D<T>& src, Array2D<T>& dst)
+	{
+		const Rect src_rect = src.Area();
+		for (int y = src_rect.y; y < src_rect.y + src_rect.h; ++y) {
+			for (int x = src_rect.x; x < src_rect.x + src_rect.w; ++x) {
+				Point pos{ x, y };
+				dst[pos] = src[pos];
+			}
+		}
+	}
+
+	template<class T, class OStream, class Pred>
+	void PrintArray2D(const Array2D<T>& arr, OStream&& out, Pred&& to_char)
+	{
+		const Rect rect = arr.Area();
+		for (int y = rect.y + rect.h - 1; y >= rect.y; --y) {
+			for (int x = rect.x; x < rect.x + rect.w; ++x) {
+				Point pos{ x, y };
+				out << to_char(arr[pos]);
+			}
+			out << '\n';
+		}
+	}
 }

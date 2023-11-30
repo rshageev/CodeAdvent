@@ -27,6 +27,7 @@
     <ClCompile Include="solutions\2021\Task_2021_25.ixx" />
     <ClCompile Include="solutions\2022\Task_2022_1.ixx" />
     <ClCompile Include="solutions\2022\Task_2022_16.ixx" />
+    <ClCompile Include="solutions\2022\Task_2022_24.ixx" />
     <ClCompile Include="solutions\2022\Task_2022_25.ixx" />
     <ClCompile Include="utils\Array2D.ixx" />
     <ClCompile Include="utils\FileUtils.cpp" />

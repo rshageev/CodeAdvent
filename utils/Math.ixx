@@ -72,6 +72,10 @@ export
 		return pt.x >= rect.x && pt.y >= rect.y && pt.x < rect.x + rect.w && pt.y < rect.y + rect.h;
 	}
 
+	template<Number T>
+	constexpr TRect<T> Inflated(const TRect<T>& rect, T dx, T dy) {
+		return { rect.x - dx, rect.y - dy, rect.w + dx + dx, rect.h + dy + dy };
+	}
 
 	using Point = TPoint<int>;
 	using Pointf = TPoint<float>;
@@ -81,5 +85,14 @@ export
 	Pointf ToFloat(Point pt)
 	{
 		return { static_cast<float>(pt.x), static_cast<float>(pt.y) };
+	}
+
+	constexpr Point WrapPoint(Point pos, Rect area)
+	{
+		while (pos.x >= area.x + area.w) pos.x -= area.w;
+		while (pos.x < area.x) pos.x += area.w;
+		while (pos.y >= area.y + area.h) pos.y -= area.h;
+		while (pos.y < area.y) pos.y += area.h;
+		return pos;
 	}
 }

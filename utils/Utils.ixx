@@ -41,16 +41,17 @@ export
 	inline constexpr to_int_fn to_int;
 
 	/* Directions */
-	enum class Dir : char {
-		None  = 0,
-		Left  = 1,
-		Right = 2,
-		Up    = 3,
-		Down  = 4
-	};
+	using Direction = std::uint8_t;
+	namespace Dir {
+		inline constexpr Direction None = 0;
+		inline constexpr Direction Left = 1;
+		inline constexpr Direction Right = 2;
+		inline constexpr Direction Up = 4;
+		inline constexpr Direction Down = 8;
+	}
 
-	constexpr Point DirToOffset(Dir dir) {
-		constexpr Point Offsets[] = { {0,0}, {-1,0}, {1,0}, {0,1}, {0,-1} };
-		return Offsets[std::to_underlying(dir)];
+	constexpr Point DirToOffset(Direction dir) {
+		constexpr Point Offsets[9] = { {0,0}, {-1,0}, {1,0}, {}, {0,1}, {}, {}, {}, {0,-1} };
+		return Offsets[dir];
 	}
 }

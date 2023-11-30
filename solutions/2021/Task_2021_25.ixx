@@ -8,7 +8,7 @@ export int Solve_2(const std::filesystem::path& input);
 
 module : private;
 
-Dir CharToDir(char ch)
+Direction CharToDir(char ch)
 {
     switch (ch) {
     case '-': return Dir::None;
@@ -18,22 +18,13 @@ Dir CharToDir(char ch)
     return Dir::None;
 }
 
-Point WrapPos(Point pos, Rect area)
-{
-    while (pos.x >= area.x + area.w) pos.x -= area.w;
-    //while (pos.x < area.x) pos.x += area.w;
-    //while (pos.y >= area.y + area.h) pos.y -= area.h;
-    while (pos.y < area.y) pos.y += area.h;
-    return pos;
-}
-
-Array2D<Dir> LoadField(const std::filesystem::path& input)
+Array2D<Direction> LoadField(const std::filesystem::path& input)
 {
     const auto file_data = ReadText(input);
     return Array2DFromString(file_data, CharToDir);
 }
 
-bool UpdateHerd(const Array2D<Dir>& old_state, Array2D<Dir>& new_state, Dir dir)
+bool UpdateHerd(const Array2D<Direction>& old_state, Array2D<Direction>& new_state, Direction dir)
 {
     const auto offset = DirToOffset(dir);
     const auto area = old_state.Area();
@@ -45,7 +36,7 @@ bool UpdateHerd(const Array2D<Dir>& old_state, Array2D<Dir>& new_state, Dir dir)
     {
         if (old_state[old_pos] == dir)
         {
-            const auto new_pos = WrapPos(old_pos + offset, area);
+            const auto new_pos = WrapPoint(old_pos + offset, area);
             if (old_state[new_pos] == Dir::None) {
                 new_state[new_pos] = dir;
                 new_state[old_pos] = Dir::None;
