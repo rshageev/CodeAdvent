@@ -28,6 +28,9 @@
     <Filter Include="Source Files\solutions\2022">
       <UniqueIdentifier>{8d8c5347-0710-4645-9961-98fed9bc5d19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\2023">
+      <UniqueIdentifier>{001b8707-a717-430c-ba6c-ee65376c6198}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CodeAdvent2023.cpp">
@@ -77,6 +80,9 @@
     </ClCompile>
     <ClCompile Include="solutions\2022\Task_2022_24.ixx">
       <Filter>Source Files\solutions\2022</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\2023\Task_2023_1.ixx">
+      <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

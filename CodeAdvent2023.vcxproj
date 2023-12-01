@@ -29,6 +29,7 @@
     <ClCompile Include="solutions\2022\Task_2022_16.ixx" />
     <ClCompile Include="solutions\2022\Task_2022_24.ixx" />
     <ClCompile Include="solutions\2022\Task_2022_25.ixx" />
+    <ClCompile Include="solutions\2023\Task_2023_1.ixx" />
     <ClCompile Include="utils\Array2D.ixx" />
     <ClCompile Include="utils\FileUtils.cpp" />
     <ClCompile Include="utils\Math.ixx" />
