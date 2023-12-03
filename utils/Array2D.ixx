@@ -123,6 +123,21 @@ export
 		return out;
 	}
 
+	template<class T>
+	void FlipArrayVertical(Array2D<T>& arr)
+	{
+		const Rect rect = arr.Area();
+		for (int y = 0; y < rect.h / 2; ++y)
+		{
+			for (int x = 0; x < rect.w; ++x)
+			{
+				Point p1{ rect.x + x, rect.y + y };
+				Point p2{ rect.x + x, rect.y + rect.h - y - 1 };
+				std::swap(arr[p1], arr[p2]);
+			}
+		}
+	}
+
 	template<class T, class Pred>
 	auto TransformArray2D(const Array2D<T>& arr, Pred pred)
 	{
