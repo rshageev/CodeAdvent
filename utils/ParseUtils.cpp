@@ -2,14 +2,6 @@ module utils;
 
 import std;
 
-int ReadInt(std::string_view& str, int def)
-{
-	int value = def;
-	const auto [ptr, ec] = std::from_chars(str.data(), str.data() + str.size(), value, 10);
-	str.remove_prefix(ptr - str.data());
-	return value;
-}
-
 std::string_view ReadWord(std::string_view& str, const char* delims)
 {
 	const auto pos = str.find_first_of(delims, 0);
