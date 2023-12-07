@@ -53,6 +53,13 @@ export
 		return ch >= '0' && ch <= '9';
 	}
 
+	template<size_t N>
+	struct tuple_get_fn {
+		auto operator() (auto&& t) { return std::get<N>(t); }
+	};
+	template<size_t N>
+	inline constexpr tuple_get_fn<N> tuple_get;
+
 	/* Directions */
 	using Direction = std::uint8_t;
 	namespace Dir {
