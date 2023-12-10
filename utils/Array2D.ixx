@@ -77,10 +77,18 @@ export
 		const Elem& operator[](Point pt) const { return data[PosToIndex(pt)]; }
 		Elem& operator[](Point pt) { return data[PosToIndex(pt)]; }
 
+		std::span<Elem> GetRow(int y) {
+			return { data.get() + (y - area.y) * area.w, static_cast<size_t>(area.w) };
+		}
+		std::span<const Elem> GetRow(int y) const {
+			return { data.get() + (y - area.y) * area.w, static_cast<size_t>(area.w) };
+		}
+
 		auto begin() { return data.get(); }
 		auto end() { return data.get() + area.w * area.h; }
 		auto begin() const { return data.get(); }
 		auto end() const { return data.get() + area.w * area.h; }
+
 
 		// Area & Size
 
@@ -170,5 +178,30 @@ export
 			}
 			out << '\n';
 		}
+	}
+
+	template<class T, class OStream, class Pred>
+	void PrintData2D(Rect rect, OStream&& out, Pred&& to_char)
+	{
+		for (int y = rect.y + rect.h - 1; y >= rect.y; --y) {
+			for (int x = rect.x; x < rect.x + rect.w; ++x) {
+				Point pos{ x, y };
+				out << to_char(pos);
+			}
+			out << '\n';
+		}
+	}
+
+	template<class Elem, class T>
+	Point FindInArray2D(const Array2D<Elem>& arr, const T& value)
+	{
+		const Rect rect = arr.Area();
+		Point pos;
+		for (pos.y = rect.y; pos.y < rect.y + rect.h; ++pos.y) {
+			for (pos.x = rect.x; pos.x < rect.x + rect.w; ++pos.x) {
+				if (arr[pos] == value) return pos;
+			}
+		}
+		return pos;
 	}
 }

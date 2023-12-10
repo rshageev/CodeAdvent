@@ -21,13 +21,13 @@ export
 		TPoint& operator*= (T v) { x *= v; y *= v; return *this; }
 		TPoint& operator/= (T v) { x /= v; y /= v; return *this; }
 
-		friend TPoint operator+ (TPoint pt1, TPoint pt2) { return { pt1.x + pt2.x, pt1.y + pt2.y }; }
-		friend TPoint operator- (TPoint pt1, TPoint pt2) { return { pt1.x - pt2.x, pt1.y - pt2.y }; }
+		constexpr friend TPoint operator+ (TPoint pt1, TPoint pt2) { return { pt1.x + pt2.x, pt1.y + pt2.y }; }
+		constexpr friend TPoint operator- (TPoint pt1, TPoint pt2) { return { pt1.x - pt2.x, pt1.y - pt2.y }; }
 
-		friend TPoint operator* (TPoint pt, T v) { return { pt.x * v, pt.y * v }; }
-		friend TPoint operator* (T v, TPoint pt) { return { pt.x * v, pt.y * v }; }
+		constexpr friend TPoint operator* (TPoint pt, T v) { return { pt.x * v, pt.y * v }; }
+		constexpr friend TPoint operator* (T v, TPoint pt) { return { pt.x * v, pt.y * v }; }
 
-		friend TPoint operator/ (TPoint pt, T v) { return { pt.x / v, pt.y / v }; }
+		constexpr friend TPoint operator/ (TPoint pt, T v) { return { pt.x / v, pt.y / v }; }
 	};
 
 

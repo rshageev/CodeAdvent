@@ -74,4 +74,26 @@ export
 		constexpr Point Offsets[9] = { {0,0}, {-1,0}, {1,0}, {}, {0,1}, {}, {}, {}, {0,-1} };
 		return Offsets[dir];
 	}
+
+	constexpr Point MovePoint(Point pt, Direction dir) {
+		return pt + DirToOffset(dir);
+	}
+	constexpr bool IsVertical(Direction dir) {
+		return dir & (Dir::Up | Dir::Down);
+	}
+	constexpr bool IsHorizontal(Direction dir) {
+		return dir & (Dir::Left | Dir::Right);
+	}
+
+	constexpr Direction Opposite(Direction dir) {
+		switch (dir) {
+			case Dir::Left: return Dir::Right;
+			case Dir::Right: return Dir::Left;
+			case Dir::Down: return Dir::Up;
+			case Dir::Up: return Dir::Down;
+			default: return dir;
+		}
+	}
+
+	inline constexpr Point Neighbours4[] = { {1,0}, {-1,0}, {0,1}, {0,-1} };
 }
