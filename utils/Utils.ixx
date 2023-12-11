@@ -55,10 +55,39 @@ export
 
 	template<size_t N>
 	struct tuple_get_fn {
-		auto operator() (auto&& t) { return std::get<N>(t); }
+		constexpr auto operator() (auto&& t) { return std::get<N>(t); }
 	};
 	template<size_t N>
 	inline constexpr tuple_get_fn<N> tuple_get;
+
+	template<auto V>
+	struct equal_fn {
+		constexpr bool operator() (auto&& v) const { return v == V; }
+	};
+	template<auto V>
+	inline constexpr equal_fn<V> equal;
+
+	template<class P>
+	struct apply_to_pair {
+		P pred;
+		auto operator() (auto&& p) {
+			auto& [p1, p2] = p;
+			return std::invoke(pred, p1, p2);
+		}
+	};
+
+	template<class P>
+	struct apply_to_pair_rev {
+		P pred;
+		auto operator() (auto&& p) {
+			auto& [p1, p2] = p;
+			return std::invoke(pred, p2, p1);
+		}
+	};
+
+	constexpr bool contains(const auto& range, const auto& v) {
+		return stdr::find(range, v) != stdr::end(range);
+	}
 
 	/* Directions */
 	using Direction = std::uint8_t;

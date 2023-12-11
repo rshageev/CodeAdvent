@@ -27,16 +27,14 @@ History ParseLine(std::string_view line)
 
 std::vector<int> CalcDifference(std::span<const int> values)
 {
-    std::vector<int> out;
-    for (size_t i = 1; i < values.size(); ++i) {
-        out.push_back(values[i] - values[i - 1]);
-    }
-    return out;  
+    return values | stdv::pairwise
+        | stdv::transform(apply_to_pair_rev<std::minus<>>{})
+        | stdr::to<std::vector>();
 }
 
 bool AllZeroes(std::span<const int> values)
 {
-    return stdr::all_of(values, [](auto v) { return v == 0; });
+    return stdr::all_of(values, equal<0>);
 }
 
 void CalcDifferences(History& history)
@@ -71,17 +69,6 @@ int ExtrapolatePrev(History& history)
     return history[0].front();
 }
 
-void Print(const History& history)
-{
-    for (auto row : history) {
-        for (auto v : row) {
-            std::cout << v << ", ";
-        }
-        std::cout << '\n';
-    }
-    std::cout << "\n\n";
-}
-
 int Solve_1(const std::filesystem::path& input)
 {
     int sum = 0;
@@ -90,9 +77,7 @@ int Solve_1(const std::filesystem::path& input)
     {
         auto history = ParseLine(line);
         CalcDifferences(history);
-        sum += Extrapolate(history);
-
-        Print(history);     
+        sum += Extrapolate(history);  
     }
     return sum;
 }
@@ -106,8 +91,6 @@ int Solve_2(const std::filesystem::path& input)
         auto history = ParseLine(line);
         CalcDifferences(history);
         sum += ExtrapolatePrev(history);
-
-        Print(history);
     }
     return sum;
 }

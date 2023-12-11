@@ -11,7 +11,7 @@ module : private;
 std::vector<Point> LoadStarPositions(const std::filesystem::path& input)
 {
     const auto data = ReadText(input);
-    const auto map = Array2DFromString(data, [](char ch) { return ch == '#'; });
+    const auto map = Array2DFromString(data, equal<'#'>);
 
     std::vector<Point> stars;
     for (Point pos : to_cell_coords(map)) {
@@ -24,12 +24,9 @@ void Expand(std::span<Point> stars, int factor)
 {
     auto expand = [=](int Point::* coord) {
         stdr::sort(stars, std::less{}, coord);
-        for (size_t idx = 1; idx < stars.size(); ++idx) {
-            if (const auto gap = stars[idx].*coord - stars[idx - 1].*coord - 1; gap > 0) {
-                for (size_t i = idx; i < stars.size(); ++i) {
-                    stars[i].*coord += gap * (factor - 1);
-                }
-            }
+        for (int offset = 0; auto [s1, s2] : stars | stdv::pairwise) {     
+            offset += std::max(0, (offset + s2.*coord - s1.*coord - 1)) * (factor - 1);
+            s2.*coord += offset;
         }
     };
     expand(&Point::x);
@@ -46,8 +43,7 @@ size_t AllDistances(std::span<const Point> stars)
     size_t sum = 0;
     for (size_t i1 = 0; i1 < stars.size() - 1; ++i1) {
         for (size_t i2 = i1 + 1; i2 < stars.size(); ++i2) {
-            const auto dist = Distance(stars[i1], stars[i2]);
-            sum += static_cast<size_t>(dist);
+            sum += static_cast<size_t>(Distance(stars[i1], stars[i2]));
         }
     }
     return sum;

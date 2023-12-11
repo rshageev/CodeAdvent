@@ -41,9 +41,7 @@ Card ParseLine(std::string_view str)
 
 int CountWinningNumbers(const Card& card)
 {
-    auto is_winning = [&card](int num) {
-        return stdr::find(card.win_numbers, num) != stdr::end(card.win_numbers);
-    };
+    auto is_winning = [&card](int num) { return contains(card.win_numbers, num); };
     return stdr::count_if(card.my_numbers, is_winning);
 }
 

@@ -59,9 +59,7 @@ Game ParseLine(std::string_view str)
 bool IsGamePossible(const Game& game, const CubeSet& bag)
 {
     auto set_valid = [&bag](const CubeSet& set) {
-        return stdr::all_of(stdv::zip(set, bag), [](auto p) {
-            return std::get<0>(p) <= std::get<1>(p);
-        });
+        return stdr::all_of(stdv::zip(set, bag), apply_to_pair<std::less_equal<>>{});
     };
     return stdr::all_of(game.sets, set_valid);
 }

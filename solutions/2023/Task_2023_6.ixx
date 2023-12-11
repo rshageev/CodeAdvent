@@ -52,6 +52,5 @@ std::uint64_t Solve_2()
     constexpr Race test_race = { 71530, 940200 };
     constexpr Race race = { 38677673, 234102711571236 };
 
-
     return CountWaysToWin(race);
 }
