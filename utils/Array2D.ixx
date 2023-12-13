@@ -94,6 +94,8 @@ export
 
 		const Rect& Area() const { return area; }
 		Point Size() const { return { area.w, area.h }; }
+		int Width() const { return area.w; }
+		int Height() const { return area.h; }
 
 		void SetOrigin(Point pt) {
 			area.x = pt.x;
@@ -108,6 +110,26 @@ export
 			return (pt.y - area.y) * area.w + (pt.x - area.x);
 		}
 	};
+
+	template<class R, class Pred>
+	auto Array2DFromLines(R&& lines_rng, Pred&& pred)
+	{
+		const auto lines = lines_rng | std::ranges::to<std::vector>();
+
+		const auto h = lines.size();
+		const auto w = lines.empty() ? 0 : lines[0].size();
+
+		Array2D<std::invoke_result_t<Pred, char>> out(static_cast<int>(w), static_cast<int>(h));
+
+		auto data = lines
+			| std::views::reverse
+			| std::views::join
+			| std::views::transform(std::forward<Pred>(pred));
+
+		std::ranges::copy(data, out.begin());
+
+		return out;
+	}
 
 	template<class Pred>
 	auto Array2DFromString(std::string_view str, Pred&& pred, char separator = '\n')
