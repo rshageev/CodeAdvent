@@ -12,6 +12,8 @@ struct Data
 {
     std::string str;
     std::vector<size_t> lengths;
+
+    mutable std::vector<std::vector<std::optional<size_t>>> cache;
 };
 
 Data ParseLine(std::string_view str)
@@ -34,51 +36,31 @@ Data Unfold(const Data& data)
     return out;
 }
 
-struct Ctx
+bool SequenceCanStartFrom(std::string_view data, size_t start_pos, size_t seq_length)
 {
-    Ctx(const Data& data)
-        : str(data.str)
-        , lengths(data.lengths)
-    {
-        cache.resize(data.str.size());
-        for (auto& cc : cache) {
-            cc.resize(data.lengths.size());
-        }
-    }
-
-    std::string_view str;
-    std::span<const size_t> lengths;
-
-    std::vector<std::vector<std::optional<size_t>>> cache;
-};
-
-bool SequenceCanStartFrom(std::string_view data, size_t seq_length)
-{
-    return (data.size() >= seq_length) // enough string to fit the sequence
-        && (data.find_first_not_of("#?") >= seq_length) // no '.' inside sequence
-        && (data.size() == seq_length || data[seq_length] != '#'); // sequence doesn't continue afterwards
+    const auto end_pos = start_pos + seq_length;
+    return (data.size() >= end_pos) // enough string to fit the sequence
+        && (data.find_first_not_of("#?", start_pos) >= end_pos) // no '.' inside sequence
+        && (data.size() == end_pos || data[end_pos] != '#'); // sequence doesn't continue afterwards
 }
 
 // find all possible start positions for sequence of given length
-std::vector<size_t> FindAllStartPositions(const Ctx& ctx, size_t start_pos, size_t seq_idx)
+std::vector<size_t> FindAllStartPositions(const Data& data, size_t start_pos, size_t seq_idx)
 {
     std::vector<size_t> out;
 
-    std::string_view data = ctx.str;
-    const auto seq_length = ctx.lengths[seq_idx];
+    const auto seq_length = data.lengths[seq_idx];
 
-    if (data.size() < seq_length + start_pos)
+    if (data.str.size() < seq_length + start_pos)
         return out;
 
-    data.remove_prefix(start_pos);
-
-    for (size_t i = 0; i <= data.size() - seq_length; ++i)
+    for (size_t i = start_pos; i <= data.str.size() - seq_length; ++i)
     {
-        if (SequenceCanStartFrom(data.substr(i), seq_length)) {
-            out.push_back(i + start_pos);
+        if (SequenceCanStartFrom(data.str, i, seq_length)) {
+            out.push_back(i);
         }
         
-        if (data[i] == '#') {
+        if (data.str[i] == '#') {
             break;
         }
     }
@@ -86,26 +68,34 @@ std::vector<size_t> FindAllStartPositions(const Ctx& ctx, size_t start_pos, size
     return out;
 }
 
-size_t CalcAllCombinations(Ctx& ctx, size_t start_pos = 0, size_t seq_idx = 0)
+size_t CalcAllCombinations(const Data& data, size_t start_pos = 0, size_t seq_idx = 0)
 {
-    if (start_pos >= ctx.str.size() || seq_idx >= ctx.lengths.size()) {
+    if (start_pos >= data.str.size() || seq_idx >= data.lengths.size()) {
         return 0;
     }
 
+    // init cache
+    if (data.cache.empty()) {
+        data.cache.resize(data.str.size());
+        for (auto& cc : data.cache) {
+            cc.resize(data.lengths.size());
+        }
+    }
+
     // check cache first
-    if (auto res = ctx.cache[start_pos][seq_idx]) {
+    if (auto res = data.cache[start_pos][seq_idx]) {
         return *res;
     }
 
 
     size_t count = 0;
-    const auto length = ctx.lengths[seq_idx];
-    auto positions = FindAllStartPositions(ctx, start_pos, seq_idx);
+    const auto length = data.lengths[seq_idx];
+    auto positions = FindAllStartPositions(data, start_pos, seq_idx);
 
-    if (seq_idx == (ctx.lengths.size() - 1))
+    if (seq_idx == (data.lengths.size() - 1))
     {
         for (auto pos : positions) {
-            if (ctx.str.find('#', pos + length) == std::string_view::npos) {
+            if (data.str.find('#', pos + length) == std::string::npos) {
                 ++count;
             }
         }
@@ -113,12 +103,12 @@ size_t CalcAllCombinations(Ctx& ctx, size_t start_pos = 0, size_t seq_idx = 0)
     else
     {
         for (auto pos : positions) {
-            count += CalcAllCombinations(ctx, pos + length + 1, seq_idx + 1);
+            count += CalcAllCombinations(data, pos + length + 1, seq_idx + 1);
         }
     }
 
     // store result in cache
-    ctx.cache[start_pos][seq_idx] = count;
+    data.cache[start_pos][seq_idx] = count;
 
     return count;
 }
@@ -129,8 +119,7 @@ size_t Solve_1(const std::filesystem::path& input)
     for (const auto& line : ReadLines(input) | stdv::filter(not_empty))
     {
         const auto data = ParseLine(line);
-        Ctx ctx(data);
-        const auto res = CalcAllCombinations(ctx);
+        const auto res = CalcAllCombinations(data);
         sum += res;
     }
     return sum;
@@ -142,8 +131,7 @@ size_t Solve_2(const std::filesystem::path& input)
     for (const auto& line : ReadLines(input) | stdv::filter(not_empty))
     {
         const auto data = Unfold(ParseLine(line));
-        Ctx ctx(data);
-        const auto res = CalcAllCombinations(ctx);
+        const auto res = CalcAllCombinations(data);
         sum += res;
     }
     return sum;
