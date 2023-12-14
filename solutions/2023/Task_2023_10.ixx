@@ -107,7 +107,7 @@ int CountInside(Rect area, const Path& path)
 
     // Calculate inside cells
     int count = 0;
-    for (int row = area.y; row < area.y + area.h; ++row)
+    for (int row : path_dirs.RowIndices())
     {
         Direction loop_dir = Dir::None;
         bool inside = false;

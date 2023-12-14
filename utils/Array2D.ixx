@@ -84,6 +84,9 @@ export
 			return { data.get() + (y - area.y) * area.w, static_cast<size_t>(area.w) };
 		}
 
+		auto ColumnIndices() const { return std::views::iota(area.x, area.x + area.w); }
+		auto RowIndices() const { return std::views::iota(area.y, area.y + area.h); }
+
 		auto begin() { return data.get(); }
 		auto end() { return data.get() + area.w * area.h; }
 		auto begin() const { return data.get(); }

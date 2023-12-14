@@ -5,6 +5,8 @@ export import std;
 export import :Math;
 export import :Array2D;
 export import :RectViews;
+export import :Timer;
+export import :Functional;
 
 export
 {
@@ -27,67 +29,6 @@ export
 	std::string_view ReadWord(std::string_view& str, const char* delims = " ,.;");
 	bool Skip(std::string_view& str, std::string_view prefix);
 
-	
-
-	/* Predicates */
-	struct pred_not_empty {
-		constexpr bool operator() (auto&& v) { return !v.empty(); }
-	};
-	struct pred_is_empty {
-		constexpr bool operator() (auto&& v) { return v.empty(); }
-	};
-	struct to_int_fn {
-		constexpr int operator() (auto&& v) {
-			std::string_view str(v);
-			int value = def;
-			std::from_chars(str.data(), str.data() + str.size(), value);
-			return value;
-		}
-		int def = 0;
-	};
-	inline constexpr pred_not_empty not_empty;
-	inline constexpr pred_is_empty is_empty;
-	inline constexpr to_int_fn to_int;
-
-	constexpr bool is_digit(char ch) {
-		return ch >= '0' && ch <= '9';
-	}
-
-	template<size_t N>
-	struct tuple_get_fn {
-		constexpr auto operator() (auto&& t) { return std::get<N>(t); }
-	};
-	template<size_t N>
-	inline constexpr tuple_get_fn<N> tuple_get;
-
-	template<auto V>
-	struct equal_fn {
-		constexpr bool operator() (auto&& v) const { return v == V; }
-	};
-	template<auto V>
-	inline constexpr equal_fn<V> equal;
-
-	template<class P>
-	struct apply_to_pair {
-		P pred;
-		auto operator() (auto&& p) {
-			auto& [p1, p2] = p;
-			return std::invoke(pred, p1, p2);
-		}
-	};
-
-	template<class P>
-	struct apply_to_pair_rev {
-		P pred;
-		auto operator() (auto&& p) {
-			auto& [p1, p2] = p;
-			return std::invoke(pred, p2, p1);
-		}
-	};
-
-	constexpr bool contains(const auto& range, const auto& v) {
-		return stdr::find(range, v) != stdr::end(range);
-	}
 
 	/* Directions */
 	using Direction = std::uint8_t;

@@ -26,8 +26,8 @@ void MoveRock(Array2D<char>& arr, Point rock_pos, Point dir)
 
 void TiltUp(Array2D<char>& arr)
 {
-    for (int x = 0; x < arr.Width(); ++x) {
-        for (int y = arr.Height() - 2; y >= 0; --y) {
+    for (int x : arr.ColumnIndices()) {
+        for (int y : arr.RowIndices() | stdv::reverse | stdv::drop(1)) {
             if (arr[{x, y}] == 'O') {
                 MoveRock(arr, Point{ x, y }, Point{ 0, 1 });
             }
@@ -37,8 +37,8 @@ void TiltUp(Array2D<char>& arr)
 
 void TiltDown(Array2D<char>& arr)
 {
-    for (int x = 0; x < arr.Width(); ++x) {
-        for (int y = 1; y < arr.Height(); ++y) {
+    for (int x : arr.ColumnIndices()) {
+        for (int y : arr.RowIndices() | stdv::drop(1)) {
             if (arr[{x, y}] == 'O') {
                 MoveRock(arr, Point{ x, y }, Point{ 0, -1 });
             }
@@ -48,8 +48,8 @@ void TiltDown(Array2D<char>& arr)
 
 void TiltLeft(Array2D<char>& arr)
 {
-    for (int y = 0; y < arr.Height(); ++y) {
-        for (int x = 1; x < arr.Width(); ++x) {
+    for (int y : arr.RowIndices()) {
+        for (int x : arr.ColumnIndices() | stdv::drop(1)) {
             if (arr[{x, y}] == 'O') {
                 MoveRock(arr, Point{ x, y }, Point{ -1, 0 });
             }
@@ -59,8 +59,8 @@ void TiltLeft(Array2D<char>& arr)
 
 void TiltRight(Array2D<char>& arr)
 {
-    for (int y = 0; y < arr.Height(); ++y) {
-        for (int x = arr.Width() - 2; x >= 0; --x) {
+    for (int y : arr.RowIndices()) {
+        for (int x : arr.ColumnIndices() | stdv::reverse | stdv::drop(1)) {
             if (arr[{x, y}] == 'O') {
                 MoveRock(arr, Point{ x, y }, Point{ 1, 0 });
             }

@@ -76,10 +76,10 @@ std::vector<Point> ReadSymbolPositions(const std::filesystem::path& input, Pred&
     return out;
 }
 
-bool IsPartValid(const PartNumber& part_number, std::span<const Point> all_parts)
+bool IsPartValid(const Rect& part_rect, std::span<const Point> all_parts)
 {
     for (Point pt : all_parts) {
-        if (Contains(part_number.rect, pt))
+        if (Contains(part_rect, pt))
             return true;
     }
     return false;
@@ -89,12 +89,12 @@ int Solve_1(const std::filesystem::path& input)
 {
     auto part_numbers = ReadPartNumbers(input);
 
-    auto is_part = [](char ch) { return ch != '.' && (ch < '0' || ch > '9'); };
+    auto is_part = [](char ch) { return ch != '.' && !is_digit(ch); };
     auto parts = ReadSymbolPositions(input, is_part);
 
     int sum = 0;
     for (const auto& pn : part_numbers) {
-        if (IsPartValid(pn, parts)) {
+        if (IsPartValid(pn.rect, parts)) {
             sum += pn.value;
         }
     }
