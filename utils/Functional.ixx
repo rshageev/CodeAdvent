@@ -29,10 +29,6 @@ export
 	};	
 	inline constexpr from_chars_to<int> to_int;
 
-	constexpr bool is_digit(char ch) {
-		return ch >= '0' && ch <= '9';
-	}
-
 	template<size_t N>
 	struct tuple_get_fn {
 		constexpr auto operator() (auto&& t) { return std::get<N>(t); }
@@ -64,6 +60,21 @@ export
 			return std::invoke(pred, p2, p1);
 		}
 	};
+
+	template<class T>
+	struct make_fn {
+		template<class ...Args>
+		constexpr T operator()(Args&&... args) const {
+			return T{ std::forward<Args>(args)... };
+		}
+	};
+	template<class T>
+	inline constexpr make_fn<T> make;
+
+
+	constexpr bool is_digit(char ch) {
+		return ch >= '0' && ch <= '9';
+	}
 
 	constexpr bool contains(const auto& range, const auto& v) {
 		return stdr::find(range, v) != stdr::end(range);
