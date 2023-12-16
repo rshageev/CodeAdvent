@@ -39,8 +39,8 @@ Array2D<Direction> TraceBeam(const Array2D<char>& mirrors, Point start_pos, Dire
 
         for (auto [pos, dir] : cnt)
         {          
-            if (Contains(beam_map.Area(), pos) && (beam_map[pos] & dir) == 0)
-            {       
+            if (beam_map.Contains(pos) && (beam_map[pos] & dir) == 0)
+            {
                 beam_map[pos] |= dir;
                 MoveBeam(next, pos, dir, mirrors[pos]);
             }

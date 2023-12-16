@@ -67,7 +67,7 @@ PlayerPos MovePlayer(const PlayerPos& current, const Array2D<Direction>& blizzar
         for (Point off : offsets)
         {
             const Point new_pos = pos + off;
-            if (Contains(blizzards.Area(), new_pos) && blizzards[new_pos] == Dir::None)
+            if (blizzards.Contains(new_pos) && blizzards[new_pos] == Dir::None)
             {
                 next.insert(new_pos);
             }

@@ -105,6 +105,10 @@ export
 			area.y = pt.y;
 		}
 
+		bool Contains(Point pt) const {
+			return Contains(area, pt);
+		}
+
 	private:
 		Rect area;
 		std::unique_ptr<Elem[]> data;

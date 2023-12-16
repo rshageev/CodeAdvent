@@ -11,7 +11,7 @@ module : private;
 void MoveRock(Array2D<char>& arr, Point rock_pos, Point dir)
 {
     Point new_pos = rock_pos + dir;
-    while (Contains(arr.Area(), new_pos) && arr[new_pos] == '.') {
+    while (arr.Contains(new_pos) && arr[new_pos] == '.') {
         new_pos += dir;
     }
     std::swap(arr[rock_pos], arr[new_pos - dir]);
