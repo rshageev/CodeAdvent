@@ -34,12 +34,6 @@ constexpr std::optional<Tube> GetTube(char tube_char)
     return std::nullopt;
 }
 
-Array2D<char> LoadMap(const std::filesystem::path& input)
-{
-    const auto data = ReadText(input);
-    return Array2DFromString(data, [](char ch) { return ch; });
-}
-
 std::optional<Direction> GetTubeOutput(const Tube tube, Direction in_dir)
 {
     const auto opp_dir = Opposite(in_dir);
@@ -132,14 +126,14 @@ int CountInside(Rect area, const Path& path)
 
 size_t Solve_1(const std::filesystem::path& input)
 {
-    const auto map = LoadMap(input);
+    const auto map = ReadArray2D(input);
     const auto loop = FindLoop(map);
     return loop->size() / 2;
 }
 
 int Solve_2(const std::filesystem::path& input)
 {
-    const auto map = LoadMap(input);
+    const auto map = ReadArray2D(input);
     const auto loop = FindLoop(map);
     return CountInside(map.Area(), *loop);
 }

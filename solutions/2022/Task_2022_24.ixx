@@ -8,31 +8,11 @@ export int Solve_2(const std::filesystem::path& input);
 
 module : private;
 
-constexpr Direction Wall = 16;
+constexpr Direction Wall = 0b1000'0000;
 
-Direction CharToDir(char ch)
+Direction CharToDirW(char ch)
 {
-    switch (ch) {
-        case '.': return Dir::None;
-        case '<': return Dir::Left;
-        case '>': return Dir::Right;
-        case '^': return Dir::Up;
-        case 'v': return Dir::Down;
-        default: return Wall;
-    }
-}
-
-char DirToChar(Direction dir)
-{
-    switch (dir) {
-        case Wall: return '#';
-        case Dir::None: return '.';
-        case Dir::Left: return '<';
-        case Dir::Right: return '>';
-        case Dir::Up: return '^';
-        case Dir::Down: return 'v';
-    }
-    return '0' + std::popcount(dir);
+    return (ch == '#') ? Wall : CharToDir(ch);
 }
 
 struct Field
@@ -47,13 +27,9 @@ using PlayerPos = std::set<Point>;
 Field LoadField(const std::filesystem::path& input)
 {
     Field field;
-    const auto file_data = ReadText(input);
-
-    field.blizzards = Array2DFromString(file_data, CharToDir);
-
+    field.blizzards = ReadArray2D(input, CharToDirW);
     field.entrance = { 1, field.blizzards.Area().h - 1 };
     field.exit = { field.blizzards.Area().w - 2, 0 };
-
     return field;
 }
 
@@ -62,20 +38,13 @@ Array2D<Direction> MoveBlizzards(const Array2D<Direction>& blizzards)
     auto next_blizzards = Array2D<Direction>(blizzards.Area(), Dir::None);
     const Rect blizzards_area = Inflated(blizzards.Area(), -1, -1);
 
-    static constexpr std::pair<Direction, Point> directions[] = {
-        { Dir::Left, {-1, 0}},
-        { Dir::Right, {1, 0}},
-        { Dir::Up, {0, 1}},
-        { Dir::Down, {0, -1}},
-    };
-
     for (Point pos : to_cell_coords(blizzards))
     {
         auto cell = blizzards[pos];
         if (cell == Wall) {
             next_blizzards[pos] = Wall;
         } else {
-            for (auto [dir, off] : directions) {
+            for (auto [dir, off] : Neighbours4) {
                 if (cell & dir) {
                     const Point new_pos = WrapPoint(pos + off, blizzards_area);
                     next_blizzards[new_pos] |= dir;

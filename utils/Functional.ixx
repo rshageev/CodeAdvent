@@ -43,6 +43,13 @@ export
 	template<auto V>
 	inline constexpr equal_fn<V> equal;
 
+	template<auto V>
+	struct not_equal_fn {
+		constexpr bool operator() (auto&& v) const { return v != V; }
+	};
+	template<auto V>
+	inline constexpr not_equal_fn<V> not_equal;
+
 	template<class P>
 	struct apply_to_pair {
 		P pred;

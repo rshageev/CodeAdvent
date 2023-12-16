@@ -10,8 +10,7 @@ module : private;
 
 std::vector<Point> LoadStarPositions(const std::filesystem::path& input)
 {
-    const auto data = ReadText(input);
-    const auto map = Array2DFromString(data, equal<'#'>);
+    const auto map = ReadArray2D(input, equal<'#'>);
 
     std::vector<Point> stars;
     for (Point pos : to_cell_coords(map)) {

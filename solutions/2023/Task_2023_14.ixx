@@ -8,13 +8,6 @@ export int Solve_2(const std::filesystem::path& input);
 
 module : private;
 
-Array2D<char> LoadData(const std::filesystem::path& input)
-{
-    const auto text = ReadText(input);
-    auto data = Array2DFromString(text, [](char ch) { return ch; });
-    return data;
-}
-
 void MoveRock(Array2D<char>& arr, Point rock_pos, Point dir)
 {
     Point new_pos = rock_pos + dir;
@@ -81,7 +74,7 @@ int CalcWeight(const Array2D<char>& arr)
 
 int Solve_1(const std::filesystem::path& input)
 {
-    auto data = LoadData(input);
+    auto data = ReadArray2D(input);
     TiltUp(data);
     return CalcWeight(data);
 }
@@ -96,7 +89,7 @@ void Spin(Array2D<char>& data)
 
 int Solve_2(const std::filesystem::path& input)
 {
-    auto data = LoadData(input);
+    auto data = ReadArray2D(input);
 
     size_t rem_cycles = 1'000'000'000;
     size_t cycle_len = rem_cycles;

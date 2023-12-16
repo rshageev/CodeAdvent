@@ -8,22 +8,6 @@ export int Solve_2(const std::filesystem::path& input);
 
 module : private;
 
-Direction CharToDir(char ch)
-{
-    switch (ch) {
-    case '-': return Dir::None;
-    case '>': return Dir::Right;
-    case 'v': return Dir::Down;
-    }
-    return Dir::None;
-}
-
-Array2D<Direction> LoadField(const std::filesystem::path& input)
-{
-    const auto file_data = ReadText(input);
-    return Array2DFromString(file_data, CharToDir);
-}
-
 bool UpdateHerd(const Array2D<Direction>& old_state, Array2D<Direction>& new_state, Direction dir)
 {
     const auto offset = DirToOffset(dir);
@@ -50,7 +34,7 @@ bool UpdateHerd(const Array2D<Direction>& old_state, Array2D<Direction>& new_sta
 
 int Solve_1(const std::filesystem::path& input)
 {
-    auto field = LoadField(input);
+    auto field = ReadArray2D(input, CharToDir);
     auto field2 = field;
 
     int step_count = 0;
