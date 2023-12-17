@@ -9,10 +9,10 @@ export
 	using Direction = std::uint8_t;
 	namespace Dir {
 		inline constexpr Direction None  = 0;
-		inline constexpr Direction Right = 0b0000'0001;
-		inline constexpr Direction Up    = 0b0000'0100;
-		inline constexpr Direction Left  = 0b0001'0000;
-		inline constexpr Direction Down  = 0b0100'0000;
+		inline constexpr Direction Right = 0b0000'0001; // 1
+		inline constexpr Direction Up    = 0b0000'0100; // 4
+		inline constexpr Direction Left  = 0b0001'0000; // 16
+		inline constexpr Direction Down  = 0b0100'0000; // 64
 	}
 
 	inline constexpr std::pair<Direction, Point> Neighbours4[] = {

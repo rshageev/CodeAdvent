@@ -38,6 +38,7 @@
     <ClCompile Include="solutions\2023\Task_2023_14.ixx" />
     <ClCompile Include="solutions\2023\Task_2023_15.ixx" />
     <ClCompile Include="solutions\2023\Task_2023_16.ixx" />
+    <ClCompile Include="solutions\2023\Task_2023_17.ixx" />
     <ClCompile Include="solutions\2023\Task_2023_2.ixx" />
     <ClCompile Include="solutions\2023\Task_2023_3.ixx" />
     <ClCompile Include="solutions\2023\Task_2023_4.ixx" />

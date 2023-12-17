@@ -106,7 +106,7 @@ export
 		}
 
 		bool Contains(Point pt) const {
-			return Contains(area, pt);
+			return ::Contains(area, pt);
 		}
 
 	private:
