@@ -8,7 +8,9 @@ export int Solve_2(const std::filesystem::path& input);
 
 module : private;
 
-using LossMap = Array2D<int>;
+using Steps = std::int16_t;
+using Loss = std::int16_t;
+using LossMap = Array2D<Loss>;
 
 template<class S, class InitState, class P1, class P2, class Comp>
 S Dijkstra(InitState&& initial_states,
@@ -36,26 +38,24 @@ struct State
 {
     Point pos;
     Direction dir;
-    int steps = 0;
-    int loss = 0;
-    const State* prev = nullptr;
+    Steps steps = 0;
+    Loss loss = 0;
 };
 
 struct VisitedMap
 {
     bool Check(const State& st)
     {
-        return losses.emplace(VisitedKey{ st.pos, st.dir, st.steps }, st.loss).second;
+        return visited.emplace(st.pos, st.dir, st.steps).second;
     }
 
-    using VisitedKey = std::tuple<Point, Direction, int>;
-    std::map<VisitedKey, int> losses;
+    std::set<std::tuple<Point, Direction, Steps>> visited;
 };
 
 
-State MoveState(const State& prev, Direction dir, int steps, const LossMap& loss_map)
+State MoveState(const State& prev, Direction dir, Steps steps, const LossMap& loss_map)
 {
-    State st{ prev.pos, dir, steps, prev.loss, &prev };
+    State st{ prev.pos, dir, steps, prev.loss };
 
     if (dir == prev.dir) st.steps += prev.steps;
 
@@ -66,22 +66,19 @@ State MoveState(const State& prev, Direction dir, int steps, const LossMap& loss
     return st;
 }
 
-std::vector<State> UpdateState(const State& st, const LossMap& loss_map, VisitedMap& visited, int min_straight, int max_straight)
+std::vector<State> UpdateState(const State& st, const LossMap& loss_map, VisitedMap& visited, Steps min_straight, Steps max_straight)
 {
     std::vector<State> out;
 
-    // straight
     if (st.steps < max_straight)
     {
-        const int steps = std::max(1, min_straight - st.steps);
+        const Steps steps = std::max(1, min_straight - st.steps);
         auto nst = MoveState(st, st.dir, steps, loss_map);
         if (loss_map.Contains(nst.pos) && visited.Check(nst)) {
             out.push_back(nst);
         }
     }
 
-
-    // turns
     if (st.steps >= min_straight)
     {
         for (Direction dir : { RotateLeft(st.dir), RotateRight(st.dir) })
@@ -98,7 +95,7 @@ std::vector<State> UpdateState(const State& st, const LossMap& loss_map, Visited
 
 int Solve(const std::filesystem::path& input, int min_straight, int max_straight)
 {
-    const auto loss_map = ReadArray2D(input, [](char ch) -> int { return ch - '0'; });
+    const auto loss_map = ReadArray2D(input, [](char ch) -> Loss { return ch - '0'; });
     const auto start = LeftTop(loss_map.Area());
     const auto finish = RightBottom(loss_map.Area());
 
