@@ -4,7 +4,7 @@ import std;
 import utils;
 
 export int Solve_1(const std::filesystem::path& input);
-export size_t Solve_2(const std::filesystem::path& input);
+export int Solve_2(const std::filesystem::path& input);
 
 module : private;
 
@@ -63,7 +63,7 @@ int Solve_1(const std::filesystem::path& input)
     return sum;
 }
 
-size_t Solve_2(const std::filesystem::path& input)
+int Solve_2(const std::filesystem::path& input)
 {
     std::vector<int> win_cards;
     for (const auto& line : ReadLines(input) | stdv::filter(not_empty)) {
@@ -72,29 +72,22 @@ size_t Solve_2(const std::filesystem::path& input)
         win_cards.push_back(win_numbers);
     }
 
+    std::deque<int> queue;
+    int owned = 0;
 
-    size_t owned = 0;
+    auto queue_numbers = [&](int start, int count) {
+        queue.append_range(stdv::iota(start, start + count));
+        owned += count;
+    };
+    
+    queue_numbers(0, std::ssize(win_cards));
 
-    std::vector<int> current;
-    std::vector<int> next;
-
-    for (int i = 0; i < std::ssize(win_cards); ++i) {
-        next.push_back(i);
-    }
-    owned += next.size();
-
-    while (!next.empty())
+    while (!queue.empty())
     {
-        current = std::move(next);
-        next.clear();
-        
-        for (int card_idx : current) {
-            int win_numbers = win_cards[card_idx];
-            for (int i = 0; i < win_numbers; ++i) {
-                next.push_back(card_idx + i + 1);
-            }
-        }
-        owned += next.size();
+        const int card_idx = queue.front();
+        const int win_numbers = win_cards[card_idx];
+        queue_numbers(card_idx + 1, win_numbers);
+        queue.pop_front();
     }
 
     return owned;

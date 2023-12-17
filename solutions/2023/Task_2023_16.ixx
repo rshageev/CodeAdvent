@@ -8,7 +8,7 @@ export size_t Solve_2(const std::filesystem::path& input);
 
 module : private;
 
-void MoveBeam(std::vector<std::pair<Point, Direction>>& out, Point pos, Direction dir, char cell)
+void MoveBeam(std::deque<std::pair<Point, Direction>>& out, Point pos, Direction dir, char cell)
 {
     auto emit = [&out, pos](Direction d) { out.emplace_back(MovePoint(pos, d), d); };
 
@@ -30,23 +30,19 @@ Array2D<Direction> TraceBeam(const Array2D<char>& mirrors, Point start_pos, Dire
 {
     Array2D<Direction> beam_map(mirrors.Area(), Dir::None);
 
-    std::vector<std::pair<Point, Direction>> cnt = { { start_pos, start_dir } };
-    std::vector<std::pair<Point, Direction>> next;
+    std::deque<std::pair<Point, Direction>> queue = { { start_pos, start_dir } };
     
-    while (!cnt.empty())
+    while (!queue.empty())
     {
-        next.clear();
-
-        for (auto [pos, dir] : cnt)
-        {          
-            if (beam_map.Contains(pos) && (beam_map[pos] & dir) == 0)
-            {
-                beam_map[pos] |= dir;
-                MoveBeam(next, pos, dir, mirrors[pos]);
-            }
+        auto [pos, dir] = queue.front();
+  
+        if (beam_map.Contains(pos) && (beam_map[pos] & dir) == 0)
+        {
+            beam_map[pos] |= dir;
+            MoveBeam(queue, pos, dir, mirrors[pos]);
         }
 
-        cnt = std::move(next);
+        queue.pop_front();
     }
 
     return beam_map;
@@ -79,5 +75,6 @@ size_t Solve_2(const std::filesystem::path& input)
         auto v2 = CountActivated(mirrors, Point{ mirrors.Width() - 1, y}, Dir::Left);
         max_activated = std::max(max_activated, std::max(v1, v2));
     }
+
     return max_activated;
 }
