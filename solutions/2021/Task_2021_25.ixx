@@ -34,7 +34,7 @@ bool UpdateHerd(const Array2D<Direction>& old_state, Array2D<Direction>& new_sta
 
 int Solve_1(const std::filesystem::path& input)
 {
-    auto field = ReadArray2D(input, CharToDir);
+    auto field = ReadArray2D(input, char_to_dir{"<>^v"} );
     auto field2 = field;
 
     int step_count = 0;

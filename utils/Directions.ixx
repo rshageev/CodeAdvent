@@ -22,7 +22,8 @@ export
 		{ Dir::Down, { 0, -1 } },
 	};
 
-	constexpr Point DirToOffset(Direction dir) {
+	template<std::integral T = int>
+	constexpr TPoint<T> DirToOffset(Direction dir) {
 		switch (dir) {
 			case Dir::Right: return { 1, 0 };
 			case Dir::Up: return { 0, 1 };
@@ -32,9 +33,11 @@ export
 		}
 	}
 
-	constexpr Point MovePoint(Point pt, Direction dir) {
-		return pt + DirToOffset(dir);
+	template<std::integral T = int>
+	constexpr TPoint<T> MovePoint(TPoint<T> pt, Direction dir, T dist = 1) {
+		return pt + DirToOffset<T>(dir) * dist;
 	}
+
 	constexpr bool IsVertical(Direction dir) {
 		return dir & (Dir::Up | Dir::Down);
 	}
@@ -51,16 +54,23 @@ export
 		return std::rotl(dir, 4);
 	}
 
-	
-	Direction CharToDir(char ch)
+	struct char_to_dir
 	{
-		switch (ch) {
-			case '<': return Dir::Left;
-			case '>': return Dir::Right;
-			case '^': return Dir::Up;
-			case 'v': return Dir::Down;
-			default: return Dir::None;
+		std::string_view table = "<>^v";
+
+		constexpr Direction operator() (char ch) const
+		{
+			if (ch == table[0]) return Dir::Left;
+			if (ch == table[1]) return Dir::Right;
+			if (ch == table[2]) return Dir::Up;
+			if (ch == table[3]) return Dir::Down;
+			return Dir::None;
 		}
+	};
+
+	Direction CharToDir(char ch, std::string_view table = "<>^v")
+	{
+		return char_to_dir{ table }(ch);
 	}
 
 	char DirToChar(Direction dir)

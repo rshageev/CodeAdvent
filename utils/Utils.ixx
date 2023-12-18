@@ -27,10 +27,10 @@ export
 	}
 
 	/* Parsing */
-	template<std::integral T>
+	template<std::integral T, int base = 10>
 	T Read(std::string_view& str, T def = 0) {
 		T value = def;
-		const auto [ptr, ec] = std::from_chars(str.data(), str.data() + str.size(), value, 10);
+		const auto [ptr, ec] = std::from_chars(str.data(), str.data() + str.size(), value, base);
 		str.remove_prefix(ptr - str.data());
 		return value;
 	}
