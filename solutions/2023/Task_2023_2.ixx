@@ -29,14 +29,14 @@ Game ParseLine(std::string_view str)
     Game game;
 
     Skip(str, "Game ");
-    game.index = ReadInt(str);
+    game.index = Read<int>(str);
     Skip(str, ": ");
 
     game.sets.push_back({0, 0, 0});
 
     while (true)
     {
-        const int count = ReadInt(str);
+        const int count = Read<int>(str);
         Skip(str, " ");
         const auto color_str = ReadWord(str);
         const auto color_idx = CubeIdxFromString(color_str);

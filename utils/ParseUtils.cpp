@@ -13,7 +13,6 @@ std::string_view ReadWord(std::string_view& str, const char* delims)
 bool Skip(std::string_view& str, std::string_view prefix)
 {
 	if (!str.starts_with(prefix)) {
-		//std::cout << "Parse error\n";
 		return false;
 	}
 	str.remove_prefix(prefix.size());

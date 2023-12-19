@@ -27,7 +27,7 @@ std::pair<Hand, int> ParseLine(std::string_view str)
 {
     const auto hand_str = ReadWord(str);
     Skip(str, " ");
-    const auto bid = ReadInt(str);
+    const auto bid = Read<int>(str);
 
     return { Hand(hand_str), bid};
 }

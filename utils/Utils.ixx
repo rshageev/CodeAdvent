@@ -27,6 +27,7 @@ export
 	}
 
 	/* Parsing */
+	
 	template<std::integral T, int base = 10>
 	T Read(std::string_view& str, T def = 0) {
 		T value = def;
@@ -34,7 +35,14 @@ export
 		str.remove_prefix(ptr - str.data());
 		return value;
 	}
-	int ReadInt(std::string_view& str, int def = 0) { return Read<int>(str, def); }
+
+	template<std::integral T, int base = 10>
+	T Read(std::string_view&& str, T def = 0) {
+		T value = def;
+		std::from_chars(str.data(), str.data() + str.size(), value, base);
+		return value;
+	}
+
 	std::string_view ReadWord(std::string_view& str, const char* delims = " ,.;");
 	bool Skip(std::string_view& str, std::string_view prefix);
 }

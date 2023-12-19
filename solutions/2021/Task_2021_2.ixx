@@ -11,7 +11,7 @@ module : private;
 std::pair<std::string_view, int> ParseLine(std::string_view str)
 {
     auto dir = ReadWord(str);
-    auto val = (Skip(str, " "), ReadInt(str));
+    auto val = (Skip(str, " "), Read<int>(str));
     return { dir, val };
 }
 

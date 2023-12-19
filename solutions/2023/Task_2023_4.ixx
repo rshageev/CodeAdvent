@@ -22,18 +22,18 @@ Card ParseLine(std::string_view str)
     Skip(str, "Card ");
     while (Skip(str, " ")) {};
 
-    card.number = ReadInt(str);
+    card.number = Read<int>(str);
     Skip(str, ": ");
 
     while (true) {
         while (Skip(str, " ")) {};
         if (Skip(str, "|")) break;
-        card.my_numbers.push_back(ReadInt(str));
+        card.my_numbers.push_back(Read<int>(str));
     }
 
     while (!str.empty()) {
         while (Skip(str, " ")) {};
-        card.win_numbers.push_back(ReadInt(str));
+        card.win_numbers.push_back(Read<int>(str));
     }
 
     return card;

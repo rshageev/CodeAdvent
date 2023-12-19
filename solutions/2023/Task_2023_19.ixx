@@ -13,31 +13,28 @@ using Part = std::array<int, 4>;
 struct Rule
 {
     std::string to;
-    int param_idx = 0;
-    int cond_value = 0;
+    std::uint8_t param_idx = 0;
     char cond = 0;
+    int cond_value = 0; 
 };
 
 using Workflow = std::vector<Rule>;
 using WorkflowMap = std::unordered_map<std::string, Workflow>;
 
-
 constexpr Rule ParseRule(std::string_view str)
 {
-    auto p = str.find(':');
+    const auto p = str.find(':');
+
     if (p == std::string_view::npos) {
         return { std::string(str) };
     }
 
-    std::string_view to = str.substr(p + 1);
-
-    const int param_idx = std::string_view("xmas").find(str[0]);
-    const char cond = str[1];
-
-    str.remove_prefix(2);
-    const int cv = Read<int>(str);
-
-    return { std::string(to), param_idx, cv, cond };
+    return {
+        .to = std::string(str.substr(p + 1)),
+        .param_idx = static_cast<std::uint8_t>(std::string_view("xmas").find(str[0])),
+        .cond = str[1],
+        .cond_value = Read<int>(str.substr(2)),      
+    };
 }
 
 std::pair<std::string, Workflow> ParseWorkflow(std::string_view str)
@@ -60,11 +57,10 @@ Part ParsePart(std::string_view str)
 {
     Part part;
 
-    str.remove_prefix(1); // remove {
+    str.remove_prefix(1); // remove '{'
 
     for (auto [idx, part_str] : str | stdv::split(',') | stdv::transform(make<std::string_view>) | stdv::enumerate) {
-        part_str.remove_prefix(2);
-        part[idx] = Read<int>(part_str);
+        part[idx] = Read<int>(part_str.substr(2));
     }
 
     return part;

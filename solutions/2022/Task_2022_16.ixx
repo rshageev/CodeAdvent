@@ -24,7 +24,7 @@ std::pair<std::string, Valve> ParseLine(std::string_view str)
     Skip(str, "Valve ");
     auto name = ReadWord(str, " ");
     Skip(str, " has flow rate=");
-    v.flow = ReadInt(str);
+    v.flow = Read<int>(str);
     Skip(str, "; tunnels lead to valves ");
     Skip(str, "; tunnel leads to valve ");
 
