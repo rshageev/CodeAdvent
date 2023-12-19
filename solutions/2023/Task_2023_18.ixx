@@ -56,9 +56,7 @@ std::pair<Direction, std::int64_t> ParseOp2(std::string_view str)
 std::int64_t Solve(const std::filesystem::path& input, auto&& parse)
 {
     auto ops = ReadLines(input) | stdv::filter(not_empty) | stdv::transform(parse);
-
     const auto points = GeneratePolygon(ops);
-
     return CalcArea(points);
 }
 

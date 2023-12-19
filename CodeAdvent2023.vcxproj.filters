@@ -147,5 +147,8 @@
     <ClCompile Include="solutions\2023\Task_2023_18.ixx">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\2023\Task_2023_19.ixx">
+      <Filter>Source Files\solutions\2023</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

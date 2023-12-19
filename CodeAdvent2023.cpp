@@ -1,11 +1,11 @@
-import AoC_2023.Day18;
+import AoC_2023.Day19;
 
 import std;
 
 int main()
 {
-    const auto res1 = Solve_1("2023/input_18.txt");
-    const auto res2 = Solve_2("2023/input_18.txt");
+    const auto res1 = Solve_1("2023/input_19.txt");
+    const auto res2 = Solve_2("2023/input_19.txt");
 
     std::cout << std::format("\nPart 1: {}\n", res1);
     std::cout << std::format("\nPart 2: {}\n", res2);
