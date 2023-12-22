@@ -15,7 +15,7 @@ export
 		auto Get(bool reset = true)
 		{
 			const auto now = TimerType::now();
-			const std::chrono::duration<double> diff = now - start;
+			const std::chrono::duration<double, std::milli> diff = now - start;
 			if (reset) {
 				start = now;
 			}
