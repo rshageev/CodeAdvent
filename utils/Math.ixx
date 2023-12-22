@@ -77,6 +77,15 @@ export
 		return { rect.x - dx, rect.y - dy, rect.w + dx + dx, rect.h + dy + dy };
 	}
 
+	template<Number T>
+	constexpr TRect<T> BoundingRect(const TRect<T>& rect1, const TRect<T>& rect2) {
+		const auto min_x = std::min(rect1.x, rect2.x);
+		const auto max_x = std::max(rect1.x + rect1.w, rect2.x + rect2.w);
+		const auto min_y = std::min(rect1.y, rect2.y);
+		const auto max_y = std::max(rect1.y + rect1.h, rect2.y + rect2.h);
+		return { min_x, min_y, max_x - min_x, max_y - min_y };
+	}
+
 	using Point = TPoint<int>;
 	using Pointf = TPoint<float>;
 	using Rect = TRect<int>;

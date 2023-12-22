@@ -93,14 +93,14 @@ size_t Solve_2(const std::filesystem::path& input)
     {
         next.clear();
         DoStep2(map, current, next);
-        deltas1[i] = std::ssize(next) - std::ssize(current);
+        deltas1[i] = static_cast<int>(std::ssize(next) - std::ssize(current));
         current = std::move(next);
     }
     for (int i = 0; i < period; ++i)
     {
         next.clear();
         DoStep2(map, current, next);
-        deltas2[i] = std::ssize(next) - std::ssize(current);
+        deltas2[i] = static_cast<int>(std::ssize(next) - std::ssize(current));
         current = std::move(next);
     }
 
