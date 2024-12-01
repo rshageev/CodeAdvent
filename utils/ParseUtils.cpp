@@ -10,6 +10,13 @@ std::string_view ReadWord(std::string_view& str, const char* delims)
 	return result;
 }
 
+char ReadChar(std::string_view& str)
+{
+	char ch = str[0];
+	str.remove_prefix(1);
+	return ch;
+}
+
 bool Skip(std::string_view& str, std::string_view prefix)
 {
 	if (!str.starts_with(prefix)) {

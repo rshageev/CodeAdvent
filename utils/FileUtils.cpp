@@ -15,7 +15,7 @@ std::string ReadText(const std::filesystem::path& filename)
     return data;
 }
 
-std::vector<std::string> ReadLines(const std::filesystem::path& filename)
+std::vector<std::string> ReadLines(const std::filesystem::path& filename, bool remove_last_empty)
 {
     std::vector<std::string> lines;
 	std::ifstream file(filename);
@@ -25,6 +25,9 @@ std::vector<std::string> ReadLines(const std::filesystem::path& filename)
             lines.emplace_back();
             std::getline(file, lines.back());
         }
+    }
+    if (!lines.empty() && lines.back().empty()) {
+        lines.pop_back();
     }
     return lines;
 }

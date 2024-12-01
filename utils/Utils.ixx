@@ -16,7 +16,7 @@ export
 
 	/* File IO */
 	std::string ReadText(const std::filesystem::path& filename);
-	std::vector<std::string> ReadLines(const std::filesystem::path& filename);
+	std::vector<std::string> ReadLines(const std::filesystem::path& filename, bool remove_last_empty = true);
 
 	template<class Pred>
 	auto ReadArray2D(const std::filesystem::path& filename, Pred&& pred) {
@@ -44,5 +44,9 @@ export
 	}
 
 	std::string_view ReadWord(std::string_view& str, const char* delims = " ,.;");
+	char ReadChar(std::string_view& str);
 	bool Skip(std::string_view& str, std::string_view prefix);
+
+	using uint64 = std::uint64_t;
+	using int64 = std::int64_t;
 }
