@@ -31,6 +31,12 @@
     <Filter Include="Source Files\solutions\2023">
       <UniqueIdentifier>{001b8707-a717-430c-ba6c-ee65376c6198}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\2020">
+      <UniqueIdentifier>{e77553aa-9053-434e-9896-149d419fb231}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\solutions\2024">
+      <UniqueIdentifier>{903373f5-476a-4ca3-adf7-9b85f1d78295}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CodeAdvent2023.cpp">
@@ -164,6 +170,18 @@
     </ClCompile>
     <ClCompile Include="solutions\2023\Task_2023_24.ixx">
       <Filter>Source Files\solutions\2023</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\2020\Task_2020_1.ixx">
+      <Filter>Source Files\solutions\2020</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\2020\Task_2020_2.ixx">
+      <Filter>Source Files\solutions\2020</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\2020\Task_2020_25.ixx">
+      <Filter>Source Files\solutions\2020</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\2024\Task_2024_1.ixx">
+      <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
