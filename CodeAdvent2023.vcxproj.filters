@@ -37,9 +37,21 @@
     <Filter Include="Source Files\solutions\2024">
       <UniqueIdentifier>{903373f5-476a-4ca3-adf7-9b85f1d78295}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\libs">
+      <UniqueIdentifier>{bb150127-8611-421e-8e44-896cf0f45e53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\libs\scnlib">
+      <UniqueIdentifier>{f6f9ac47-eec6-41b2-abc2-53f4200c9573}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\libs\scnlib\src">
+      <UniqueIdentifier>{8115cac1-7fa9-4319-bdc4-b9fb2296313b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\libs\scnlib\include">
+      <UniqueIdentifier>{f3e7a87e-b9ab-48d5-abe0-9e5b475987fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CodeAdvent2023.cpp">
+    <ClCompile Include="CodeAdvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="utils\FileUtils.cpp">
@@ -183,5 +195,37 @@
     <ClCompile Include="solutions\2024\Task_2024_1.ixx">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\2024\Task_2024_2.ixx">
+      <Filter>Source Files\solutions\2024</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\scnlib\src\scn\impl.cpp">
+      <Filter>Source Files\libs\scnlib\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="libs\scnlib\src\scn\impl.h">
+      <Filter>Source Files\libs\scnlib\src</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\scnlib\include\scn\chrono.h">
+      <Filter>Source Files\libs\scnlib\include</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\scnlib\include\scn\fwd.h">
+      <Filter>Source Files\libs\scnlib\include</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\scnlib\include\scn\istream.h">
+      <Filter>Source Files\libs\scnlib\include</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\scnlib\include\scn\ranges.h">
+      <Filter>Source Files\libs\scnlib\include</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\scnlib\include\scn\regex.h">
+      <Filter>Source Files\libs\scnlib\include</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\scnlib\include\scn\scan.h">
+      <Filter>Source Files\libs\scnlib\include</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\scnlib\include\scn\xchar.h">
+      <Filter>Source Files\libs\scnlib\include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

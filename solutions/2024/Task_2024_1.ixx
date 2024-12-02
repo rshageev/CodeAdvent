@@ -1,3 +1,6 @@
+module;
+#include <scn/scan.h>
+
 export module AoC_2024.Day1;
 
 import std;
@@ -12,10 +15,9 @@ auto ReadData(const std::filesystem::path& input)
 {
     std::pair<std::vector<int>, std::vector<int>> data;
     for (auto line : ReadLines(input)) {
-        std::string_view str(line);
-        data.first.push_back(Read<int, 10>(str, 0));
-        Skip(str, "   ");
-        data.second.push_back(Read<int, 10>(str, 0));
+        auto [v1, v2] = scn::scan<int, int>(line, "{}   {}")->values();
+        data.first.push_back(v1);
+        data.second.push_back(v2);
     }
     return data;
 }

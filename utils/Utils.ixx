@@ -47,6 +47,8 @@ export
 	char ReadChar(std::string_view& str);
 	bool Skip(std::string_view& str, std::string_view prefix);
 
+	/* Type aliases */
+
 	using uint64 = std::uint64_t;
 	using int64 = std::int64_t;
 }

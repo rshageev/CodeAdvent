@@ -19,7 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CodeAdvent2023.cpp" />
+    <ClCompile Include="CodeAdvent.cpp" />
+    <ClCompile Include="libs\scnlib\src\scn\impl.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
     <ClCompile Include="solutions\2015\Task_2015_1.ixx" />
     <ClCompile Include="solutions\2015\Task_2015_2.ixx" />
     <ClCompile Include="solutions\2015\Task_2015_3.ixx" />
@@ -58,6 +64,7 @@
     <ClCompile Include="solutions\2023\Task_2023_8.ixx" />
     <ClCompile Include="solutions\2023\Task_2023_9.ixx" />
     <ClCompile Include="solutions\2024\Task_2024_1.ixx" />
+    <ClCompile Include="solutions\2024\Task_2024_2.ixx" />
     <ClCompile Include="utils\Array2D.ixx" />
     <ClCompile Include="utils\Directions.ixx" />
     <ClCompile Include="utils\FileUtils.cpp" />
@@ -67,6 +74,16 @@
     <ClCompile Include="utils\RectViews.ixx" />
     <ClCompile Include="utils\Timer.ixx" />
     <ClCompile Include="utils\Utils.ixx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="libs\scnlib\include\scn\chrono.h" />
+    <ClInclude Include="libs\scnlib\include\scn\fwd.h" />
+    <ClInclude Include="libs\scnlib\include\scn\istream.h" />
+    <ClInclude Include="libs\scnlib\include\scn\ranges.h" />
+    <ClInclude Include="libs\scnlib\include\scn\regex.h" />
+    <ClInclude Include="libs\scnlib\include\scn\scan.h" />
+    <ClInclude Include="libs\scnlib\include\scn\xchar.h" />
+    <ClInclude Include="libs\scnlib\src\scn\impl.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -121,6 +138,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(ProjectDir)libs\scnlib\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(ProjectDir)libs\scnlib\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(ProjectDir)libs\scnlib\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(ProjectDir)libs\scnlib\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
