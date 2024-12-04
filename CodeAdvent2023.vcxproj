@@ -66,6 +66,7 @@
     <ClCompile Include="solutions\2024\Task_2024_1.ixx" />
     <ClCompile Include="solutions\2024\Task_2024_2.ixx" />
     <ClCompile Include="solutions\2024\Task_2024_3.ixx" />
+    <ClCompile Include="solutions\2024\Task_2024_4.ixx" />
     <ClCompile Include="utils\Array2D.ixx" />
     <ClCompile Include="utils\Directions.ixx" />
     <ClCompile Include="utils\FileUtils.cpp" />
