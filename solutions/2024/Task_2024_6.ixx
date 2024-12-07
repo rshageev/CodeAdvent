@@ -15,7 +15,7 @@ struct Cell {
     bool operator==(const Cell&) const = default;
 };
 
-bool Walk(auto& data, Point gpos, Direction gdir)
+bool Walk(auto& data, Point gpos, Direction gdir = Dir::Up)
 {
     while (data.Contains(gpos))
     {
@@ -28,7 +28,7 @@ bool Walk(auto& data, Point gpos, Direction gdir)
         }
         gpos = next;
 
-        if (data.Contains(next) && ((data[next].visited & gdir) == gdir)) {
+        if (data.Contains(next) && (data[next].visited & gdir) == gdir) {
             return true;
         }
     }
@@ -37,32 +37,35 @@ bool Walk(auto& data, Point gpos, Direction gdir)
 
 int Solve_1(const std::filesystem::path& input)
 {
-    auto data = Array2DFromString(ReadText(input), [](char ch) {
-        return Cell{ ch };
-    });
-    Point gpos = FindInArray2D(data, Cell{ '^' });
-
-    Walk(data, gpos, Dir::Up);
-
-    return stdr::count_if(data, [](Cell cell) { return cell.visited != 0; });
+    auto data = ReadArray2D(input, make<Cell>);
+    const Point start = FindInArray2D(data, Cell{'^'});
+    Walk(data, start);
+    return stdr::count_if(data, &Cell::visited);
 }
 
 int Solve_2(const std::filesystem::path& input)
 {
-    auto data = Array2DFromString(ReadText(input), [](char ch) {
-        return Cell{ ch };
-        });
-    Point gpos = FindInArray2D(data, Cell{ '^' });
-    
-    int result = 0;
-    for (Point opos : to_cell_coords(data)) {
-        if (opos != gpos && data[opos].type == '.') {
-            auto copy = data;
-            copy[opos].type = '#';
-            if (Walk(copy, gpos, Dir::Up)) {
-                ++result;
-            }
+    auto data = ReadArray2D(input, make<Cell>);
+    const Point start = FindInArray2D(data, Cell{'^'});
+
+    Walk(data, start);
+
+    std::vector<Point> path;
+    for (Point pos : to_cell_coords(data)) {
+        if (data[pos].visited && data[pos].type == '.') {
+            path.push_back(pos);
         }
+    }
+
+    int result = 0;
+    for (Point pos : path) {
+        for (auto& cell : data) cell.visited = 0;
+
+        data[pos].type = '#';
+        if (Walk(data, start)) {
+            ++result;
+        }
+        data[pos].type = '.';
     }
 
     return result;
