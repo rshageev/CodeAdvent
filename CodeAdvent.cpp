@@ -1,5 +1,5 @@
 
-import AoC_2024.Day6;
+import AoC_2024.Day7;
 
 import std;
 
