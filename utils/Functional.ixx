@@ -19,7 +19,7 @@ export
 
 	template<std::integral T>
 	struct from_chars_to {
-		constexpr int operator() (auto&& v) const {
+		constexpr T operator() (auto&& v) const {
 			std::string_view str(v);
 			T value = def;
 			std::from_chars(str.data(), str.data() + str.size(), value);
