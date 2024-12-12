@@ -1,7 +1,8 @@
 
-import AoC_2024.Day11;
+import AoC_2024.Day12;
 
 import std;
+import utils;
 
 int main()
 {
