@@ -1,5 +1,6 @@
 module;
 #include <scn/scan.h>
+#include <Eigen/Dense>
 
 export module AoC_2024.Day13;
 
@@ -40,24 +41,24 @@ auto LoadData(const std::filesystem::path& input)
     return out;
 }
 
-//int64 SolveGame(Game g)
-//{
-//    int64 ap_max = std::min(g.p.x / g.a.x, g.p.y / g.a.y);
-//
-//    int64 min_cost = IntMax;
-//    for (int64 ap = 0; ap < ap_max; ++ap)
-//    {
-//        Point64 prize = g.p - g.a * ap;
-//        int64 bp1 = prize.x / g.b.x;
-//        int64 bp2 = prize.y / g.b.y;
-//        if ((bp1 == bp2) && g.b * bp1 == prize) {
-//            min_cost = std::min(min_cost, ap * 3 + bp1);
-//        }
-//    }
-//    return min_cost;
-//}
+int64 SolveGame_BruteForce(Game g)
+{
+    int64 ap_max = std::min(g.p.x / g.a.x, g.p.y / g.a.y);
 
-int64 SolveGame(Game g)
+    int64 min_cost = IntMax;
+    for (int64 ap = 0; ap < ap_max; ++ap)
+    {
+        Point64 prize = g.p - g.a * ap;
+        int64 bp1 = prize.x / g.b.x;
+        int64 bp2 = prize.y / g.b.y;
+        if ((bp1 == bp2) && g.b * bp1 == prize) {
+            min_cost = std::min(min_cost, ap * 3 + bp1);
+        }
+    }
+    return min_cost;
+}
+
+int64 SolveGame_PenAndPaper(Game g)
 {
     /*
     |ax bx| * |pa| == |px|
@@ -84,12 +85,31 @@ int64 SolveGame(Game g)
     return IntMax;
 }
 
+int64 SolveGame_Eigen(Game g)
+{
+    auto M = Eigen::Matrix2d{
+        { (double)g.a.x, (double)g.b.x },
+        { (double)g.a.y, (double)g.b.y },
+    };
+    auto p = Eigen::Vector2d{ g.p.x, g.p.y };
+
+    auto res = M.partialPivLu().solve(p);
+
+    int64 pa = static_cast<int64>(std::round(res.x()));
+    int64 pb = static_cast<int64>(std::round(res.y()));
+
+    if (g.a * pa + g.b * pb == g.p) {
+        return pa * 3 + pb;
+    }
+    return IntMax;
+}
+
 int64 Solve_1(const std::filesystem::path& input)
 {
     auto games = LoadData(input);
     int64 total = 0;
     for (auto game : games) { 
-        if (int64 cost = SolveGame(game); cost < IntMax) {
+        if (int64 cost = SolveGame_Eigen(game); cost < IntMax) {
             total += cost;
         }
     }
@@ -103,7 +123,7 @@ int64 Solve_2(const std::filesystem::path& input)
     for (auto game : games) {
         game.p.x += 10000000000000;
         game.p.y += 10000000000000;    
-        if (int64 cost = SolveGame(game); cost < IntMax) {
+        if (int64 cost = SolveGame_Eigen(game); cost < IntMax) {
             total += cost;
         }
     }
