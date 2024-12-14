@@ -96,12 +96,15 @@ export
 		return { static_cast<float>(pt.x), static_cast<float>(pt.y) };
 	}
 
+	constexpr int WrapCoord(int coord, int range_start, int range_size)
+	{
+		while (coord >= range_start + range_size) coord -= range_size;
+		while (coord < range_start) coord += range_size;
+		return coord;
+	}
+
 	constexpr Point WrapPoint(Point pos, Rect area)
 	{
-		while (pos.x >= area.x + area.w) pos.x -= area.w;
-		while (pos.x < area.x) pos.x += area.w;
-		while (pos.y >= area.y + area.h) pos.y -= area.h;
-		while (pos.y < area.y) pos.y += area.h;
-		return pos;
+		return { WrapCoord(pos.x, area.x, area.w), WrapCoord(pos.y, area.y, area.h) };
 	}
 }

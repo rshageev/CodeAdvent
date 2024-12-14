@@ -237,6 +237,9 @@
     <ClCompile Include="solutions\2024\Task_2024_14.ixx">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\2020\Task_2020_3.ixx">
+      <Filter>Source Files\solutions\2020</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs\scnlib\src\scn\impl.h">
