@@ -1,6 +1,3 @@
-module;
-#include <scn/scan.h>
-
 export module AoC_2024.Day9;
 
 import std;
@@ -70,7 +67,6 @@ uint64 Solve_1(const std::filesystem::path& input)
     uint64 res = 0;
     uint64 pos = 0;
     for (auto [id, sz] : blocks) {
-        assert(id >= 0);
         for (int off = 0; off < sz; ++off) {
             res += id * (pos + off);
         }
