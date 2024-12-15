@@ -1,5 +1,5 @@
 
-import AoC_2024.Day14;
+import AoC_2024.Day15;
 
 import std;
 import utils;
@@ -7,7 +7,7 @@ import utils;
 int main()
 {
     const auto res1t = Solve_1("test.txt");
-    const auto res2t = 0;// Solve_2("test.txt");
+    const auto res2t = Solve_2("test.txt");
 
     Timer timer;
     const auto res1 = Solve_1("input.txt");
