@@ -1,6 +1,3 @@
-module;
-#include <scn/scan.h>
-
 export module AoC_2024.Day15;
 
 import std;
@@ -91,9 +88,6 @@ Array2D<char> MoveRobot2(const Array2D<char>& map, Point start_pos, Direction di
                 // nowhere to move
                 return map;
             }
-            else if (map[pt] == '.') {
-                // ok so far
-            }
             else if (map[pt] == '[') {
                 Point rpt = MovePoint(pt, Dir::Right);
                 Point nrpt = MovePoint(npt, Dir::Right);
@@ -154,7 +148,6 @@ int64 Solve_2(const std::filesystem::path& input)
 {
     auto [map, moves] = LoadData(input, true);
 
-    Point pos = FindInArray2D(map, '@');
     for (auto dir : moves) {
         Point pos = FindInArray2D(map, '@');
         map = MoveRobot2(map, pos, dir);
