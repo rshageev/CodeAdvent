@@ -31,3 +31,12 @@ std::vector<std::string> ReadLines(const std::filesystem::path& filename, bool r
     }
     return lines;
 }
+
+std::vector<std::vector<std::string>> ReadLineBlocks(const std::filesystem::path& filename)
+{
+    std::vector<std::vector<std::string>> out;
+    for (auto block : ReadLines(filename) | stdv::split("")) {
+        out.emplace_back().assign_range(block);
+    }
+    return out;
+}

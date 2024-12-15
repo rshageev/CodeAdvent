@@ -24,22 +24,15 @@ std::string Widen(std::string_view line)
 
 auto LoadData(const std::filesystem::path& input, bool wide = false)
 {
-    bool map_read = false;
-    std::vector<std::string> map_str;
-    std::string moves_str;
-    for (const auto& line : ReadLines(input)) {
-        if (line.empty()) {
-            map_read = true;
-        } else if (map_read) {
-            moves_str.append(line);
-        } else {
-            map_str.push_back(wide ? Widen(line) : line);
-        }
+    auto blocks = ReadLineBlocks(input);
+
+    if (wide) {
+        blocks[0] = blocks[0] | stdv::transform(Widen) | stdr::to<std::vector>();
     }
 
-    Array2D<char> map = Array2DFromLines(map_str, [](char ch) { return ch; });
+    Array2D<char> map = Array2DFromLines(blocks[0], [](char ch) { return ch; });
 
-    std::vector<Direction> dirs = moves_str | stdv::transform(char_to_dir{}) | stdr::to<std::vector>();
+    auto dirs = blocks[1] | stdv::join | stdv::transform(char_to_dir{}) | stdr::to<std::vector>();
     
     return std::pair(map, dirs);
 }
