@@ -20,12 +20,9 @@ export
 	std::vector<std::string> ReadLines(const std::filesystem::path& filename, bool remove_last_empty = true);
 	std::vector<std::vector<std::string>> ReadLineBlocks(const std::filesystem::path& filename);
 
-	template<class Pred>
-	auto ReadArray2D(const std::filesystem::path& filename, Pred&& pred) {
+	template<class Pred = std::identity>
+	auto ReadArray2D(const std::filesystem::path& filename, Pred&& pred = {}) {
 		return Array2DFromString(ReadText(filename), std::forward<Pred>(pred));
-	}
-	Array2D<char> ReadArray2D(const std::filesystem::path& filename) {
-		return Array2DFromString(ReadText(filename), [](char ch) { return ch; });
 	}
 
 	/* Parsing */

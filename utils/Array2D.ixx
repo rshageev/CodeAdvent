@@ -118,15 +118,16 @@ export
 		}
 	};
 
-	template<class R, class Pred>
-	auto Array2DFromLines(R&& lines_rng, Pred&& pred)
+	template<class R, class Pred = std::identity>
+	auto Array2DFromLines(R&& lines_rng, Pred&& pred = {})
 	{
 		const auto lines = lines_rng | std::ranges::to<std::vector>();
 
 		const auto h = lines.size();
 		const auto w = lines.empty() ? 0 : lines[0].size();
 
-		Array2D<std::invoke_result_t<Pred, char>> out(static_cast<int>(w), static_cast<int>(h));
+		using OutType = std::remove_reference_t<std::invoke_result_t<Pred, char>>;
+		Array2D<OutType> out(static_cast<int>(w), static_cast<int>(h));
 
 		auto data = lines
 			| std::views::reverse
@@ -138,7 +139,7 @@ export
 		return out;
 	}
 
-	template<class Pred>
+	template<class Pred = std::identity>
 	auto Array2DFromString(std::string_view str, Pred&& pred, char separator = '\n')
 	{
 		const auto lines = str
@@ -148,7 +149,8 @@ export
 		const auto h = lines.size();
 		const auto w = lines.empty() ? 0 : lines[0].size();
 
-		Array2D<std::invoke_result_t<Pred, char>> out(static_cast<int>(w), static_cast<int>(h));
+		using OutType = std::remove_reference_t<std::invoke_result_t<Pred, char>>;
+		Array2D<OutType> out(static_cast<int>(w), static_cast<int>(h));
 
 		auto data = lines
 			| std::views::reverse
