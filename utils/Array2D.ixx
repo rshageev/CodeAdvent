@@ -196,8 +196,8 @@ export
 		}
 	}
 
-	template<class T, class OStream, class Pred>
-	void PrintArray2D(const Array2D<T>& arr, OStream&& out, Pred&& to_char)
+	template<class T, class Pred = std::identity>
+	void PrintArray2D(const Array2D<T>& arr, Pred&& to_char = {}, std::ostream& out = std::cout)
 	{
 		const Rect rect = arr.Area();
 		for (int y = rect.y + rect.h - 1; y >= rect.y; --y) {
@@ -209,8 +209,8 @@ export
 		}
 	}
 
-	template<class T, class OStream, class Pred>
-	void PrintData2D(Rect rect, OStream&& out, Pred&& to_char)
+	template<class T, class Pred>
+	void PrintData2D(Rect rect, Pred&& to_char, std::ostream& out = std::cout)
 	{
 		for (int y = rect.y + rect.h - 1; y >= rect.y; --y) {
 			for (int x = rect.x; x < rect.x + rect.w; ++x) {
