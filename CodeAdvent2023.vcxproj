@@ -87,6 +87,7 @@
     <ClCompile Include="utils\ParseUtils.cpp" />
     <ClCompile Include="utils\RectViews.ixx" />
     <ClCompile Include="utils\Timer.ixx" />
+    <ClCompile Include="utils\Types.ixx" />
     <ClCompile Include="utils\Utils.ixx" />
   </ItemGroup>
   <ItemGroup>

@@ -243,6 +243,18 @@
     <ClCompile Include="solutions\2020\Task_2020_3.ixx">
       <Filter>Source Files\solutions\2020</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\2024\Task_2024_16.ixx">
+      <Filter>Source Files\solutions\2024</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\2024\Task_2024_17.ixx">
+      <Filter>Source Files\solutions\2024</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\Algorithms.ixx">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\Types.ixx">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs\scnlib\src\scn\impl.h">
