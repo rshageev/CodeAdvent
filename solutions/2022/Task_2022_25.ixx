@@ -94,7 +94,7 @@ static_assert(stdr::all_of(test_cases, [](auto p) { return Dec2Spec(p.first) == 
 std::string Solve_1(const std::filesystem::path& input)
 {
     std::int64_t total = 0;
-    for (const auto& line : ReadLines(input) | stdv::filter(not_empty))
+    for (const auto& line : ReadLines(input))
     {
         total += Spec2Dec(line);
     }

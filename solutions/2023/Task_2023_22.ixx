@@ -30,7 +30,7 @@ auto ReadBricks(const std::filesystem::path& input)
 {
     std::vector<Brick> bricks;
 
-    for (const auto& line : ReadLines(input) | stdv::filter(not_empty))
+    for (const auto& line : ReadLines(input))
     {
         std::string_view str(line);
         int x1 = Read<int>(str); Skip(str, ",");

@@ -19,7 +19,7 @@ int Solve_1(const std::filesystem::path& input)
 {
     Point pos{ 0, 0 };
 
-    for (const auto& line : ReadLines(input) | stdv::filter(not_empty))
+    for (const auto& line : ReadLines(input))
     {
         auto [dir, val] = ParseLine(line);
 
@@ -35,7 +35,7 @@ int Solve_2(const std::filesystem::path& input)
     Point pos{ 0, 0 };
     int aim = 0;
 
-    for (const auto& line : ReadLines(input) | stdv::filter(not_empty))
+    for (const auto& line : ReadLines(input))
     {
         auto [dir, val] = ParseLine(line);
 

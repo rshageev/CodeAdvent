@@ -41,7 +41,7 @@ Box ParseLine(std::string_view str)
 int Solve_1(const std::filesystem::path& input)
 {
 	int total = 0;
-	for (const auto& line : ReadLines(input) | stdv::filter(not_empty))
+	for (const auto& line : ReadLines(input))
 	{
 		total += PaperForBox(ParseLine(line));
 	}
@@ -51,7 +51,7 @@ int Solve_1(const std::filesystem::path& input)
 int Solve_2(const std::filesystem::path& input)
 {
 	int total = 0;
-	for (const auto& line : ReadLines(input) | stdv::filter(not_empty))
+	for (const auto& line : ReadLines(input))
 	{
 		total += RibbonForBox(ParseLine(line));
 	}

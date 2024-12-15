@@ -68,7 +68,7 @@ auto LoadModules(const std::filesystem::path& input)
 {
     ModulesMap modules;
 
-    for (const auto& line : ReadLines(input) | stdv::filter(not_empty)) {
+    for (const auto& line : ReadLines(input)) {
         modules.insert(ParseLine(line));
     }
 

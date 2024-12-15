@@ -116,7 +116,7 @@ size_t CalcAllCombinations(const Data& data, size_t start_pos = 0, size_t seq_id
 size_t Solve_1(const std::filesystem::path& input)
 {
     size_t sum = 0;
-    for (const auto& line : ReadLines(input) | stdv::filter(not_empty))
+    for (const auto& line : ReadLines(input))
     {
         const auto data = ParseLine(line);
         const auto res = CalcAllCombinations(data);
@@ -128,7 +128,7 @@ size_t Solve_1(const std::filesystem::path& input)
 size_t Solve_2(const std::filesystem::path& input)
 {
     size_t sum = 0;
-    for (const auto& line : ReadLines(input) | stdv::filter(not_empty))
+    for (const auto& line : ReadLines(input))
     {
         const auto data = Unfold(ParseLine(line));
         const auto res = CalcAllCombinations(data);

@@ -96,7 +96,7 @@ int Solve_1(const std::filesystem::path& input)
 
     std::vector<std::pair<Hand, int>> hands;
 
-    for (const auto& line : ReadLines(input) | stdv::filter(not_empty)) {
+    for (const auto& line : ReadLines(input)) {
         hands.push_back(ParseLine(line));
     }
 
@@ -139,7 +139,7 @@ int Solve_2(const std::filesystem::path& input)
 
     std::vector<std::pair<Hand, int>> hands;
 
-    for (const auto& line : ReadLines(input) | stdv::filter(not_empty))
+    for (const auto& line : ReadLines(input))
     {
         hands.push_back(ParseLine(line));
         ApplyJokers(hands.back().first.card_counts);

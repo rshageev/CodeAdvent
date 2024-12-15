@@ -54,7 +54,7 @@ int CardPoints(const Card& card)
 int Solve_1(const std::filesystem::path& input)
 {
     int sum = 0;
-    for (const auto& line : ReadLines(input) | stdv::filter(not_empty))
+    for (const auto& line : ReadLines(input))
     {
         const auto card = ParseLine(line);
         const auto points = CardPoints(card);
@@ -66,7 +66,7 @@ int Solve_1(const std::filesystem::path& input)
 int Solve_2(const std::filesystem::path& input)
 {
     std::vector<int> win_cards;
-    for (const auto& line : ReadLines(input) | stdv::filter(not_empty)) {
+    for (const auto& line : ReadLines(input)) {
         const auto card = ParseLine(line);
         const auto win_numbers = CountWinningNumbers(card);
         win_cards.push_back(win_numbers);

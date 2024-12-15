@@ -20,7 +20,7 @@ int ReadNumber(std::string_view str)
 int Solve_1(const std::filesystem::path& input)
 {
     int sum = 0;
-    for (auto line : ReadLines(input) | stdv::filter(not_empty))
+    for (auto line : ReadLines(input))
     {
         sum += ReadNumber(line);
     }
@@ -83,7 +83,7 @@ int FindRightDigit(std::string_view str)
 int Solve_2(const std::filesystem::path& input)
 {
     int sum = 0;
-    for (auto line : ReadLines(input) | stdv::filter(not_empty))
+    for (auto line : ReadLines(input))
     {
         const int d1 = FindLeftDigit(line);
         const int d2 = FindRightDigit(line);

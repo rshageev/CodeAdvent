@@ -69,7 +69,7 @@ int Solve_1(const std::filesystem::path& input)
     constexpr CubeSet bag{ 12, 13, 14 };
 
     int result = 0;
-    for (const auto& line : ReadLines(input) | stdv::filter(not_empty))
+    for (const auto& line : ReadLines(input))
     {
         const auto game = ParseLine(line);
         const bool is_valid = IsGamePossible(game, bag);
@@ -100,7 +100,7 @@ int SetPower(CubeSet set)
 int Solve_2(const std::filesystem::path& input)
 {
     int result = 0;
-    for (const auto& line : ReadLines(input) | stdv::filter(not_empty))
+    for (const auto& line : ReadLines(input))
     {
         const auto game = ParseLine(line);
         const auto min_set = MinimumSet(game);
