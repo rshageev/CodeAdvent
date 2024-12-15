@@ -19,6 +19,9 @@ export
 
 	template<std::integral T>
 	struct from_chars_to {
+		constexpr T operator() (char ch) const {
+			return static_cast<T>(ch - '0');
+		}
 		constexpr T operator() (auto&& v) const {
 			std::string_view str(v);
 			T value = def;
@@ -28,6 +31,7 @@ export
 		T def = 0;
 	};	
 	inline constexpr from_chars_to<int> to_int;
+	inline constexpr from_chars_to<std::int64_t> to_int64;
 
 	template<size_t N>
 	struct tuple_get_fn {

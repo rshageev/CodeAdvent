@@ -60,7 +60,7 @@ int FindTrailRating(const Array2D<int>& map, Point start)
 
 int Solve(const std::filesystem::path& input, auto calcScore)
 {
-    auto map = ReadArray2D(input, [](char ch) -> int { return ch - '0'; });
+    auto map = ReadArray2D(input, to_int);
 
     int score = 0;
     for (Point start : to_cell_coords(map)) {
