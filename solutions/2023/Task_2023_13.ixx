@@ -12,11 +12,9 @@ std::vector<Array2D<char>> ReadInput(const std::filesystem::path& input)
 {
     std::vector<Array2D<char>> out;
 
-    const auto lines = ReadLines(input);
-
-    for (auto map_lines : lines | stdv::split("") | stdv::filter(not_empty))
+    for (auto map_lines : ReadLineBlocks(input))
     {
-        auto arr = Array2DFromLines(map_lines, [](char ch) { return ch; });
+        auto arr = Array2DFromLines(map_lines);
         FlipArrayVertical(arr);
         out.push_back(std::move(arr));
     }
