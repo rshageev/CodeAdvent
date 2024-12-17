@@ -111,7 +111,7 @@ int64 Solve_2(const std::filesystem::path& input)
 
         if (Symmetrical(map) > robots.size() / 6) {
             std::cout << std::format("Step: {}\n", i);
-            PrintArray2D(map, std::cout, [](int c) -> char { return (c > 0) ? '#' : '.'; });
+            PrintArray2D(map, [](int c) -> char { return (c > 0) ? '#' : '.'; });
         }
     }
 

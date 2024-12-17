@@ -30,11 +30,10 @@ auto LoadData(const std::filesystem::path& input, bool wide = false)
         blocks[0] = blocks[0] | stdv::transform(Widen) | stdr::to<std::vector>();
     }
 
-    Array2D<char> map = Array2DFromLines(blocks[0], [](char ch) { return ch; });
-
-    auto dirs = blocks[1] | stdv::join | stdv::transform(char_to_dir{}) | stdr::to<std::vector>();
-    
-    return std::pair(map, dirs);
+    return std::pair(
+        Array2DFromLines(blocks[0]),
+        blocks[1] | stdv::join | stdv::transform(char_to_dir{}) | stdr::to<std::vector>()
+    );
 }
 
 Point MoveRobot(Array2D<char>& map, Point start_pos, Direction dir)

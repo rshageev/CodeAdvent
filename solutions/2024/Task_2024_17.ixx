@@ -51,12 +51,6 @@ namespace
             uint64 arg = OpValue(ops[ip + 1], reg);
             ip += 2;
 
-            /*
-            0, 3 | adv 3 | A = A >> 3
-            5, 4 | out A | out A % 8
-            3, 0 | jnz 0 | loop if A != 0
-            */
-
             switch (op)
             {
             case 0: // adv
