@@ -41,8 +41,8 @@ namespace
 
     std::vector<uint8> Run(std::span<const uint8> ops, Registers reg)
     {
-        int ip = 0;
-        int max_ip = static_cast<int>(ops.size() - 1);
+        uint64 ip = 0;
+        uint64 max_ip = ops.size() - 1;
         std::vector<uint8> out;
 
         while (ip < max_ip)
@@ -78,8 +78,8 @@ namespace
     uint64 FindA(uint64 base_a, std::span<const uint8> ops)
     {
         // appending 3 bits more to the a, if they cause numbers to match, until we match them all
-        for (uint8 v = 0; v < 8; ++v) {
-            uint64 a = (base_a << 3) + v;
+        for (uint64 v = 0; v < 8u; ++v) {
+            uint64 a = (base_a << 3) | v;
             auto out = Run(ops, { a, 0, 0 });
             if (stdr::ends_with(ops, out)) {
                 if (out.size() == ops.size())
@@ -91,6 +91,46 @@ namespace
             }
         }
         return 0;
+    }
+
+    /* BRUTE FORCE! */
+
+    constexpr uint64 PackOps(std::span<const uint8> ops) {
+        uint64 res = 0;
+        uint64 mul = 1;
+        for (auto op : ops) {
+            res = res + op * mul;
+            mul *= 8;
+        }
+        return res;
+    }
+
+    static_assert(PackOps(std::to_array<uint8>({ 0b001, 0b010, 0b011, 0b111 })) == 0b111'011'010'001);
+
+    bool Check(uint64 ops, uint64 ax) // 49m
+    {
+        for (int i = 0; i < 16; ++i)
+        {
+            uint64 bx = (ax % 8) ^ 2;
+            bx = bx ^ (ax >> bx);
+            bx = bx ^ 3;
+
+            if ((bx % 8) != (ops % 8)) return false;
+            
+            ops >>= 3;
+            ax >>= 3;
+        }
+        return true;
+    }
+
+    void CheckBatch(uint64 ops, uint64 start, uint64 end, uint64 step)
+    {
+        for (uint64 ax = start; ax <= end; ax += step) {
+            if (Check(ops, ax)) {
+                std::osyncstream(std::cout) << ax << '\n';
+                break;
+            }
+        }
     }
 }
 
@@ -110,9 +150,29 @@ std::string Solve_1(const std::filesystem::path& input)
     return res;
 }
 
-uint64 Solve_2(const std::filesystem::path& input)
+void Solve_BruteForce(const std::filesystem::path& input)
 {
     const auto [_, ops] = LoadData(input);
 
+    constexpr uint64 start = 0x0000'00FF'FFFF'FFFF; // 40 1's
+    constexpr uint64 end = start + 50'000'000'000; // 0x0000'FFFF'FFFF'FFFF; // 48 1's
+
+    const uint32 jobs = std::thread::hardware_concurrency();
+    std::osyncstream(std::cout) << std::format("Starting {} threads\n", jobs);
+
+    Timer timer;
+    std::vector<std::jthread> threads;
+    const uint64 ops_packed = PackOps(ops);
+    for (uint32 i = 0; i < jobs; ++i) {
+        threads.emplace_back([=]() { CheckBatch(ops_packed, start + i, end, jobs); });
+    }
+    threads.clear();
+
+    std::cout << timer.Get();
+}
+
+uint64 Solve_2(const std::filesystem::path& input)
+{
+    auto [_, ops] = LoadData(input);
     return FindA(0, ops);
 }
