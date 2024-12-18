@@ -107,4 +107,17 @@ export
 	{
 		return { WrapCoord(pos.x, area.x, area.w), WrapCoord(pos.y, area.y, area.h) };
 	}
+
+	namespace std {
+		template <> struct hash<Point> {
+			size_t operator()(Point pos) const {
+				auto x = std::bit_cast<std::uint32_t>(pos.x);
+				auto y = std::bit_cast<std::uint32_t>(pos.y);
+				auto x64 = static_cast<std::uint64_t>(x);
+				auto y64 = static_cast<std::uint64_t>(x);
+				auto xy64 = (x64 << 32) | y64;
+				return std::hash<std::uint64_t>{}(xy64);
+			}
+		};
+	}
 }
