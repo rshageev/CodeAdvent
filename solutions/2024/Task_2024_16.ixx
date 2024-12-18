@@ -1,6 +1,3 @@
-module;
-#include <scn/scan.h>
-
 export module AoC_2024.Day16;
 
 import std;
@@ -13,99 +10,119 @@ module : private;
 
 namespace
 {
-
-    struct State
-    {
+    struct Node {
         Point pos;
-        Direction dir = Dir::Right;
+        Direction dir;
+
+        bool operator==(const Node&) const = default;
+    };
+
+    struct NodeHash {
+        size_t operator() (Node n) const {
+            int64 v = n.dir + 1000ll * n.pos.x + 1000'000ll * n.pos.y;
+            return std::hash<int64>{}(v);
+        }
+    };
+
+    struct NodeData {
         int score = 0;
-        int index = 0;
-        int prev = -1;
-
-        bool operator<(const State& rhs) const noexcept { return score > rhs.score; }
+        std::vector<Node> prev;
     };
 
-    struct VisitedMap
+    using Nodes = std::unordered_map<Node, NodeData, NodeHash>;
+
+    bool AddNode(Nodes& nodes, Node node, int score, Node prev)
     {
-        bool Check(Point pos, Direction dir, int score)
-        {
-            auto [itr, inserted] = visited.try_emplace(std::pair(pos, dir), score);
-            if (inserted) {
-                return true;
-            } else if (score <= itr->second) {
-                itr->second = score;
-                return true;
+        auto [itr, inserted] = nodes.try_emplace(node);
+        if (inserted) {
+            // not visited previously
+            itr->second.score = score;
+            itr->second.prev.push_back(prev);
+            return true;
+        }
+        else if (score == itr->second.score) {
+            // already visited but at the same distance, remember alternative route
+            itr->second.prev.push_back(prev);
+        }
+        return false;
+    }
+
+    std::vector<Node> UpdateState(Node prev, const Array2D<char>& map, Nodes& nodes)
+    {
+        std::vector<Node> ns;
+
+        int score = nodes.at(prev).score;
+
+        Node next_fwd = { MovePoint(prev.pos, prev.dir), prev.dir };
+        if (map.Contains(next_fwd.pos) && map[next_fwd.pos] != '#') {
+            if (AddNode(nodes, next_fwd, score + 1, prev)) {
+                ns.push_back(next_fwd);
             }
-            return false;
         }
 
-        std::map<std::pair<Point, Direction>, int> visited;
-    };
-
-    std::vector<State> UpdateState(State s, const Array2D<char>& map, VisitedMap& visited, std::vector<State>& all_states)
-    {
-        std::vector<State> ns;
-
-        Point np = MovePoint(s.pos, s.dir);
-        if (map.Contains(np) && map[np] != '#' && visited.Check(np, s.dir, s.score + 1)) {
-            State next{ np, s.dir, s.score + 1, all_states.size(), s.index };
-            all_states.push_back(next);
-            ns.push_back(next);
+        Node next_rl = { prev.pos, RotateLeft(prev.dir) };
+        if (AddNode(nodes, next_rl, score + 1000, prev)) {
+            ns.push_back(next_rl);
         }
 
-        if (visited.Check(s.pos, RotateLeft(s.dir), s.score + 1000)) {
-            State r1{ s.pos, RotateLeft(s.dir), s.score + 1000, all_states.size(), s.index };
-            all_states.push_back(r1);
-            ns.push_back(r1);
+        Node next_rr = { prev.pos, RotateRight(prev.dir) };
+        if (AddNode(nodes, next_rr, score + 1000, prev)) {
+            ns.push_back(next_rr);
         }
 
-        if (visited.Check(s.pos, RotateRight(s.dir), s.score + 1000)) {
-            State r2{ s.pos, RotateRight(s.dir), s.score + 1000, all_states.size(), s.index };
-            all_states.push_back(r2);
-            ns.push_back(r2);
-        }
         return ns;
     }
 
-    int64 CalcPath(Array2D<char>& map)
+    void ReconstructPath(Node end, Array2D<char>& map, const Nodes& nodes)
+    {
+        std::queue<Node> q;
+        q.push(end);
+        while (!q.empty()) {
+            Node node = q.front();
+            q.pop();
+
+            map[node.pos] = 'O';
+            q.push_range(nodes.at(node).prev);
+        }
+    }
+
+    int CalcPath(Array2D<char>& map)
     {
         const Point start_pos = FindInArray2D(map, 'S');
 
-        VisitedMap visited;
-        std::priority_queue<State> q;
-        State init{ start_pos, Dir::Right, 0, 0, -1 };
-        q.push(init);
+        Nodes nodes = { {{start_pos, Dir::Right}, { 0 }} };
 
-        std::vector<State> all_states = { init };
-        int64 shortest = std::numeric_limits<int64>::max();
+        auto is_better = [&nodes](Node n1, Node n2) {
+            return nodes.at(n1).score > nodes.at(n2).score;
+        };
+
+        std::priority_queue<Node, std::vector<Node>, decltype(is_better)> q(is_better);
+        q.push({ start_pos, Dir::Right });
+
+        int shortest = std::numeric_limits<int>::max();
 
         while (!q.empty())
         {
-            auto st = q.top();
+            Node node = q.top();
             q.pop();
 
-            if (st.score > shortest) continue;
+            auto& node_data = nodes.at(node);
+            if (node_data.score > shortest) continue;
 
-            if (map[st.pos] == 'E')
+            if (map[node.pos] == 'E')
             {
-                shortest = st.score;
+                shortest = node_data.score;
 
-                // reconstruct path
-                State* node = &st;
-                while (node->prev >= 0) {
-                    node = &all_states[node->prev];
-                    map[node->pos] = 'O';
-                }
+                ReconstructPath(node, map, nodes);
             }
             else
             {
-                q.push_range(UpdateState(st, map, visited, all_states));
+                q.push_range(UpdateState(node, map, nodes));
             }
         }
 
         return shortest;
     }
-
 }
 
 int64 Solve_1(const std::filesystem::path& input)
@@ -118,5 +135,5 @@ int64 Solve_2(const std::filesystem::path& input)
 {
     auto map = ReadArray2D(input);
     CalcPath(map);
-    return stdr::count(map, 'O') + 1;
+    return stdr::count(map, 'O');
 }
