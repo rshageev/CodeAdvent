@@ -9,28 +9,46 @@ export
 	using Direction = std::uint8_t;
 	namespace Dir {
 		inline constexpr Direction None  = 0;
-		inline constexpr Direction Right = 0b0000'0001; // 1
-		inline constexpr Direction Up    = 0b0000'0100; // 4
-		inline constexpr Direction Left  = 0b0001'0000; // 16
-		inline constexpr Direction Down  = 0b0100'0000; // 64
+
+		inline constexpr Direction Right = 0b0000'0001;
+		inline constexpr Direction Up    = 0b0000'0100;
+		inline constexpr Direction Left  = 0b0001'0000;
+		inline constexpr Direction Down  = 0b0100'0000;
+
+		inline constexpr Direction E  = 0b0000'0001;
+		inline constexpr Direction NE = 0b0000'0010;
+		inline constexpr Direction N  = 0b0000'0100;
+		inline constexpr Direction NW = 0b0000'1000;
+		inline constexpr Direction W  = 0b0001'0000;
+		inline constexpr Direction SW = 0b0010'0000;
+		inline constexpr Direction S  = 0b0100'0000;
+		inline constexpr Direction SE = 0b1000'0000;
 	}
 
 	inline constexpr std::pair<Direction, Point> Neighbours4[] = {
-		{ Dir::Right, { 1, 0 } },
-		{ Dir::Up, { 0, 1 } },
-		{ Dir::Left, { -1, 0 } },
-		{ Dir::Down, { 0, -1 } },
+		{ Dir::E, { 1, 0 } },
+		{ Dir::N, { 0, 1 } },
+		{ Dir::W, { -1, 0 } },
+		{ Dir::S, { 0, -1 } },
+	};
+
+	inline constexpr std::pair<Direction, Point> Neighbours8[] = {
+		{ Dir::E, { 1, 0 } },
+		{ Dir::NE, { 1, 1 } },
+		{ Dir::N, { 0, 1 } },
+		{ Dir::NW, { -1, 1 } },
+		{ Dir::W, { -1, 0 } },
+		{ Dir::SW, { -1, -1 } },
+		{ Dir::S, { 0, -1 } },
+		{ Dir::SE, { 1, -1 } },
 	};
 
 	template<std::integral T = int>
 	constexpr TPoint<T> DirToOffset(Direction dir) {
-		switch (dir) {
-			case Dir::Right: return { 1, 0 };
-			case Dir::Up: return { 0, 1 };
-			case Dir::Left: return { -1, 0 };
-			case Dir::Down: return { 0, -1 };
-			default: return { 0, 0 };
+		for (auto [d, off] : Neighbours8) {
+			if (d == dir) return { off.x, off.y };
 		}
+		return { 0, 0 };
 	}
 
 	template<std::integral T = int>
@@ -49,6 +67,12 @@ export
 	}
 	constexpr Direction RotateLeft(Direction dir) {
 		return std::rotl(dir, 2);
+	}
+	constexpr Direction RotateRight45(Direction dir) {
+		return std::rotr(dir, 1);
+	}
+	constexpr Direction RotateLeft45(Direction dir) {
+		return std::rotl(dir, 1);
 	}
 	constexpr Direction Opposite(Direction dir) {
 		return std::rotl(dir, 4);
