@@ -107,7 +107,7 @@ namespace
 
     static_assert(PackOps(std::to_array<uint8>({ 0b001, 0b010, 0b011, 0b111 })) == 0b111'011'010'001);
 
-    bool Check(uint64 ops, uint64 ax) // 49m
+    bool Check(uint64 ops, uint64 ax)
     {
         for (int i = 0; i < 16; ++i)
         {
@@ -154,8 +154,8 @@ void Solve_BruteForce(const std::filesystem::path& input)
 {
     const auto [_, ops] = LoadData(input);
 
-    constexpr uint64 start = 0x0000'00FF'FFFF'FFFF; // 40 1's
-    constexpr uint64 end = start + 50'000'000'000; // 0x0000'FFFF'FFFF'FFFF; // 48 1's
+    constexpr uint64 start = 0x0000'00FF'FFFF'FFFF; // at least 46 bit to have output length 16
+    constexpr uint64 end = 0x0000'FFFF'FFFF'FFFF; // max 48 bit to have output length 16
 
     const uint32 jobs = std::thread::hardware_concurrency();
     std::osyncstream(std::cout) << std::format("Starting {} threads\n", jobs);

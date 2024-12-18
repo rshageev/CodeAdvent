@@ -43,7 +43,7 @@ int Solve_2(const std::filesystem::path& input)
 
     int result = 0;
     for (int v1 : list1) {
-        result += v1 * stdr::count(list2, v1);
+        result += v1 * static_cast<int>(stdr::count(list2, v1));
     }
     return result;
 }

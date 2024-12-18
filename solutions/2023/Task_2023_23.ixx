@@ -8,7 +8,7 @@ export int Solve_2(const std::filesystem::path& input);
 
 module : private;
 
-void DFS(const Array2D<char>& map, Point pos, Point finish, size_t step, Array2D<bool>& visited, int& max_path)
+void DFS(const Array2D<char>& map, Point pos, Point finish, int step, Array2D<bool>& visited, int& max_path)
 {
     if (pos == finish) {
         if (step > max_path) {

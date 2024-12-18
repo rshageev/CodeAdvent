@@ -80,7 +80,7 @@ int Solve_2(const std::filesystem::path& input)
         owned += count;
     };
     
-    queue_numbers(0, std::ssize(win_cards));
+    queue_numbers(0, static_cast<int>(win_cards.size()));
 
     while (!queue.empty())
     {

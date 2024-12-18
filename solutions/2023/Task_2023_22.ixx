@@ -86,7 +86,7 @@ auto CalcBrickSupports(std::span<const Brick> bricks)
 
     for (auto [i, b] : bricks | stdv::enumerate)
     {
-        for (size_t j = 0; j < i; ++j) {
+        for (int j = 0; j < i; ++j) {
             for (Point pt : to_cell_coords(b.RectXY())) {
                 if (bricks[j].Contains(pt.x, pt.y, b.z1 - 1)) {
                     supports[i].push_back(j);
