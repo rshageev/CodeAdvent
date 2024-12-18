@@ -202,25 +202,31 @@ export
 	void PrintArray2D(const Array2D<T>& arr, Pred&& to_char = {}, std::ostream& out = std::cout)
 	{
 		const Rect rect = arr.Area();
+		std::string out_str;
+		out_str.reserve(rect.w * rect.h);
 		for (int y = rect.y + rect.h - 1; y >= rect.y; --y) {
 			for (int x = rect.x; x < rect.x + rect.w; ++x) {
 				Point pos{ x, y };
-				out << to_char(arr[pos]);
+				out_str.push_back(std::invoke(to_char, arr[pos]));
 			}
-			out << '\n';
+			out_str.push_back('\n');
 		}
+		out << out_str;
 	}
 
 	template<class T, class Pred>
 	void PrintData2D(Rect rect, Pred&& to_char, std::ostream& out = std::cout)
 	{
+		std::string out_str;
+		out_str.reserve(rect.w * rect.h);
 		for (int y = rect.y + rect.h - 1; y >= rect.y; --y) {
 			for (int x = rect.x; x < rect.x + rect.w; ++x) {
 				Point pos{ x, y };
-				out << to_char(pos);
+				out_str.push_back(std::invoke(to_char, pos));
 			}
-			out << '\n';
+			out_str.push_back('\n');
 		}
+		out << out_str;
 	}
 
 	template<class Elem, class T>
