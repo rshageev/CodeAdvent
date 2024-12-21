@@ -140,7 +140,7 @@ export
 	}
 
 	template<class Pred = std::identity>
-	auto Array2DFromString(std::string_view str, Pred&& pred, char separator = '\n')
+	auto Array2DFromString(std::string_view str, Pred&& pred = {}, char separator = '\n')
 	{
 		const auto lines = str
 			| std::views::split(separator)
@@ -214,7 +214,7 @@ export
 		out << out_str;
 	}
 
-	template<class T, class Pred>
+	template<class Pred>
 	void PrintData2D(Rect rect, Pred&& to_char, std::ostream& out = std::cout)
 	{
 		std::string out_str;
