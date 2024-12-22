@@ -31,6 +31,7 @@ export
 		T def = 0;
 	};	
 	inline constexpr from_chars_to<int> to_int;
+	inline constexpr from_chars_to<std::uint64_t> to_uint64;
 	inline constexpr from_chars_to<std::int64_t> to_int64;
 
 	template<size_t N>
