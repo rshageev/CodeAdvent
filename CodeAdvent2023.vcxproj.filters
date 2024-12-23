@@ -273,6 +273,12 @@
     <ClCompile Include="solutions\2024\Task_2024_22.ixx">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\2021\Task_2021_3.ixx">
+      <Filter>Source Files\solutions\2021</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\2024\Task_2024_23.ixx">
+      <Filter>Source Files\solutions\2024</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs\scnlib\src\scn\impl.h">

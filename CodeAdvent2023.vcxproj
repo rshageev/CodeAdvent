@@ -36,6 +36,7 @@
     <ClCompile Include="solutions\2021\Task_2021_1.ixx" />
     <ClCompile Include="solutions\2021\Task_2021_2.ixx" />
     <ClCompile Include="solutions\2021\Task_2021_25.ixx" />
+    <ClCompile Include="solutions\2021\Task_2021_3.ixx" />
     <ClCompile Include="solutions\2022\Task_2022_1.ixx" />
     <ClCompile Include="solutions\2022\Task_2022_16.ixx" />
     <ClCompile Include="solutions\2022\Task_2022_23.ixx" />
@@ -80,6 +81,7 @@
     <ClCompile Include="solutions\2024\Task_2024_20.ixx" />
     <ClCompile Include="solutions\2024\Task_2024_21.ixx" />
     <ClCompile Include="solutions\2024\Task_2024_22.ixx" />
+    <ClCompile Include="solutions\2024\Task_2024_23.ixx" />
     <ClCompile Include="solutions\2024\Task_2024_3.ixx" />
     <ClCompile Include="solutions\2024\Task_2024_4.ixx" />
     <ClCompile Include="solutions\2024\Task_2024_5.ixx" />
