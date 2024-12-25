@@ -82,6 +82,7 @@
     <ClCompile Include="solutions\2024\Task_2024_21.ixx" />
     <ClCompile Include="solutions\2024\Task_2024_22.ixx" />
     <ClCompile Include="solutions\2024\Task_2024_23.ixx" />
+    <ClCompile Include="solutions\2024\Task_2024_25.ixx" />
     <ClCompile Include="solutions\2024\Task_2024_3.ixx" />
     <ClCompile Include="solutions\2024\Task_2024_4.ixx" />
     <ClCompile Include="solutions\2024\Task_2024_5.ixx" />
