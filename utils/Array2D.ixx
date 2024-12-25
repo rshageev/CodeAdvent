@@ -1,6 +1,7 @@
 export module utils:Array2D;
 
 import :Math;
+import :File;
 
 import std;
 
@@ -240,5 +241,10 @@ export
 			}
 		}
 		return pos;
+	}
+
+	template<class Pred = std::identity>
+	auto ReadArray2D(const std::filesystem::path& filename, Pred&& pred = {}) {
+		return Array2DFromString(ReadText(filename), std::forward<Pred>(pred));
 	}
 }
