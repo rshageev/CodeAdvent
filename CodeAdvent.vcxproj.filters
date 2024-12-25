@@ -282,14 +282,20 @@
     <ClCompile Include="solutions\2024\Task_2024_24.ixx">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_25.ixx">
-      <Filter>Source Files\solutions\2024</Filter>
-    </ClCompile>
     <ClCompile Include="utils\Parsing.ixx">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
     <ClCompile Include="utils\File.ixx">
       <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Runner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Runner.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\2024\Task_2024_25.cpp">
+      <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
