@@ -82,6 +82,7 @@
     <ClCompile Include="solutions\2024\Task_2024_21.ixx" />
     <ClCompile Include="solutions\2024\Task_2024_22.ixx" />
     <ClCompile Include="solutions\2024\Task_2024_23.ixx" />
+    <ClCompile Include="solutions\2024\Task_2024_24.ixx" />
     <ClCompile Include="solutions\2024\Task_2024_25.ixx" />
     <ClCompile Include="solutions\2024\Task_2024_3.ixx" />
     <ClCompile Include="solutions\2024\Task_2024_4.ixx" />
@@ -93,10 +94,12 @@
     <ClCompile Include="utils\Algorithms.ixx" />
     <ClCompile Include="utils\Array2D.ixx" />
     <ClCompile Include="utils\Directions.ixx" />
-    <ClCompile Include="utils\FileUtils.cpp" />
+    <ClCompile Include="utils\File.cpp" />
+    <ClCompile Include="utils\File.ixx" />
     <ClCompile Include="utils\Functional.ixx" />
     <ClCompile Include="utils\Math.ixx" />
-    <ClCompile Include="utils\ParseUtils.cpp" />
+    <ClCompile Include="utils\Parsing.cpp" />
+    <ClCompile Include="utils\Parsing.ixx" />
     <ClCompile Include="utils\RectViews.ixx" />
     <ClCompile Include="utils\Timer.ixx" />
     <ClCompile Include="utils\Types.ixx" />
@@ -201,6 +204,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -233,6 +237,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

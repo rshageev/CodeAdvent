@@ -54,13 +54,13 @@
     <ClCompile Include="CodeAdvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils\FileUtils.cpp">
+    <ClCompile Include="utils\File.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
     <ClCompile Include="utils\Utils.ixx">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
-    <ClCompile Include="utils\ParseUtils.cpp">
+    <ClCompile Include="utils\Parsing.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
     <ClCompile Include="utils\Math.ixx">
@@ -284,6 +284,12 @@
     </ClCompile>
     <ClCompile Include="solutions\2024\Task_2024_25.ixx">
       <Filter>Source Files\solutions\2024</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\Parsing.ixx">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\File.ixx">
+      <Filter>Source Files\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
