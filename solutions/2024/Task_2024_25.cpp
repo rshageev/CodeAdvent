@@ -1,9 +1,9 @@
+#include "Runner.h"
+
 import std;
 import utils;
 
-#include "Runner.h"
-
-namespace Day25
+namespace
 {
     auto LoadData(const std::filesystem::path& input)
     {

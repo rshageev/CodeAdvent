@@ -1,12 +1,7 @@
-export module AoC_2024.Day21;
+#include "Runner.h"
 
 import std;
 import utils;
-
-export int64 Solve_1(const std::filesystem::path& input);
-export int64 Solve_2(const std::filesystem::path& input);
-
-module : private;
 
 namespace
 {
@@ -14,7 +9,7 @@ namespace
     static const Keypad KeypadN = Array2DFromString("789\n456\n123\n.0A");
     static const Keypad KeypadD = Array2DFromString(".^A\n<v>");
 
- 
+
     // Find all shortest sequences we need to press on a digital keypad in order for the robot
     // controlled by us to press `tgt_key` from the initial position at `start_key`
     std::vector<std::string> FindSequences(const Array2D<char>& tgt_keypad, char start_key, char tgt_key)
@@ -117,14 +112,17 @@ namespace
         }
         return res;
     }
-}
 
-int64 Solve_1(const std::filesystem::path& input)
-{
-    return Solve(input, 3);
-}
+    int64 Solve_1(const std::filesystem::path& input)
+    {
+        return Solve(input, 3);
+    }
 
-int64 Solve_2(const std::filesystem::path& input)
-{
-    return Solve(input, 26);
+    int64 Solve_2(const std::filesystem::path& input)
+    {
+        return Solve(input, 26);
+    }
+
+    REGISTER_SOLUTION(2024, 21, 1, Solve_1);
+    REGISTER_SOLUTION(2024, 21, 2, Solve_2);
 }

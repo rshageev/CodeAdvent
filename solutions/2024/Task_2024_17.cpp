@@ -1,12 +1,4 @@
-export module AoC_2024.Day17;
-
-import std;
-import utils;
-
-export std::string Solve_1(const std::filesystem::path& input);
-export uint64 Solve_2(const std::filesystem::path& input);
-
-module : private;
+#include "Runner.h"
 
 namespace
 {
@@ -132,47 +124,51 @@ namespace
             }
         }
     }
-}
 
-std::string Solve_1(const std::filesystem::path& input)
-{
-    auto [reg, ops] = LoadData(input);
+    std::string Solve_1(const std::filesystem::path& input)
+    {
+        auto [reg, ops] = LoadData(input);
 
-    auto out = Run(ops, reg);
+        auto out = Run(ops, reg);
 
-    std::string res;
-    for (auto v : out) {
-        res.append(std::to_string(v));
-        res.push_back(',');
+        std::string res;
+        for (auto v : out) {
+            res.append(std::to_string(v));
+            res.push_back(',');
+        }
+        if (!res.empty() && res.back() == ',') res.pop_back();
+
+        return res;
     }
-    if (!res.empty() && res.back() == ',') res.pop_back();
 
-    return res;
-}
+    void Solve_BruteForce(const std::filesystem::path& input)
+    {
+        const auto [_, ops] = LoadData(input);
 
-void Solve_BruteForce(const std::filesystem::path& input)
-{
-    const auto [_, ops] = LoadData(input);
+        constexpr uint64 start = 0x0000'00FF'FFFF'FFFF; // at least 46 bit to have output length 16
+        constexpr uint64 end = 0x0000'FFFF'FFFF'FFFF; // max 48 bit to have output length 16
 
-    constexpr uint64 start = 0x0000'00FF'FFFF'FFFF; // at least 46 bit to have output length 16
-    constexpr uint64 end = 0x0000'FFFF'FFFF'FFFF; // max 48 bit to have output length 16
+        const uint32 jobs = std::thread::hardware_concurrency();
+        std::osyncstream(std::cout) << std::format("Starting {} threads\n", jobs);
 
-    const uint32 jobs = std::thread::hardware_concurrency();
-    std::osyncstream(std::cout) << std::format("Starting {} threads\n", jobs);
+        Timer timer;
+        std::vector<std::jthread> threads;
+        const uint64 ops_packed = PackOps(ops);
+        for (uint32 i = 0; i < jobs; ++i) {
+            threads.emplace_back([=]() { CheckBatch(ops_packed, start + i, end, jobs); });
+        }
+        threads.clear();
 
-    Timer timer;
-    std::vector<std::jthread> threads;
-    const uint64 ops_packed = PackOps(ops);
-    for (uint32 i = 0; i < jobs; ++i) {
-        threads.emplace_back([=]() { CheckBatch(ops_packed, start + i, end, jobs); });
+        std::cout << timer.Get();
     }
-    threads.clear();
 
-    std::cout << timer.Get();
+    uint64 Solve_2(const std::filesystem::path& input)
+    {
+        auto [_, ops] = LoadData(input);
+        return FindA(0, ops);
+    }
+
+    REGISTER_SOLUTION(2024, 17, 1, Solve_1);
+    REGISTER_SOLUTION(2024, 17, 2, Solve_2);
 }
 
-uint64 Solve_2(const std::filesystem::path& input)
-{
-    auto [_, ops] = LoadData(input);
-    return FindA(0, ops);
-}

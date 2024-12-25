@@ -1,12 +1,7 @@
-export module AoC_2024.Day16;
+#include "Runner.h"
 
 import std;
 import utils;
-
-export int64 Solve_1(const std::filesystem::path& input);
-export int64 Solve_2(const std::filesystem::path& input);
-
-module : private;
 
 namespace
 {
@@ -123,17 +118,21 @@ namespace
 
         return shortest;
     }
+
+    int64 Solve_1(const std::filesystem::path& input)
+    {
+        auto map = ReadArray2D(input);
+        return CalcPath(map);
+    }
+
+    int64 Solve_2(const std::filesystem::path& input)
+    {
+        auto map = ReadArray2D(input);
+        CalcPath(map);
+        return stdr::count(map, 'O');
+    }
+
+    REGISTER_SOLUTION(2024, 16, 1, Solve_1);
+    REGISTER_SOLUTION(2024, 16, 2, Solve_2);
 }
 
-int64 Solve_1(const std::filesystem::path& input)
-{
-    auto map = ReadArray2D(input);
-    return CalcPath(map);
-}
-
-int64 Solve_2(const std::filesystem::path& input)
-{
-    auto map = ReadArray2D(input);
-    CalcPath(map);
-    return stdr::count(map, 'O');
-}

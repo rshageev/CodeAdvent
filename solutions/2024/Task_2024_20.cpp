@@ -1,12 +1,7 @@
-export module AoC_2024.Day20;
+#include "Runner.h"
 
 import std;
 import utils;
-
-export int64 Solve_1(const std::filesystem::path& input);
-export int64 Solve_2(const std::filesystem::path& input);
-
-module : private;
 
 namespace
 {
@@ -42,7 +37,7 @@ namespace
         int64 res = 0;
         for (Point end : to_cell_coords(search_rect)) {
             int dist = std::abs(end.x - start.x) + std::abs(end.y - start.y);
-            if (dm.Contains(end) && dist <= cheat_duration) {         
+            if (dm.Contains(end) && dist <= cheat_duration) {
                 int saving = (dm[end] - dm[start]) - dist;
                 if (saving >= req_savings) {
                     ++res;
@@ -63,14 +58,17 @@ namespace
         }
         return res;
     }
-}
 
-int64 Solve_1(const std::filesystem::path& input)
-{
-    return Solve(input, 100, 2);
-}
+    int64 Solve_1(const std::filesystem::path& input)
+    {
+        return Solve(input, 100, 2);
+    }
 
-int64 Solve_2(const std::filesystem::path& input)
-{   
-    return Solve(input, 100, 20);
+    int64 Solve_2(const std::filesystem::path& input)
+    {
+        return Solve(input, 100, 20);
+    }
+
+    REGISTER_SOLUTION(2024, 20, 1, Solve_1);
+    REGISTER_SOLUTION(2024, 20, 2, Solve_2);
 }

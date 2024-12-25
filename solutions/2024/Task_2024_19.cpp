@@ -1,15 +1,5 @@
-module;
 #include <scn/scan.h>
-
-export module AoC_2024.Day19;
-
-import std;
-import utils;
-
-export int64 Solve_1(const std::filesystem::path& input);
-export int64 Solve_2(const std::filesystem::path& input);
-
-module : private;
+#include "Runner.h"
 
 namespace
 {
@@ -45,28 +35,31 @@ namespace
         cache[design] = count;
         return count;
     };
-}
 
-int64 Solve_1(const std::filesystem::path& input)
-{
-    auto [parts, designs] = LoadData(input);
+    int64 Solve_1(const std::filesystem::path& input)
+    {
+        auto [parts, designs] = LoadData(input);
 
-    int64 res = 0;
-    Cache cache;
-    for (const auto& design : designs) {
-        res += std::min(1ll, CountDesigns(design, parts, cache));
+        int64 res = 0;
+        Cache cache;
+        for (const auto& design : designs) {
+            res += std::min(1ll, CountDesigns(design, parts, cache));
+        }
+        return res;
     }
-    return res;
-}
 
-int64 Solve_2(const std::filesystem::path& input)
-{
-    auto [parts, designs] = LoadData(input);
+    int64 Solve_2(const std::filesystem::path& input)
+    {
+        auto [parts, designs] = LoadData(input);
 
-    int64 res = 0;
-    Cache cache;
-    for (const auto& design : designs) {
-        res += CountDesigns(design, parts, cache);
+        int64 res = 0;
+        Cache cache;
+        for (const auto& design : designs) {
+            res += CountDesigns(design, parts, cache);
+        }
+        return res;
     }
-    return res;
+
+    REGISTER_SOLUTION(2024, 19, 1, Solve_1);
+    REGISTER_SOLUTION(2024, 19, 2, Solve_2);
 }

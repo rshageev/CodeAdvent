@@ -1,12 +1,7 @@
-export module AoC_2024.Day18;
+#include "Runner.h"
 
 import std;
 import utils;
-
-export int Solve_1(const std::filesystem::path& input);
-export std::string Solve_2(const std::filesystem::path& input);
-
-module : private;
 
 namespace
 {
@@ -48,39 +43,42 @@ namespace
 
         return 0;
     }
-}
 
-int Solve_1(const std::filesystem::path& input)
-{
-    const auto bytes = ReadPositions(input);
+    int Solve_1(const std::filesystem::path& input)
+    {
+        const auto bytes = ReadPositions(input);
 
-    bool is_test = (input == "test.txt");
-    int size = is_test ? 7 : 71;
-    int count = is_test ? 12 : 1024;
+        bool is_test = (input.filename() == "test.txt");
+        int size = is_test ? 7 : 71;
+        int count = is_test ? 12 : 1024;
 
-    Array2D<char> map(size, size, '.');
-    for (Point pos : bytes | stdv::take(count)) {
-        if (map.Contains(pos)) map[pos] = '#';
-    }
-
-    return FindPath(map);
-}
-
-std::string Solve_2(const std::filesystem::path& input)
-{
-    auto bytes = ReadPositions(input);
-
-    bool is_test = (input == "test.txt");
-    int size = is_test ? 7 : 71;
-
-    Array2D<char> map(size, size, '.');
-
-    for (Point bp : bytes) {
-        map[bp] = '#';
-        if (FindPath(map) == 0) {
-            return std::format("{},{}", bp.x, bp.y);
+        Array2D<char> map(size, size, '.');
+        for (Point pos : bytes | stdv::take(count)) {
+            if (map.Contains(pos)) map[pos] = '#';
         }
+
+        return FindPath(map);
     }
 
-    return "No result";
+    std::string Solve_2(const std::filesystem::path& input)
+    {
+        auto bytes = ReadPositions(input);
+
+        bool is_test = (input.filename() == "test.txt");
+        int size = is_test ? 7 : 71;
+
+        Array2D<char> map(size, size, '.');
+
+        for (Point bp : bytes) {
+            map[bp] = '#';
+            if (FindPath(map) == 0) {
+                return std::format("{},{}", bp.x, bp.y);
+            }
+        }
+
+        return "No result";
+    }
+
+    REGISTER_SOLUTION(2024, 18, 1, Solve_1);
+    REGISTER_SOLUTION(2024, 18, 2, Solve_2);
 }

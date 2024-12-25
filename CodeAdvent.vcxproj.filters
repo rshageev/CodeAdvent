@@ -192,61 +192,61 @@
     <ClCompile Include="solutions\2020\Task_2020_25.ixx">
       <Filter>Source Files\solutions\2020</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_1.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_1.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_2.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_2.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
     <ClCompile Include="libs\scnlib\src\scn\impl.cpp">
       <Filter>Source Files\libs\scnlib\src</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_3.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_3.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_4.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_4.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_5.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_5.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_6.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_6.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_7.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_7.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_8.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_8.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_9.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_9.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_10.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_10.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_11.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_11.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_12.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_12.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_13.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_13.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_14.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_14.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_15.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_15.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
     <ClCompile Include="solutions\2020\Task_2020_3.ixx">
       <Filter>Source Files\solutions\2020</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_16.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_16.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_17.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_17.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
     <ClCompile Include="utils\Algorithms.ixx">
@@ -255,31 +255,31 @@
     <ClCompile Include="utils\Types.ixx">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_18.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_18.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_19.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_19.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
     <ClCompile Include="solutions\2022\Task_2022_23.ixx">
       <Filter>Source Files\solutions\2022</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_20.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_20.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_21.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_21.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_22.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_22.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
     <ClCompile Include="solutions\2021\Task_2021_3.ixx">
       <Filter>Source Files\solutions\2021</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_23.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_23.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2024\Task_2024_24.ixx">
+    <ClCompile Include="solutions\2024\Task_2024_24.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
     <ClCompile Include="utils\Parsing.ixx">
