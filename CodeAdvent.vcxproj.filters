@@ -96,49 +96,49 @@
     <ClCompile Include="solutions\2022\Task_2022_24.cpp">
       <Filter>Source Files\solutions\2022</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_1.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_1.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
     <ClCompile Include="solutions\2021\Task_2021_2.cpp">
       <Filter>Source Files\solutions\2021</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_2.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_2.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_3.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_3.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_4.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_4.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_5.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_5.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_6.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_6.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_7.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_7.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_8.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_8.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_9.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_9.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_10.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_10.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_11.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_11.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_12.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_12.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_13.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_13.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_14.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_14.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
     <ClCompile Include="utils\Timer.ixx">
@@ -147,37 +147,37 @@
     <ClCompile Include="utils\Functional.ixx">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_15.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_15.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_16.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_16.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
     <ClCompile Include="utils\Directions.ixx">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_17.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_17.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_18.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_18.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_19.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_19.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_20.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_20.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_21.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_21.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_22.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_22.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_23.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_23.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2023\Task_2023_24.ixx">
+    <ClCompile Include="solutions\2023\Task_2023_24.cpp">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
     <ClCompile Include="solutions\2020\Task_2020_1.cpp">

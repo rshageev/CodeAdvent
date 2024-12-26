@@ -1,16 +1,10 @@
-export module AoC_2023.Day17;
+#include "Runner.h"
 
 import std;
 import utils;
 
-export int Solve_1(const std::filesystem::path& input);
-export int Solve_2(const std::filesystem::path& input);
-
-module : private;
-
 namespace
 {
-
     using Steps = std::int16_t;
     using Loss = std::int16_t;
     using LossMap = Array2D<Loss>;
@@ -118,15 +112,16 @@ namespace
         return final_state.loss;
     }
 
-}
+    int Solve_1(const std::filesystem::path& input)
+    {
+        return Solve(input, 1, 3);
+    }
 
+    int Solve_2(const std::filesystem::path& input)
+    {
+        return Solve(input, 4, 10);
+    }
 
-int Solve_1(const std::filesystem::path& input)
-{
-    return Solve(input, 1, 3);
-}
-
-int Solve_2(const std::filesystem::path& input)
-{
-    return Solve(input, 4, 10);
+    REGISTER_SOLUTION(2023, 17, 1, Solve_1);
+    REGISTER_SOLUTION(2023, 17, 2, Solve_2);
 }
