@@ -1,12 +1,7 @@
-export module AoC_2022.Day23;
+#include "Runner.h"
 
 import std;
 import utils;
-
-export int Solve_1(const std::filesystem::path& input);
-export int Solve_2(const std::filesystem::path& input);
-
-module : private;
 
 namespace
 {
@@ -85,17 +80,19 @@ namespace
                 if (prop.at(*desired_pos) == 1) { // can we move?
                     new_elves.try_emplace(*desired_pos);
                     moved = true;
-                } else {
+                }
+                else {
                     new_elves.try_emplace(current_pos);
                 }
-            } else {
+            }
+            else {
                 new_elves.try_emplace(current_pos);
             }
         }
         elves = std::move(new_elves);
         return moved;
     }
-    
+
     Rect BoundingRect(const Elves& elves)
     {
         int min_x = std::numeric_limits<int>::max();
@@ -112,35 +109,38 @@ namespace
 
         return Rect{ min_x, min_y, max_x - min_x + 1, max_y - min_y + 1 };
     }
-}
 
-int Solve_1(const std::filesystem::path& input)
-{
-    auto elves = LoadInput(input);
+    int Solve_1(const std::filesystem::path& input)
+    {
+        auto elves = LoadInput(input);
 
-    int dir = 0;
-    for (int i = 0; i < 10; ++i) {
-        auto prop = ProposeMove(elves, dir);
-        MoveElves(elves, prop);
-        dir = (dir + 1) % 4;
+        int dir = 0;
+        for (int i = 0; i < 10; ++i) {
+            auto prop = ProposeMove(elves, dir);
+            MoveElves(elves, prop);
+            dir = (dir + 1) % 4;
+        }
+
+        Rect rec = BoundingRect(elves);
+        return rec.w * rec.h - (int)elves.size();
     }
 
-    Rect rec = BoundingRect(elves);
-    return rec.w * rec.h - (int)elves.size();
-}
+    int Solve_2(const std::filesystem::path& input)
+    {
+        auto elves = LoadInput(input);
 
-int Solve_2(const std::filesystem::path& input)
-{
-    auto elves = LoadInput(input);
-
-    int dir = 0;
-    int step = 0;
-    bool moving = true;
-    while (moving) {
-        auto prop = ProposeMove(elves, dir);
-        moving = MoveElves(elves, prop);
-        dir = (dir + 1) % 4;
-        ++step;
+        int dir = 0;
+        int step = 0;
+        bool moving = true;
+        while (moving) {
+            auto prop = ProposeMove(elves, dir);
+            moving = MoveElves(elves, prop);
+            dir = (dir + 1) % 4;
+            ++step;
+        }
+        return step;
     }
-    return step;
+
+    REGISTER_SOLUTION(2022, 23, 1, Solve_1);
+    REGISTER_SOLUTION(2022, 23, 2, Solve_2);
 }

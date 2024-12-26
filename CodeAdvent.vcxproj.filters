@@ -87,16 +87,13 @@
     <ClCompile Include="solutions\2021\Task_2021_1.cpp">
       <Filter>Source Files\solutions\2021</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2022\Task_2022_1.ixx">
+    <ClCompile Include="solutions\2022\Task_2022_1.cpp">
       <Filter>Source Files\solutions\2022</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2022\Task_2022_16.ixx">
+    <ClCompile Include="solutions\2022\Task_2022_25.cpp">
       <Filter>Source Files\solutions\2022</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2022\Task_2022_25.ixx">
-      <Filter>Source Files\solutions\2022</Filter>
-    </ClCompile>
-    <ClCompile Include="solutions\2022\Task_2022_24.ixx">
+    <ClCompile Include="solutions\2022\Task_2022_24.cpp">
       <Filter>Source Files\solutions\2022</Filter>
     </ClCompile>
     <ClCompile Include="solutions\2023\Task_2023_1.ixx">
@@ -261,7 +258,7 @@
     <ClCompile Include="solutions\2024\Task_2024_19.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2022\Task_2022_23.ixx">
+    <ClCompile Include="solutions\2022\Task_2022_23.cpp">
       <Filter>Source Files\solutions\2022</Filter>
     </ClCompile>
     <ClCompile Include="solutions\2024\Task_2024_20.cpp">
