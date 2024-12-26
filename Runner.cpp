@@ -44,10 +44,13 @@ namespace Solutions
 		} else {
 			std::cout << std::format("\033[32mPart {} ({})\n\033[0m", sln.part, sln.name);
 		}
+
 		// run test
-		std::string test_file = std::format("{}/day{}/test.txt", date.year, date.day);
-		std::string test_result = sln.func(test_file);
-		std::cout << std::format("  Test:\t\t {}\n", test_result);
+		auto test_file = std::format("{}/day{}/test.txt", date.year, date.day);
+		if (std::filesystem::exists(test_file)) {
+			auto test_result = sln.func(test_file);
+			std::cout << std::format("  Test:\t\t {}\n", test_result);
+		}
 		// run input
 		std::string input_file = std::format("{}/day{}/input.txt", date.year, date.day);
 		std::string result = sln.func(input_file);

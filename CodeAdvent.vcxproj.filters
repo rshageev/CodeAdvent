@@ -66,13 +66,13 @@
     <ClCompile Include="utils\Math.ixx">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2015\Task_2015_1.ixx">
+    <ClCompile Include="solutions\2015\Task_2015_1.cpp">
       <Filter>Source Files\solutions\2015</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2015\Task_2015_2.ixx">
+    <ClCompile Include="solutions\2015\Task_2015_2.cpp">
       <Filter>Source Files\solutions\2015</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2015\Task_2015_3.ixx">
+    <ClCompile Include="solutions\2015\Task_2015_3.cpp">
       <Filter>Source Files\solutions\2015</Filter>
     </ClCompile>
     <ClCompile Include="utils\Array2D.ixx">

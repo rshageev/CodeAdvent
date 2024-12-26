@@ -28,9 +28,9 @@
     </ClCompile>
     <ClCompile Include="Runner.cpp" />
     <ClCompile Include="Runner.h" />
-    <ClCompile Include="solutions\2015\Task_2015_1.ixx" />
-    <ClCompile Include="solutions\2015\Task_2015_2.ixx" />
-    <ClCompile Include="solutions\2015\Task_2015_3.ixx" />
+    <ClCompile Include="solutions\2015\Task_2015_1.cpp" />
+    <ClCompile Include="solutions\2015\Task_2015_2.cpp" />
+    <ClCompile Include="solutions\2015\Task_2015_3.cpp" />
     <ClCompile Include="solutions\2020\Task_2020_1.ixx" />
     <ClCompile Include="solutions\2020\Task_2020_2.ixx" />
     <ClCompile Include="solutions\2020\Task_2020_25.ixx" />
