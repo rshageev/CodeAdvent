@@ -183,13 +183,13 @@
     <ClCompile Include="solutions\2023\Task_2023_24.ixx">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2020\Task_2020_1.ixx">
+    <ClCompile Include="solutions\2020\Task_2020_1.cpp">
       <Filter>Source Files\solutions\2020</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2020\Task_2020_2.ixx">
+    <ClCompile Include="solutions\2020\Task_2020_2.cpp">
       <Filter>Source Files\solutions\2020</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2020\Task_2020_25.ixx">
+    <ClCompile Include="solutions\2020\Task_2020_25.cpp">
       <Filter>Source Files\solutions\2020</Filter>
     </ClCompile>
     <ClCompile Include="solutions\2024\Task_2024_1.cpp">
@@ -240,7 +240,7 @@
     <ClCompile Include="solutions\2024\Task_2024_15.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2020\Task_2020_3.ixx">
+    <ClCompile Include="solutions\2020\Task_2020_3.cpp">
       <Filter>Source Files\solutions\2020</Filter>
     </ClCompile>
     <ClCompile Include="solutions\2024\Task_2024_16.cpp">

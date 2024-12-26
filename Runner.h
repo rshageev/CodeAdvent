@@ -13,6 +13,7 @@ namespace Solutions
 	};
 
 	void Run(int year, int day);
+	void Run(int year);
 	void RunAll();
 
 	

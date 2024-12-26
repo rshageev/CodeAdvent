@@ -69,6 +69,20 @@ namespace Solutions
 		}
 	}
 
+	void Run(int year)
+	{
+		auto& all_solutions = GetSolutions();
+		for (const auto& [date, day_solutions] : all_solutions) {
+			if (date.year == year) {
+				std::cout << std::format("\033[36m= Day {}, Year {} =\n\033[0m", date.day, date.year);
+				for (auto& sln : day_solutions) {
+					Run(date, sln);
+				}
+				std::cout << '\n';
+			}
+		}
+	}
+
 	void Run(int year, int day)
 	{
 		std::cout << std::format("\033[36m= Day {}, Year {} =\n\033[0m", day, year);
