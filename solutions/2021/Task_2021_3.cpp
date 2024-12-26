@@ -1,12 +1,7 @@
-export module AoC_2021.Day3;
+#include "Runner.h"
 
 import std;
 import utils;
-
-export int Solve_1(const std::filesystem::path& input);
-export int Solve_2(const std::filesystem::path& input);
-
-module : private;
 
 namespace
 {
@@ -20,14 +15,14 @@ namespace
     };
     char MCBitAt(std::span<const std::string_view> numbers, int bit_pos)
     {
-        const size_t ones = stdr::count_if(numbers, BitIs{bit_pos, '1'});
+        const size_t ones = stdr::count_if(numbers, BitIs{ bit_pos, '1' });
         const size_t threshold = (numbers.size() + 1u) / 2u;
         return (ones >= threshold) ? '1' : '0';
     }
 
     char LCBitAt(std::span<const std::string_view> numbers, int bit_pos)
     {
-        const size_t zeroes = stdr::count_if(numbers, BitIs{bit_pos, '0'});
+        const size_t zeroes = stdr::count_if(numbers, BitIs{ bit_pos, '0' });
         const size_t threshold = numbers.size() / 2u;
         return (zeroes <= threshold) ? '0' : '1';
     }
@@ -72,20 +67,23 @@ namespace
         auto new_numbers = numbers | stdv::filter(BitIs{ bit_pos, lc_bit }) | stdr::to<std::vector>();
         return CO2Rating(new_numbers, bit_pos + 1);
     }
-}
 
-int Solve_1(const std::filesystem::path& input)
-{
-    const auto lines = ReadLines(input);
-    auto lines_view = lines | stdv::transform(make<std::string_view>) | stdr::to<std::vector>();
+    int Solve_1(const std::filesystem::path& input)
+    {
+        const auto lines = ReadLines(input);
+        auto lines_view = lines | stdv::transform(make<std::string_view>) | stdr::to<std::vector>();
 
-    return PowerConsumption(lines_view);
-}
+        return PowerConsumption(lines_view);
+    }
 
-int Solve_2(const std::filesystem::path& input)
-{
-    const auto lines = ReadLines(input);
-    auto lines_view = lines | stdv::transform(make<std::string_view>) | stdr::to<std::vector>();
+    int Solve_2(const std::filesystem::path& input)
+    {
+        const auto lines = ReadLines(input);
+        auto lines_view = lines | stdv::transform(make<std::string_view>) | stdr::to<std::vector>();
 
-    return OxygenRating(lines_view) * CO2Rating(lines_view);
+        return OxygenRating(lines_view) * CO2Rating(lines_view);
+    }
+
+    REGISTER_SOLUTION(2021, 3, 1, Solve_1);
+    REGISTER_SOLUTION(2021, 3, 2, Solve_2);
 }

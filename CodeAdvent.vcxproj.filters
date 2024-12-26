@@ -78,13 +78,13 @@
     <ClCompile Include="utils\Array2D.ixx">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2021\Task_2021_25.ixx">
+    <ClCompile Include="solutions\2021\Task_2021_25.cpp">
       <Filter>Source Files\solutions\2021</Filter>
     </ClCompile>
     <ClCompile Include="utils\RectViews.ixx">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2021\Task_2021_1.ixx">
+    <ClCompile Include="solutions\2021\Task_2021_1.cpp">
       <Filter>Source Files\solutions\2021</Filter>
     </ClCompile>
     <ClCompile Include="solutions\2022\Task_2022_1.ixx">
@@ -102,7 +102,7 @@
     <ClCompile Include="solutions\2023\Task_2023_1.ixx">
       <Filter>Source Files\solutions\2023</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2021\Task_2021_2.ixx">
+    <ClCompile Include="solutions\2021\Task_2021_2.cpp">
       <Filter>Source Files\solutions\2021</Filter>
     </ClCompile>
     <ClCompile Include="solutions\2023\Task_2023_2.ixx">
@@ -273,7 +273,7 @@
     <ClCompile Include="solutions\2024\Task_2024_22.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\2021\Task_2021_3.ixx">
+    <ClCompile Include="solutions\2021\Task_2021_3.cpp">
       <Filter>Source Files\solutions\2021</Filter>
     </ClCompile>
     <ClCompile Include="solutions\2024\Task_2024_23.cpp">
