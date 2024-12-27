@@ -29,13 +29,42 @@ namespace
         return count;
     }
 
-    std::uint64_t Solve_1(const std::filesystem::path&)
+    std::vector<Race> LoadData_1(const std::filesystem::path& input)
     {
-        constexpr Race test_races[] = { { 7, 9 }, { 15, 40 }, { 30, 200 } };
-        constexpr Race races[] = { { 38, 234 }, { 67, 1027 }, { 76, 1157 }, { 73, 1236 } };
+        const auto lines = ReadLines(input);
 
+        std::vector<Race> races;
+        std::regex regex{ R"(\d+)" };
+
+        auto times = std::ranges::subrange(std::sregex_iterator(lines[0].begin(), lines[0].end(), regex), std::sregex_iterator());
+        auto dist = std::ranges::subrange(std::sregex_iterator(lines[1].begin(), lines[1].end(), regex), std::sregex_iterator());
+        for (auto [tm, dm] : stdv::zip(times, dist)) {
+            races.emplace_back(to_uint64(tm.str()), to_uint64(dm.str()));
+        }
+        return races;
+    }
+
+    Race LoadData_2(const std::filesystem::path& input)
+    {
+        const auto lines = ReadLines(input);
+
+        std::regex regex{ R"(\d+)" };
+
+        std::string time_str;
+        std::string dist_str;
+        auto times = std::ranges::subrange(std::sregex_iterator(lines[0].begin(), lines[0].end(), regex), std::sregex_iterator());
+        auto dist = std::ranges::subrange(std::sregex_iterator(lines[1].begin(), lines[1].end(), regex), std::sregex_iterator());
+        for (auto [tm, dm] : stdv::zip(times, dist)) {
+            time_str.append(tm.str());
+            dist_str.append(dm.str());
+        }
+        return Race{ to_uint64(time_str), to_uint64(dist_str) };
+    }
+
+    std::uint64_t Solve_1(const std::filesystem::path& input)
+    {
         std::uint64_t result = 1;
-        for (const auto& race : races)
+        for (const auto& race : LoadData_1(input))
         {
             const auto win_times = CountWaysToWin(race);
             result *= win_times;
@@ -43,12 +72,9 @@ namespace
         return result;
     }
 
-    std::uint64_t Solve_2(const std::filesystem::path&)
+    std::uint64_t Solve_2(const std::filesystem::path& input)
     {
-        constexpr Race test_race = { 71530, 940200 };
-        constexpr Race race = { 38677673, 234102711571236 };
-
-        return CountWaysToWin(race);
+        return CountWaysToWin(LoadData_2(input));
     }
 
     REGISTER_SOLUTION(2023, 6, 1, Solve_1);
