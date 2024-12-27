@@ -303,6 +303,9 @@
     <ClCompile Include="solutions\2022\Task_2022_3.cpp">
       <Filter>Source Files\solutions\2022</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\2022\Task_2022_4.cpp">
+      <Filter>Source Files\solutions\2022</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs\scnlib\src\scn\impl.h">
