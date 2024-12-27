@@ -102,6 +102,7 @@
     <ClCompile Include="utils\Parsing.cpp" />
     <ClCompile Include="utils\Parsing.ixx" />
     <ClCompile Include="utils\RectViews.ixx" />
+    <ClCompile Include="utils\Regex.ixx" />
     <ClCompile Include="utils\Timer.ixx" />
     <ClCompile Include="utils\Types.ixx" />
     <ClCompile Include="utils\Utils.ixx" />

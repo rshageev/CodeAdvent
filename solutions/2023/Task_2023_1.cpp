@@ -16,12 +16,7 @@ namespace
 
     int Solve_1(const std::filesystem::path& input)
     {
-        int sum = 0;
-        for (auto line : ReadLines(input))
-        {
-            sum += ReadNumber(line);
-        }
-        return sum;
+        return Sum(ReadLines(input) | stdv::transform(ReadNumber));
     }
 
     struct DigitDesc

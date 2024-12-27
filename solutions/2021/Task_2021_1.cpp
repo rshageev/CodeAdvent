@@ -8,21 +8,13 @@ namespace
     int CountIncreases(auto&& numbers)
     {
         int counter = 0;
-        int prev = numbers[0];
-        for (int num : numbers | stdv::drop(1)) {
-            if (num > prev) {
+        for (auto [prev, cnt] : numbers | stdv::pairwise) {
+            if (cnt > prev) {
                 ++counter;
             }
-            prev = num;
         }
         return counter;
     }
-
-    struct CountSum {
-        int operator()(auto&& numbers) const {
-            return std::accumulate(stdr::begin(numbers), stdr::end(numbers), 0);
-        }
-    };
 
     std::vector<int> ReadNumbers(const std::filesystem::path& input)
     {
@@ -44,7 +36,7 @@ namespace
 
         const auto sums = numbers
             | stdv::slide(3)
-            | stdv::transform(CountSum{})
+            | stdv::transform(Sum)
             | stdr::to<std::vector>();
 
         return CountIncreases(sums);

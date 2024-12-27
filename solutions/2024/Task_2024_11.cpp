@@ -50,11 +50,7 @@ namespace
             stone_counts = Blink(stone_counts);
         }
 
-        uint64 res = 0;
-        for (auto [_, cnt] : stone_counts) {
-            res += cnt;
-        }
-        return res;
+        return Sum(stone_counts | stdv::values);
     }
 
     uint64 Solve_1(const std::filesystem::path& input)

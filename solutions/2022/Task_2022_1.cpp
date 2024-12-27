@@ -23,8 +23,7 @@ namespace
     {
         const auto food = ParseInput(input);
 
-        const auto itr = std::max_element(food.begin(), food.end());
-        return *itr;
+        return *std::max_element(food.begin(), food.end());
     }
 
     int Solve_2(const std::filesystem::path& input)
@@ -33,9 +32,7 @@ namespace
 
         stdr::sort(food, std::greater{});
 
-        food.resize(3u);
-
-        return std::accumulate(food.begin(), food.end(), 0);
+        return Sum(food | stdv::take(3));
     }
 
     REGISTER_SOLUTION(2022, 1, 1, Solve_1);

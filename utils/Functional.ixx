@@ -7,11 +7,15 @@ export
 	namespace stdr = std::ranges;
 	namespace stdv = std::ranges::views;
 
+	/* Converting strings to numbers */
+
 	template<std::integral T>
-	struct from_chars_to {
+	struct from_chars_to
+	{
 		constexpr T operator() (char ch) const {
 			return static_cast<T>(ch - '0');
 		}
+
 		constexpr T operator() (auto&& v) const {
 			std::string_view str(v);
 			T value = def;
@@ -24,6 +28,8 @@ export
 	inline constexpr from_chars_to<std::uint64_t> to_uint64;
 	inline constexpr from_chars_to<std::int64_t> to_int64;
 
+
+	/* Accessing keys / values/ tuple elements */
 	template<size_t N>
 	struct tuple_get_fn {
 		constexpr auto operator() (auto&& t) { return std::get<N>(t); }
@@ -31,6 +37,7 @@ export
 	template<size_t N>
 	inline constexpr tuple_get_fn<N> tuple_get;
 
+	/* Comparison predicates */
 	template<auto V>
 	struct equal_fn {
 		constexpr bool operator() (auto&& v) const { return v == V; }
@@ -45,6 +52,7 @@ export
 	template<auto V>
 	inline constexpr not_equal_fn<V> not_equal;
 
+	/* Convert binary predicated into unary working on pair */
 	template<class P>
 	struct apply_to_pair {
 		P pred;
@@ -63,6 +71,7 @@ export
 		}
 	};
 
+	/* Construct an object from fiven arguments */
 	template<class T>
 	struct make_fn {
 		template<class ...Args>
@@ -74,6 +83,8 @@ export
 	inline constexpr make_fn<T> make;
 
 
+	/* Misc utility functions */
+
 	constexpr bool is_digit(char ch) {
 		return ch >= '0' && ch <= '9';
 	}
@@ -81,4 +92,16 @@ export
 	constexpr bool contains(const auto& range, const auto& v) {
 		return stdr::find(range, v) != stdr::end(range);
 	}
+
+	
+	struct sum_fn
+	{
+		template<typename Rng>
+			requires std::integral<std::ranges::range_value_t<Rng>>
+		constexpr auto operator()(const Rng& range) const {
+			using ValueT = std::ranges::range_value_t<Rng>;
+			return std::accumulate(std::begin(range), std::end(range), static_cast<ValueT>(0));
+		}
+	};
+	inline constexpr sum_fn Sum;
 }
