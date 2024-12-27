@@ -16,9 +16,9 @@ namespace
         const auto str = ReadText(input);
         std::vector<Block> blocks;
         int id = 0;
-        for (size_t i = 0; i < str.size(); i += 2) {
-            blocks.emplace_back(id++, int(str[i] - '0'));
-            blocks.emplace_back(-1, int(str[i + 1] - '0'));
+        for (auto v : str | stdv::chunk(2)) {
+            blocks.emplace_back(id++, to_int(v[0]));
+            blocks.emplace_back(-1, to_int(v[1]));
         }
         blocks.pop_back();
         return blocks;

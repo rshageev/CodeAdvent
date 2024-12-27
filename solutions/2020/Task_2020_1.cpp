@@ -15,10 +15,10 @@ namespace
     {
         const auto data = ReadNumbers(input);
 
-        for (size_t i = 0; i < data.size(); ++i) {
-            for (size_t j = 0; j < data.size(); ++j) {
-                if (i != j && data[i] + data[j] == 2020) {
-                    return data[i] * data[j];
+        for (auto [i1,v1] : data | stdv::enumerate) {
+            for (auto [i2, v2] : data | stdv::enumerate) {
+                if (i1 != i2 && v1 + v2 == 2020) {
+                    return v1 * v2;
                 }
             }
         }
@@ -29,12 +29,12 @@ namespace
     {
         const auto data = ReadNumbers(input);
 
-        for (size_t i = 0; i < data.size(); ++i) {
-            for (size_t j = 0; j < data.size(); ++j) {
-                for (size_t k = 0; k < data.size(); ++k) {
-                    if (i != j && i != k && j != k && data[i] + data[j] + data[k] == 2020)
+        for (auto [i1, v1] : data | stdv::enumerate) {
+            for (auto [i2, v2] : data | stdv::enumerate) {
+                for (auto [i3, v3] : data | stdv::enumerate) {
+                    if (i1 != i2 && i1 != i3 && i2 != i3 && v1 + v2 + v3 == 2020)
                     {
-                        return data[i] * data[j] * data[k];
+                        return v1 * v2 * v3;
                     }
                 }
             }

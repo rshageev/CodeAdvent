@@ -19,7 +19,7 @@ namespace
     uint64 CountWaysToWin(Race race)
     {
         uint64 count = 0;
-        for (uint64 hold_time = 0; hold_time <= race.time; ++hold_time)
+        for (uint64 hold_time : stdv::iota(0u, race.time))
         {
             const auto distance = CalcDistance(race.time, hold_time);
             if (distance > race.record) {

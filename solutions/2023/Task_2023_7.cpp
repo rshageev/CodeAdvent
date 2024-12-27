@@ -14,8 +14,7 @@ namespace
             : cards(str)
         {
             for (char ch : str) {
-                auto [itr, inserted] = card_counts.emplace(ch, 0);
-                itr->second++;
+                card_counts[ch]++;
             }
         }
     };

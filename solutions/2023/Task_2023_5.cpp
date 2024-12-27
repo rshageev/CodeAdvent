@@ -170,10 +170,7 @@ namespace
         std::vector<Range> seeds_r;
         for (auto r : seeds | stdv::chunk(2))
         {
-            auto itr = stdr::begin(r);
-            const IdxType start = *itr++;
-            const IdxType size = *itr;
-            seeds_r.emplace_back(start, size);
+            seeds_r.emplace_back(r[0], r[1]);
         }
         return seeds_r;
     }

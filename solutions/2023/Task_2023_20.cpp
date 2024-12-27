@@ -74,7 +74,7 @@ namespace
             for (const auto& out : mo.second)
             {
                 // for every non existent output name, add special output module
-                auto [itr, inserted] = modules.emplace(out, std::pair<Module, Outputs>{ Output{}, {} });;
+                auto [itr, inserted] = modules.emplace(out, std::pair<Module, Outputs>{ Output{}, {} });
 
                 // set conjunction modules inputs
                 auto& m = itr->second;
