@@ -50,11 +50,11 @@ namespace
     {
         const auto [nodes, edges] = LoadGraph(input);
 
-        std::unordered_set<std::string_view> max_clique;
+        std::set<std::string_view> max_clique;
 
         for (const auto& clique_start : nodes)
         {
-            std::unordered_set<std::string_view> clique = { clique_start };
+            std::set<std::string_view> clique = { clique_start };
 
             bool added = true;
             for (const auto& pn : nodes)
