@@ -1,5 +1,7 @@
 #include "Runner.h"
 
+#include <cassert>
+
 import std;
 import utils;
 
@@ -59,7 +61,9 @@ namespace
 
         for (int i = 0; i < steps; ++i) {
             st.pos = MovePoint(st.pos, st.dir);
-            st.loss += loss_map[st.pos];
+            if (loss_map.Contains(st.pos)) {
+                st.loss += loss_map[st.pos];
+            }
         }
         return st;
     }
