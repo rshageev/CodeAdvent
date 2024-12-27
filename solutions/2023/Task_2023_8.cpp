@@ -22,7 +22,7 @@ namespace
 
         data.directions = lines[0];
 
-        for (const auto& line : lines | stdv::drop(2) | stdv::filter(not_empty))
+        for (const auto& line : lines | stdv::drop(2))
         {
             auto from = line.substr(0, 3);
             auto left = line.substr(7, 3);

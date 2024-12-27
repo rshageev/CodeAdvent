@@ -112,7 +112,7 @@ namespace
         }
 
         // read maps
-        for (const auto& line : lines | stdv::drop(2) | stdv::filter(not_empty))
+        for (const auto& line : lines | stdv::drop(2))
         {
             if (is_digit(line[0])) {
                 almanac.maps.back().Add(ReadRangeLine(line));

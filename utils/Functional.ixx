@@ -7,16 +7,6 @@ export
 	namespace stdr = std::ranges;
 	namespace stdv = std::ranges::views;
 
-	struct pred_not_empty {
-		constexpr bool operator() (auto&& v) { return !v.empty(); }
-	};
-
-	struct pred_is_empty {
-		constexpr bool operator() (auto&& v) { return v.empty(); }
-	};
-	inline constexpr pred_not_empty not_empty;
-	inline constexpr pred_is_empty is_empty;
-
 	template<std::integral T>
 	struct from_chars_to {
 		constexpr T operator() (char ch) const {

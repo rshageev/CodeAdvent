@@ -27,7 +27,6 @@ namespace
     std::vector<int> ReadNumbers(const std::filesystem::path& input)
     {
         return ReadLines(input)
-            | stdv::filter(not_empty)
             | stdv::transform(to_int)
             | stdr::to<std::vector>();
     }

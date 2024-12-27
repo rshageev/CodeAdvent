@@ -30,7 +30,7 @@ namespace
     auto LoadInput(const std::filesystem::path& input)
     {
         std::vector<Stone> stones;
-        for (const auto& line : ReadLines(input) | stdv::filter(not_empty)) {
+        for (const auto& line : ReadLines(input)) {
             stones.push_back(ParseLine(line));
         }
         return stones;
