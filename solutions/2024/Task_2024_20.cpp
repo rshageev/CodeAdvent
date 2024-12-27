@@ -36,7 +36,7 @@ namespace
 
         int64 res = 0;
         for (Point end : to_cell_coords(search_rect)) {
-            int dist = std::abs(end.x - start.x) + std::abs(end.y - start.y);
+            int dist = MDist(start, end);
             if (dm.Contains(end) && dist <= cheat_duration) {
                 int saving = (dm[end] - dm[start]) - dist;
                 if (saving >= req_savings) {

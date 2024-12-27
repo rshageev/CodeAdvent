@@ -25,7 +25,7 @@ namespace
         for (auto [p1, p2] : points | stdv::pairwise)
         {
             sum += p1.x * p2.y - p1.y * p2.x;
-            len += std::abs(p1.x - p2.x) + std::abs(p1.y - p2.y);
+            len += MDist(p1, p2);
         }
         return std::abs(sum) / 2 + len / 2 + 1;
     }

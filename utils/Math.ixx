@@ -86,6 +86,11 @@ export
 		return { min_x, min_y, max_x - min_x, max_y - min_y };
 	}
 
+	template<Number T>
+	constexpr T MDist(TPoint<T> p1, TPoint<T> p2) {
+		return std::abs(p2.x - p1.x) + std::abs(p2.y - p1.y);
+	}
+
 	using Point = TPoint<int>;
 	using Pointf = TPoint<float>;
 	using Rect = TRect<int>;

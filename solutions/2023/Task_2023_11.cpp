@@ -29,17 +29,12 @@ namespace
         expand(&Point::y);
     }
 
-    int Distance(Point p1, Point p2)
-    {
-        return std::abs(p2.x - p1.x) + std::abs(p2.y - p1.y);
-    }
-
     size_t AllDistances(std::span<const Point> stars)
     {
         size_t sum = 0;
         for (size_t i1 = 0; i1 < stars.size() - 1; ++i1) {
             for (size_t i2 = i1 + 1; i2 < stars.size(); ++i2) {
-                sum += static_cast<size_t>(Distance(stars[i1], stars[i2]));
+                sum += static_cast<size_t>(MDist(stars[i1], stars[i2]));
             }
         }
         return sum;
