@@ -12,6 +12,7 @@ export import :Functional;
 export import :Directions;
 export import :Types;
 export import :Algo;
+export import :Regex;
 
 export
 {

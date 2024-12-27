@@ -36,8 +36,8 @@ namespace
         std::vector<Race> races;
         std::regex regex{ R"(\d+)" };
 
-        auto times = std::ranges::subrange(std::sregex_iterator(lines[0].begin(), lines[0].end(), regex), std::sregex_iterator());
-        auto dist = std::ranges::subrange(std::sregex_iterator(lines[1].begin(), lines[1].end(), regex), std::sregex_iterator());
+        auto times = RegexSearch(lines[0], regex);
+        auto dist = RegexSearch(lines[1], regex);
         for (auto [tm, dm] : stdv::zip(times, dist)) {
             races.emplace_back(to_uint64(tm.str()), to_uint64(dm.str()));
         }
@@ -52,8 +52,8 @@ namespace
 
         std::string time_str;
         std::string dist_str;
-        auto times = std::ranges::subrange(std::sregex_iterator(lines[0].begin(), lines[0].end(), regex), std::sregex_iterator());
-        auto dist = std::ranges::subrange(std::sregex_iterator(lines[1].begin(), lines[1].end(), regex), std::sregex_iterator());
+        auto times = RegexSearch(lines[0], regex);
+        auto dist = RegexSearch(lines[1], regex);
         for (auto [tm, dm] : stdv::zip(times, dist)) {
             time_str.append(tm.str());
             dist_str.append(dm.str());

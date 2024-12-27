@@ -46,10 +46,9 @@ namespace
     int Solve1_Regex(const std::string& str)
     {
         std::regex mul_regex(R"(mul\((\d+),(\d+)\))");
-        std::sregex_iterator itr(str.begin(), str.end(), mul_regex), end;
 
         int result = 0;
-        for (std::smatch match : stdr::subrange(itr, end)) {
+        for (std::smatch match : RegexSearch(str, mul_regex)) {
             result += to_int(match[1].str()) * to_int(match[2].str());
         }
         return result;
@@ -58,11 +57,10 @@ namespace
     int Solve2_Regex(const std::string& str)
     {
         std::regex mul_regex(R"(mul\((\d+),(\d+)\)|don't\(\)|do\(\))");
-        std::sregex_iterator itr(str.begin(), str.end(), mul_regex), end;
 
         int result = 0;
         bool enabled = true;
-        for (std::smatch match : stdr::subrange(itr, end)) {
+        for (std::smatch match : RegexSearch(str, mul_regex)) {
             if (match.str() == "don't()") {
                 enabled = false;
             }
