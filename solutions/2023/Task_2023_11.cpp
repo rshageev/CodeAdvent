@@ -59,7 +59,8 @@ namespace
 
     size_t Solve_2(const std::filesystem::path& input)
     {
-        return Solve(input, 1000000);
+        const int factor = (input.filename() == "input.txt") ? 1000000 : 100;
+        return Solve(input, factor);
     }
 
     REGISTER_SOLUTION(2023, 11, 1, Solve_1);
