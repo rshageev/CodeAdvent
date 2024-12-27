@@ -105,8 +105,9 @@ namespace
 
     std::int64_t Solve_1(const std::filesystem::path& input)
     {
-        constexpr std::int64_t MinLimit = 200000000000000;
-        constexpr std::int64_t MaxLimit = 400000000000000;
+        const bool is_test = (input.filename() != "input.txt");
+        const std::int64_t MinLimit = is_test ? 7 : 200000000000000;
+        const std::int64_t MaxLimit = is_test ? 27 : 400000000000000;
 
         const auto stones = LoadInput(input);
 
