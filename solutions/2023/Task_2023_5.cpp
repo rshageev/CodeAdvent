@@ -5,7 +5,7 @@ import utils;
 
 namespace
 {
-    using IdxType = std::uint64_t;
+    using IdxType = uint64;
 
     struct Range {
         IdxType start;

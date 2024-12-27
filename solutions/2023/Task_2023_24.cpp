@@ -5,25 +5,25 @@ import utils;
 
 namespace
 {
-    using Point64 = TPoint<std::int64_t>;
+    using Point64 = TPoint<int64>;
     using Point64d = TPoint<double>;
 
     struct Stone
     {
         Point64 p;
-        std::int64_t pz;
+        int64 pz;
         Point64 v;
-        std::int64_t vz;
+        int64 vz;
     };
 
     Stone ParseLine(std::string_view str)
     {
-        auto x = Read<std::int64_t>(str); Skip(str, ", "); while (str.starts_with(' ')) str.remove_prefix(1);
-        auto y = Read<std::int64_t>(str); Skip(str, ", "); while (str.starts_with(' ')) str.remove_prefix(1);
-        auto z = Read<std::int64_t>(str); Skip(str, " @ "); while (str.starts_with(' ')) str.remove_prefix(1);
-        auto vx = Read<std::int64_t>(str); Skip(str, ", "); while (str.starts_with(' ')) str.remove_prefix(1);
-        auto vy = Read<std::int64_t>(str); Skip(str, ", "); while (str.starts_with(' ')) str.remove_prefix(1);
-        auto vz = Read<std::int64_t>(str);
+        auto x = Read<int64>(str); Skip(str, ", "); while (str.starts_with(' ')) str.remove_prefix(1);
+        auto y = Read<int64>(str); Skip(str, ", "); while (str.starts_with(' ')) str.remove_prefix(1);
+        auto z = Read<int64>(str); Skip(str, " @ "); while (str.starts_with(' ')) str.remove_prefix(1);
+        auto vx = Read<int64>(str); Skip(str, ", "); while (str.starts_with(' ')) str.remove_prefix(1);
+        auto vy = Read<int64>(str); Skip(str, ", "); while (str.starts_with(' ')) str.remove_prefix(1);
+        auto vz = Read<int64>(str);
         return Stone{ .p = {x,y}, .pz = z, .v = { vx, vy }, .vz = vz };
     }
 
@@ -69,13 +69,13 @@ namespace
         return std::nullopt;
     }
 
-    std::int64_t CountIntersections(std::span<const Stone> stones, std::int64_t area_min, std::int64_t area_max)
+    int64 CountIntersections(std::span<const Stone> stones, int64 area_min, int64 area_max)
     {
         const auto offset = area_min;
         area_min = 0;
         area_max -= offset;
 
-        std::int64_t count = 0;
+        int64 count = 0;
         for (size_t i = 1; i < stones.size(); ++i)
         {
             for (size_t j = 0; j < i; ++j)
@@ -103,11 +103,11 @@ namespace
         return count;
     }
 
-    std::int64_t Solve_1(const std::filesystem::path& input)
+    int64 Solve_1(const std::filesystem::path& input)
     {
         const bool is_test = (input.filename() != "input.txt");
-        const std::int64_t MinLimit = is_test ? 7 : 200000000000000;
-        const std::int64_t MaxLimit = is_test ? 27 : 400000000000000;
+        const int64 MinLimit = is_test ? 7 : 200000000000000;
+        const int64 MaxLimit = is_test ? 27 : 400000000000000;
 
         const auto stones = LoadInput(input);
 

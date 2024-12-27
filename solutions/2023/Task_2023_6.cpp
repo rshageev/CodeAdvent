@@ -5,21 +5,21 @@ import utils;
 
 namespace
 {
-    constexpr std::uint64_t CalcDistance(std::uint64_t race_time, std::uint64_t hold_time)
+    constexpr uint64 CalcDistance(uint64 race_time, uint64 hold_time)
     {
         return hold_time * (race_time - hold_time);
     }
 
     struct Race
     {
-        std::uint64_t time;
-        std::uint64_t record;
+        uint64 time;
+        uint64 record;
     };
 
-    std::uint64_t CountWaysToWin(Race race)
+    uint64 CountWaysToWin(Race race)
     {
-        std::uint64_t count = 0;
-        for (std::uint64_t hold_time = 0; hold_time <= race.time; ++hold_time)
+        uint64 count = 0;
+        for (uint64 hold_time = 0; hold_time <= race.time; ++hold_time)
         {
             const auto distance = CalcDistance(race.time, hold_time);
             if (distance > race.record) {
@@ -61,9 +61,9 @@ namespace
         return Race{ to_uint64(time_str), to_uint64(dist_str) };
     }
 
-    std::uint64_t Solve_1(const std::filesystem::path& input)
+    uint64 Solve_1(const std::filesystem::path& input)
     {
-        std::uint64_t result = 1;
+        uint64 result = 1;
         for (const auto& race : LoadData_1(input))
         {
             const auto win_times = CountWaysToWin(race);
@@ -72,7 +72,7 @@ namespace
         return result;
     }
 
-    std::uint64_t Solve_2(const std::filesystem::path& input)
+    uint64 Solve_2(const std::filesystem::path& input)
     {
         return CountWaysToWin(LoadData_2(input));
     }

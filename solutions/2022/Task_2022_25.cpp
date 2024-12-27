@@ -7,7 +7,7 @@ namespace
 {
     /* Decimal to SNAFU */
 
-    constexpr std::int64_t Spec2Dec(char ch)
+    constexpr int64 Spec2Dec(char ch)
     {
         switch (ch) {
         case '=': return -2;
@@ -19,9 +19,9 @@ namespace
         return 0;
     }
 
-    constexpr std::int64_t Spec2Dec(std::string_view str)
+    constexpr int64 Spec2Dec(std::string_view str)
     {
-        std::int64_t value = 0;
+        int64 value = 0;
         for (char ch : str) {
             value *= 5;
             value += Spec2Dec(ch);
@@ -32,10 +32,10 @@ namespace
 
     /* SNAFU to decimal */
 
-    constexpr std::pair<std::int64_t, std::int64_t> ExtractDigit(std::int64_t num)
+    constexpr std::pair<int64, int64> ExtractDigit(int64 num)
     {
-        std::int64_t quot = num / 5;
-        std::int64_t rem = num % 5;
+        int64 quot = num / 5;
+        int64 rem = num % 5;
         if (rem > 2) {
             rem -= 5;
             quot += 1;
@@ -43,12 +43,12 @@ namespace
         return { quot, rem };
     }
 
-    constexpr std::string Dec2Spec(std::int64_t num)
+    constexpr std::string Dec2Spec(int64 num)
     {
         constexpr char digits[] = { '=', '-', '0', '1', '2' };
 
         std::string str;
-        std::pair<int64_t, int64_t> qr = { num, 0 };
+        std::pair<int64, int64> qr = { num, 0 };
 
         while (qr.first != 0) {
             qr = ExtractDigit(qr.first);
@@ -61,7 +61,7 @@ namespace
 
     /* Tests */
 
-    constexpr std::pair<std::int64_t, std::string_view> test_cases[] = {
+    constexpr std::pair<int64, std::string_view> test_cases[] = {
         {1, "1"},
         {2, "2"},
         {3, "1="},
@@ -90,7 +90,7 @@ namespace
 
     std::string Solve_1(const std::filesystem::path& input)
     {
-        std::int64_t total = 0;
+        int64 total = 0;
         for (const auto& line : ReadLines(input))
         {
             total += Spec2Dec(line);
