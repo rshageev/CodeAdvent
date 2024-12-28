@@ -46,6 +46,7 @@
     <ClCompile Include="solutions\2022\Task_2022_25.cpp" />
     <ClCompile Include="solutions\2022\Task_2022_3.cpp" />
     <ClCompile Include="solutions\2022\Task_2022_4.cpp" />
+    <ClCompile Include="solutions\2022\Task_2022_5.cpp" />
     <ClCompile Include="solutions\2023\Task_2023_1.cpp" />
     <ClCompile Include="solutions\2023\Task_2023_10.cpp" />
     <ClCompile Include="solutions\2023\Task_2023_11.cpp" />
