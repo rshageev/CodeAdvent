@@ -13,7 +13,7 @@ namespace
         Point64 p;
     };
 
-    auto LoadData(const std::filesystem::path& input)
+    auto LoadData(const std::filesystem::path& input, int64 offset = 0)
     {
         std::vector<Game> out;
         auto lines = ReadLines(input);
@@ -28,6 +28,8 @@ namespace
             if (auto res = scn::scan<int64, int64>(lines[i + 2], "Prize: X={}, Y={}")) {
                 std::tie(g.p.x, g.p.y) = res->values();
             }
+            g.p.x += offset;
+            g.p.y += offset;
             out.push_back(g);
         }
         return out;
@@ -47,7 +49,7 @@ namespace
                 min_cost = std::min(min_cost, ap * 3 + bp1);
             }
         }
-        return min_cost;
+        return (min_cost < IntMax) ? min_cost : 0;
     }
 
     int64 SolveGame_PenAndPaper(Game g)
@@ -74,7 +76,7 @@ namespace
         if (g.a * pa + g.b * pb == g.p) {
             return pa * 3 + pb;
         }
-        return IntMax;
+        return 0;
     }
 
     int64 SolveGame_Eigen(Game g)
@@ -85,7 +87,7 @@ namespace
         };
         auto p = Eigen::Vector2d{ g.p.x, g.p.y };
 
-        auto res = M.partialPivLu().solve(p);
+        auto res = M.fullPivLu().solve(p);
 
         int64 pa = static_cast<int64>(std::round(res.x()));
         int64 pb = static_cast<int64>(std::round(res.y()));
@@ -93,35 +95,19 @@ namespace
         if (g.a * pa + g.b * pb == g.p) {
             return pa * 3 + pb;
         }
-        return IntMax;
+        return 0;
     }
 
-    int64 Solve_1(const std::filesystem::path& input)
+    using SolveFunc = int64(*) (Game);
+
+    int64 Solve(SolveFunc solve_game, int64 offset, const std::filesystem::path& input)
     {
-        auto games = LoadData(input);
-        int64 total = 0;
-        for (auto game : games) {
-            if (int64 cost = SolveGame_PenAndPaper(game); cost < IntMax) {
-                total += cost;
-            }
-        }
-        return total;
+        return Sum(LoadData(input, offset) | stdv::transform(solve_game));
     }
 
-    int64 Solve_2(const std::filesystem::path& input)
-    {
-        auto games = LoadData(input);
-        int64 total = 0;
-        for (auto game : games) {
-            game.p.x += 10000000000000;
-            game.p.y += 10000000000000;
-            if (int64 cost = SolveGame_PenAndPaper(game); cost < IntMax) {
-                total += cost;
-            }
-        }
-        return total;
-    }
-
-    REGISTER_SOLUTION(2024, 13, 1, Solve_1);
-    REGISTER_SOLUTION(2024, 13, 2, Solve_2);
+    REGISTER_SOLUTION(2024, 13, 1, (std::bind_front(Solve, SolveGame_PenAndPaper, 0)), "formula");
+    REGISTER_SOLUTION(2024, 13, 1, (std::bind_front(Solve, SolveGame_Eigen, 0)), "eigen");
+    REGISTER_SOLUTION(2024, 13, 1, (std::bind_front(Solve, SolveGame_BruteForce, 0)), "brute force");
+    REGISTER_SOLUTION(2024, 13, 2, (std::bind_front(Solve, SolveGame_PenAndPaper, 10000000000000)), "formula");
+    REGISTER_SOLUTION(2024, 13, 2, (std::bind_front(Solve, SolveGame_Eigen, 10000000000000)), "eigen");
 }
