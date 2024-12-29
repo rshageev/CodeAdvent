@@ -1,3 +1,4 @@
+#include <scn/scan.h>
 #include "Runner.h"
 
 import std;
@@ -10,30 +11,22 @@ namespace
 
     struct Stone
     {
-        Point64 p;
-        int64 pz;
-        Point64 v;
-        int64 vz;
+        int64 px, py, pz;
+        int64 vx, vy, vz;
     };
 
     Stone ParseLine(std::string_view str)
     {
-        auto x = Read<int64>(str); Skip(str, ", "); while (str.starts_with(' ')) str.remove_prefix(1);
-        auto y = Read<int64>(str); Skip(str, ", "); while (str.starts_with(' ')) str.remove_prefix(1);
-        auto z = Read<int64>(str); Skip(str, " @ "); while (str.starts_with(' ')) str.remove_prefix(1);
-        auto vx = Read<int64>(str); Skip(str, ", "); while (str.starts_with(' ')) str.remove_prefix(1);
-        auto vy = Read<int64>(str); Skip(str, ", "); while (str.starts_with(' ')) str.remove_prefix(1);
-        auto vz = Read<int64>(str);
-        return Stone{ .p = {x,y}, .pz = z, .v = { vx, vy }, .vz = vz };
+        if (auto res = scn::scan<int64, int64, int64, int64, int64, int64>(str, "{}, {}, {} @ {}, {}, {}")) {
+            auto [x, y, z, vx, vy, vz] = res->values();
+            return Stone{ x, y, z, vx, vy, vz };
+        }
+        return Stone{};
     }
 
     auto LoadInput(const std::filesystem::path& input)
     {
-        std::vector<Stone> stones;
-        for (const auto& line : ReadLines(input)) {
-            stones.push_back(ParseLine(line));
-        }
-        return stones;
+        return ReadLines(input) | stdv::transform(ParseLine) | stdr::to<std::vector>();
     }
 
     std::optional<Point64d> RayIntersection(Point64 p1, Point64 v1, Point64 p2, Point64 v2)
@@ -46,9 +39,6 @@ namespace
             // parallel
             return std::nullopt;
         }
-
-        //double u = static_cast<double>(dy * v2.x - dx * v2.y) / (double)det;
-        //double v = static_cast<double>(dy * v1.x - dx * v1.y) / (double)det;
 
         double t1 = double(v2.x * dy - v2.y * dx) / det;
         double t2 = double(v1.x * dy - v1.y * dx) / det;
@@ -80,15 +70,10 @@ namespace
         {
             for (size_t j = 0; j < i; ++j)
             {
-                auto p1 = stones[i].p;
-                auto v1 = stones[i].v;
-                auto p2 = stones[j].p;
-                auto v2 = stones[j].v;
-
-                p1.x -= offset;
-                p1.y -= offset;
-                p2.x -= offset;
-                p2.y -= offset;
+                Point64 p1 = { stones[i].px - offset, stones[i].py - offset };
+                Point64 v1 = { stones[i].vx, stones[i].vy };
+                Point64 p2 = { stones[j].px - offset, stones[j].py - offset };
+                Point64 v2 = { stones[j].vx, stones[j].vy };
 
                 if (auto cp = RayIntersection(p1, v1, p2, v2))
                 {
