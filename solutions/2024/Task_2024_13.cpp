@@ -1,5 +1,4 @@
 #include <scn/scan.h>
-#include <Eigen/Dense>
 #include "Runner.h"
 
 namespace
@@ -81,16 +80,13 @@ namespace
 
     int64 SolveGame_Eigen(Game g)
     {
-        auto M = Eigen::Matrix2d{
-            { (double)g.a.x, (double)g.b.x },
-            { (double)g.a.y, (double)g.b.y },
-        };
-        auto p = Eigen::Vector2d{ g.p.x, g.p.y };
+        auto res = SolveSystemEigen({
+            { double(g.a.x), double(g.b.x), double(g.p.x) },
+            { double(g.a.y), double(g.b.y), double(g.p.y) }
+        });
 
-        auto res = M.fullPivLu().solve(p);
-
-        int64 pa = static_cast<int64>(std::round(res.x()));
-        int64 pb = static_cast<int64>(std::round(res.y()));
+        int64 pa = static_cast<int64>(std::round(res[0]));
+        int64 pb = static_cast<int64>(std::round(res[1]));
 
         if (g.a * pa + g.b * pb == g.p) {
             return pa * 3 + pb;

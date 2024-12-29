@@ -1,5 +1,4 @@
 #include <scn/scan.h>
-#include <Eigen/Dense>
 #include "Runner.h"
 
 import std;
@@ -116,25 +115,6 @@ namespace
         return { offset_x, offset_y, offset_z };
     }
 
-    std::vector<double> SolveSystem(const std::vector<std::vector<double>>& equations)
-    {
-        size_t size = equations.size();
-
-        Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> coeff_mat(size, size);
-        Eigen::Vector<double, Eigen::Dynamic> res_vec(size);
-
-        for (const auto& [y, eq] : equations | stdv::enumerate) {
-            for (size_t x = 0; x < size; ++x) {
-                coeff_mat(y, x) = eq[x];
-            }
-            res_vec(y) = eq.back();
-        }
-
-        Eigen::Vector<double, Eigen::Dynamic> sln = coeff_mat.fullPivLu().solve(res_vec);
-
-        return { sln.data(), sln.data() + sln.size() };
-    }
-
     int64 Solve_1(const std::filesystem::path& input)
     {
         const bool is_test = (input.filename() != "input.txt");
@@ -194,7 +174,7 @@ namespace
         add_equations(stones[0], stones[1]);
         add_equations(stones[0], stones[2]);
 
-        auto sln = SolveSystem(equations);
+        auto sln = SolveSystemEigen(equations);
 
         int64 px = static_cast<int64>(std::round(sln[0]));
         int64 py = static_cast<int64>(std::round(sln[1]));
