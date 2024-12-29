@@ -31,14 +31,10 @@ namespace
     }
 }
 
-/*
-* Chinese remainder theorem
-*
-* implementation from:
-* https://www.geeksforgeeks.org/implementation-of-chinese-remainder-theorem-inverse-modulo-based-implementation/
-*/
 int64 SolveCRT(std::span<const int64> numbers, std::span<const int64> remainders)
 {
+    // https://www.geeksforgeeks.org/implementation-of-chinese-remainder-theorem-inverse-modulo-based-implementation/
+
     int64 prod = 1;
     for (auto n : numbers)
         prod *= n;
@@ -69,4 +65,48 @@ std::vector<double> SolveSystemEigen(const std::vector<std::vector<double>>& equ
     Eigen::Vector<double, Eigen::Dynamic> sln = coeff_mat.fullPivLu().solve(res_vec);
 
     return { sln.data(), sln.data() + sln.size() };
+}
+
+std::vector<double> SolveSystemGauss(const std::vector<std::vector<double>>& equations)
+{
+    auto mat = equations;
+    const int N = static_cast<int>(equations.size());
+
+    for (int i = 0; i < N; ++i)
+    {
+        auto& cnt_row = mat[i];
+
+        int imax;
+        double vmax = 0.0;
+        for (int j = i; j < N; j++) {
+            if (auto v = std::abs(mat[j][i]); v > vmax) {
+                vmax = v;
+                imax = j;
+            }
+        }
+
+        if (vmax <= 0.00001) {
+            return {};
+        }
+
+        std::swap(cnt_row, mat[imax]);
+
+        for (int j = i + 1; j < N; j++) {
+            auto& row = mat[j];
+            auto r = row[i] / cnt_row[i];
+            for (int k = i; k < N + 1; k++) {
+                row[k] -= r * cnt_row[k];
+            }
+        }
+    }
+
+    std::vector<double> res(mat.size());
+    for (int i = N - 1; i >= 0; i--) {
+        res[i] = mat[i].back();
+        for (int j = i + 1; j < N; j++)
+            res[i] -= mat[i][j] * res[j];
+        res[i] /= mat[i][i];
+    }
+
+    return res;
 }

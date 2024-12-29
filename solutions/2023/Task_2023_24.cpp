@@ -126,7 +126,9 @@ namespace
         return CountIntersections(stones, MinLimit, MaxLimit);
     }
 
-    int64 Solve_2(const std::filesystem::path& input)
+    using EqSolver = std::vector<double>(*)(const std::vector<std::vector<double>>&);
+
+    int64 Solve_2(EqSolver solveSystem, const std::filesystem::path& input)
     {
         auto stones = LoadInput(input);
 
@@ -174,7 +176,7 @@ namespace
         add_equations(stones[0], stones[1]);
         add_equations(stones[0], stones[2]);
 
-        auto sln = SolveSystemEigen(equations);
+        auto sln = solveSystem(equations);
 
         int64 px = static_cast<int64>(std::round(sln[0]));
         int64 py = static_cast<int64>(std::round(sln[1]));
@@ -184,5 +186,6 @@ namespace
     }
 
     REGISTER_SOLUTION(2023, 24, 1, Solve_1);
-    REGISTER_SOLUTION(2023, 24, 2, Solve_2);
+    REGISTER_SOLUTION(2023, 24, 2, std::bind_front(Solve_2, SolveSystemEigen), "eigen");
+    REGISTER_SOLUTION(2023, 24, 2, std::bind_front(Solve_2, SolveSystemGauss), "gauss");
 }
