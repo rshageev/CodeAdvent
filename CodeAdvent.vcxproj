@@ -34,6 +34,7 @@
     <ClCompile Include="solutions\2015\Task_2015_4.cpp" />
     <ClCompile Include="solutions\2015\Task_2015_5.cpp" />
     <ClCompile Include="solutions\2015\Task_2015_6.cpp" />
+    <ClCompile Include="solutions\2015\Task_2015_7.cpp" />
     <ClCompile Include="solutions\2020\Task_2020_1.cpp" />
     <ClCompile Include="solutions\2020\Task_2020_2.cpp" />
     <ClCompile Include="solutions\2020\Task_2020_25.cpp" />
