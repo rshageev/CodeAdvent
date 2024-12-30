@@ -6,36 +6,44 @@ import md5;
 
 namespace
 {
-    uint32 Solve_1(const std::filesystem::path& input)
+    uint32 SolveThread(std::string_view key, std::string_view req_prefix, uint32 start, uint32 stride, std::atomic<uint32>& result)
     {
-        const auto key = ReadText(input);
-
-        for (uint32 i = 0; i < std::numeric_limits<uint32>::max(); ++i)
+        uint32 i = start;
+        uint32 res = result.load();
+        while (i < res)
         {
             std::string str = std::format("{}{}", key, i);
             std::string hash = CalcMD5(str);
-            if (hash.starts_with("00000")) {
-                return i;
+
+            res = result.load();
+            if (hash.starts_with(req_prefix)) {
+                uint32 new_res = std::min(i, res);
+                while (!result.compare_exchange_weak(res, new_res)) {
+                    new_res = std::min(i, res);
+                }
             }
+            i += stride;
         }
         return 0;
     }
 
-    uint32 Solve_2(const std::filesystem::path& input)
+    uint32 Solve(std::string_view req_prefix, const std::filesystem::path& input)
     {
         const auto key = ReadText(input);
 
-        for (uint32 i = 0; i < std::numeric_limits<uint32>::max(); ++i)
-        {
-            std::string str = std::format("{}{}", key, i);
-            std::string hash = CalcMD5(str);
-            if (hash.starts_with("000000")) {
-                return i;
-            }
+        const int Threads = std::thread::hardware_concurrency();
+        
+        std::atomic<uint32> result = std::numeric_limits<uint32>::max();
+
+        std::vector<std::jthread> threads;
+        for (int i = 0; i < Threads; ++i) {
+            threads.emplace_back(std::bind_front(SolveThread, key, req_prefix, i, Threads, std::ref(result)));
         }
-        return 0;
+        threads.clear();
+
+        return result.load();
     }
 
-    REGISTER_SOLUTION(2015, 4, 1, Solve_1);
-    REGISTER_SOLUTION(2015, 4, 2, Solve_2);
+    REGISTER_SOLUTION(2015, 4, 1, std::bind_front(Solve, "00000"));
+    REGISTER_SOLUTION(2015, 4, 2, std::bind_front(Solve, "000000"));
 }

@@ -90,16 +90,24 @@ namespace
         state[3] += st[3];
     }
 
+    std::string Bytes2Hex(std::span<const uint8, 16> digest)
+    {
+        static constexpr std::string_view HexChars = "0123456789ABCDEF";
+
+        std::string result;
+        result.reserve(32);
+        for (uint8 b : digest) {
+            result.push_back(HexChars[b >> 4]);
+            result.push_back(HexChars[b & 0x0F]);
+        }
+        return result;
+    }
+
     std::string State2Hex(std::span<const uint32, 4> state)
     {
         std::array<uint8, 16> digest;
         std::memcpy(digest.data(), state.data(), state.size_bytes());
-
-        std::string result;
-        for (auto d : digest) {
-            result += std::format("{:0>2x}", d);
-        }
-        return result;
+        return Bytes2Hex(digest);
     }
 }
 
@@ -113,7 +121,6 @@ std::string CalcMD5(std::span<const uint8> data)
         ProcessChunk(data.first<64>(), state);
         data = data.subspan<64>();
     }
-
 
     // add padding and length to remaining data
     std::vector<uint8> buffer(data.begin(), data.end());
