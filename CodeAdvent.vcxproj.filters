@@ -336,8 +336,14 @@
     <ClCompile Include="solutions\2022\Task_2022_6.cpp">
       <Filter>Source Files\solutions\2022</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\2022\Task_2022_7.cpp">
+      <Filter>Source Files\solutions\2022</Filter>
+    </ClCompile>
     <ClCompile Include="solutions\2016\Task_2016_1.cpp">
       <Filter>Source Files\solutions\2016</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\2015\Task_2015_9.cpp">
+      <Filter>Source Files\solutions\2015</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

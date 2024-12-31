@@ -36,6 +36,7 @@
     <ClCompile Include="solutions\2015\Task_2015_6.cpp" />
     <ClCompile Include="solutions\2015\Task_2015_7.cpp" />
     <ClCompile Include="solutions\2015\Task_2015_8.cpp" />
+    <ClCompile Include="solutions\2015\Task_2015_9.cpp" />
     <ClCompile Include="solutions\2016\Task_2016_1.cpp" />
     <ClCompile Include="solutions\2020\Task_2020_1.cpp" />
     <ClCompile Include="solutions\2020\Task_2020_2.cpp" />
@@ -54,6 +55,7 @@
     <ClCompile Include="solutions\2022\Task_2022_4.cpp" />
     <ClCompile Include="solutions\2022\Task_2022_5.cpp" />
     <ClCompile Include="solutions\2022\Task_2022_6.cpp" />
+    <ClCompile Include="solutions\2022\Task_2022_7.cpp" />
     <ClCompile Include="solutions\2023\Task_2023_1.cpp" />
     <ClCompile Include="solutions\2023\Task_2023_10.cpp" />
     <ClCompile Include="solutions\2023\Task_2023_11.cpp" />
