@@ -1,4 +1,3 @@
-#include <scn/scan.h>
 #include "Runner.h"
 
 import std;
