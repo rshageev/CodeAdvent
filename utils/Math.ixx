@@ -87,7 +87,7 @@ export
 	}
 
 	template<Number T>
-	constexpr T MDist(TPoint<T> p1, TPoint<T> p2) {
+	constexpr T MDist(TPoint<T> p1, TPoint<T> p2 = {}) {
 		return std::abs(p2.x - p1.x) + std::abs(p2.y - p1.y);
 	}
 

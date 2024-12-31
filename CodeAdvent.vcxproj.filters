@@ -49,6 +49,9 @@
     <Filter Include="Source Files\libs\scnlib\include">
       <UniqueIdentifier>{f3e7a87e-b9ab-48d5-abe0-9e5b475987fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\2016">
+      <UniqueIdentifier>{32f7ec9f-236d-4c41-835c-9e4b02465340}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CodeAdvent.cpp">
@@ -332,6 +335,9 @@
     </ClCompile>
     <ClCompile Include="solutions\2022\Task_2022_6.cpp">
       <Filter>Source Files\solutions\2022</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\2016\Task_2016_1.cpp">
+      <Filter>Source Files\solutions\2016</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
