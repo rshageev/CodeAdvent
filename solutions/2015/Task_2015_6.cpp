@@ -34,10 +34,10 @@ namespace
                 if (op_str == "toggle") op = op_set[2];
 
                 // parse rect
-                int x1 = to_int(m[2].str());
-                int y1 = to_int(m[3].str());
-                int x2 = to_int(m[4].str());
-                int y2 = to_int(m[5].str());
+                int x1 = to_int(m[2]);
+                int y1 = to_int(m[3]);
+                int x2 = to_int(m[4]);
+                int y2 = to_int(m[5]);
                 Rect rect = { x1, y1, x2 - x1 + 1, y2 - y1 + 1 };
 
                 // apply operation to the map

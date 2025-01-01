@@ -39,7 +39,7 @@ namespace
         auto times = RegexSearch(lines[0], regex);
         auto dist = RegexSearch(lines[1], regex);
         for (auto [tm, dm] : stdv::zip(times, dist)) {
-            races.emplace_back(to_uint64(tm.str()), to_uint64(dm.str()));
+            races.emplace_back(to_uint64(tm), to_uint64(dm));
         }
         return races;
     }

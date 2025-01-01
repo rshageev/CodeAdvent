@@ -25,8 +25,8 @@ namespace
 
         std::string str = std::to_string(s);
         if (str.size() % 2 == 0) {
-            uint64 v1 = from_chars_to<uint64>{}(str.substr(0, str.size() / 2));
-            uint64 v2 = from_chars_to<uint64>{}(str.substr(str.size() / 2));
+            uint64 v1 = to_uint64(str.substr(0, str.size() / 2));
+            uint64 v2 = to_uint64(str.substr(str.size() / 2));
             return { v1, v2 };
         }
 

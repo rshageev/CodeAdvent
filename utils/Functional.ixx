@@ -9,6 +9,11 @@ export
 
 	/* Converting strings to numbers */
 
+	template<typename Rng>
+	concept StringLike = stdr::contiguous_range<Rng>
+		&& stdr::sized_range<Rng>
+		&& std::same_as<stdr::range_value_t<Rng>, char>;
+
 	template<std::integral T>
 	struct from_chars_to
 	{
@@ -16,14 +21,24 @@ export
 			return static_cast<T>(ch - '0');
 		}
 
-		constexpr T operator() (auto&& v) const {
-			std::string_view str(v);
+		constexpr T operator() (const std::smatch& match) const {
+			return operator()(match.str());
+		}
+
+		constexpr T operator() (const std::ssub_match& match) const {
+			return operator()(match.str());
+		}
+
+		template<StringLike Rng>
+		constexpr T operator() (Rng&& str) const {
 			T value = def;
-			std::from_chars(str.data(), str.data() + str.size(), value);
+			std::from_chars(stdr::data(str), stdr::data(str) + stdr::size(str), value);
 			return value;
 		}
+
 		T def = 0;
-	};	
+	};
+
 	inline constexpr from_chars_to<int> to_int;
 	inline constexpr from_chars_to<std::uint64_t> to_uint64;
 	inline constexpr from_chars_to<std::int64_t> to_int64;

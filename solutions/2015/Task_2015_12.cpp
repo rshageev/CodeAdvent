@@ -39,7 +39,7 @@ namespace
         const std::regex regex(R"(-?\d+)");
         int res = 0;
         for (std::smatch match : RegexSearch(text, regex)) {
-            res += to_int(match.str());
+            res += to_int(match);
         }
         return res;
     }

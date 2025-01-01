@@ -11,7 +11,7 @@ namespace
 
         auto p1 = str.find_first_of(digits);
         auto p2 = str.find_last_of(digits);
-        return (str[p1] - '0') * 10 + (str[p2] - '0');
+        return to_int(str[p1]) * 10 + to_int(str[p2]);
     }
 
     int Solve_1(const std::filesystem::path& input)
