@@ -29,6 +29,7 @@
     <ClCompile Include="Runner.cpp" />
     <ClCompile Include="Runner.h" />
     <ClCompile Include="solutions\2015\Task_2015_1.cpp" />
+    <ClCompile Include="solutions\2015\Task_2015_10.cpp" />
     <ClCompile Include="solutions\2015\Task_2015_2.cpp" />
     <ClCompile Include="solutions\2015\Task_2015_3.cpp" />
     <ClCompile Include="solutions\2015\Task_2015_4.cpp" />
