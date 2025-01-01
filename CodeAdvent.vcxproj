@@ -31,6 +31,7 @@
     <ClCompile Include="solutions\2015\Task_2015_1.cpp" />
     <ClCompile Include="solutions\2015\Task_2015_10.cpp" />
     <ClCompile Include="solutions\2015\Task_2015_11.cpp" />
+    <ClCompile Include="solutions\2015\Task_2015_12.cpp" />
     <ClCompile Include="solutions\2015\Task_2015_2.cpp" />
     <ClCompile Include="solutions\2015\Task_2015_3.cpp" />
     <ClCompile Include="solutions\2015\Task_2015_4.cpp" />
@@ -190,16 +191,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)libs\scnlib\include;$(ProjjectDir)libs\eigen-3.4.0;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)libs\json;$(ProjectDir)libs\scnlib\include;$(ProjectDir)libs\eigen-3.4.0;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)libs\scnlib\include;$(ProjjectDir)libs\eigen-3.4.0;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)libs\json;$(ProjectDir)libs\scnlib\include;$(ProjectDir)libs\eigen-3.4.0;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)libs\scnlib\include;$(ProjjectDir)libs\eigen-3.4.0;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)libs\json;$(ProjectDir)libs\scnlib\include;$(ProjectDir)libs\eigen-3.4.0;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)libs\scnlib\include;$(ProjjectDir)libs\eigen-3.4.0;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)libs\json;$(ProjectDir)libs\scnlib\include;$(ProjectDir)libs\eigen-3.4.0;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
