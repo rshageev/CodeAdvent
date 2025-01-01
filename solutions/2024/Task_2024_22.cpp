@@ -63,7 +63,7 @@ namespace
             }
         }
 
-        return stdr::max_element(all_prices, std::less{}, tuple_get<1>)->second;
+        return stdr::max(all_prices | stdv::values);
     }
 
     REGISTER_SOLUTION(2024, 22, 1, Solve_1);

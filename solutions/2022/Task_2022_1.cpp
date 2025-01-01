@@ -21,9 +21,7 @@ namespace
 
     int Solve_1(const std::filesystem::path& input)
     {
-        const auto food = ParseInput(input);
-
-        return *std::max_element(food.begin(), food.end());
+        return stdr::max(ParseInput(input));
     }
 
     int Solve_2(const std::filesystem::path& input)

@@ -30,10 +30,7 @@ namespace
 
     int HandType(const Hand& hand)
     {
-        int max_count = 0;
-        for (auto [card, count] : hand.card_counts) {
-            max_count = std::max(max_count, count);
-        }
+        int max_count = stdr::max(hand.card_counts | stdv::values);
 
         if (hand.card_counts.size() == 1)
         {

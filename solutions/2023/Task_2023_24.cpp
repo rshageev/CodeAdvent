@@ -90,23 +90,14 @@ namespace
 
     std::tuple<int64, int64, int64> NormalizeStoneCoords(std::span<Stone> stones)
     {
-        int64 min_x = std::numeric_limits<int64>::max();
-        int64 min_y = std::numeric_limits<int64>::max();
-        int64 min_z = std::numeric_limits<int64>::max();
-        int64 max_x = 0;
-        int64 max_y = 0;
-        int64 max_z = 0;
-        for (const auto& s : stones) {
-            min_x = std::min(s.px, min_x);
-            min_y = std::min(s.py, min_y);
-            min_z = std::min(s.pz, min_z);
-            max_x = std::max(s.px, max_x);
-            max_y = std::max(s.px, max_y);
-            max_z = std::max(s.px, max_z);
-        }
-        int64 offset_x = std::midpoint(min_x, max_x);
-        int64 offset_y = std::midpoint(min_y, max_y);
-        int64 offset_z = std::midpoint(min_z, max_z);
+        const auto& [min_xs, max_xs] = stdr::minmax(stones, std::less{}, &Stone::px);
+        const auto& [min_ys, max_ys] = stdr::minmax(stones, std::less{}, &Stone::py);
+        const auto& [min_zs, max_zs] = stdr::minmax(stones, std::less{}, &Stone::pz);
+
+        int64 offset_x = std::midpoint(min_xs.px, max_xs.px);
+        int64 offset_y = std::midpoint(min_ys.py, max_ys.py);
+        int64 offset_z = std::midpoint(min_zs.pz, max_zs.pz);
+
         for (auto& s : stones) {
             s.px -= offset_x;
             s.py -= offset_y;
@@ -132,8 +123,8 @@ namespace
     {
         auto stones = LoadInput(input);
 
-        // Move all stone coordinates closer to 0 to help with precision
-        auto [off_x, off_y, off_z] = NormalizeStoneCoords(stones);
+        // Move stone coordinates closer to 0 to help with precision
+        auto [off_x, off_y, off_z] = NormalizeStoneCoords(stones | stdv::take(3));
 
         std::vector<std::vector<double>> equations;
 

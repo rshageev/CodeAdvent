@@ -95,19 +95,10 @@ namespace
 
     Rect BoundingRect(const Elves& elves)
     {
-        int min_x = std::numeric_limits<int>::max();
-        int max_x = std::numeric_limits<int>::min();
-        int min_y = std::numeric_limits<int>::max();
-        int max_y = std::numeric_limits<int>::min();
+        auto [min_x, max_x] = stdr::minmax(elves | stdv::keys, std::less{}, &Point::x);
+        auto [min_y, max_y] = stdr::minmax(elves | stdv::keys, std::less{}, &Point::y);
 
-        for (auto [pos, _] : elves) {
-            min_x = std::min(pos.x, min_x);
-            max_x = std::max(pos.x, max_x);
-            min_y = std::min(pos.y, min_y);
-            max_y = std::max(pos.y, max_y);
-        }
-
-        return Rect{ min_x, min_y, max_x - min_x + 1, max_y - min_y + 1 };
+        return Rect{ min_x.x, min_y.y, max_x.x - min_x.x + 1, max_y.y - min_y.y + 1 };
     }
 
     int Solve_1(const std::filesystem::path& input)
