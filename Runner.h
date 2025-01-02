@@ -5,7 +5,7 @@ import utils;
 
 namespace Solutions
 {
-	using SolutionFunc = std::function<std::string(const std::filesystem::path&)>;
+	using SolutionFunc = std::function<std::pair<std::string, Timer::Duration>(const std::filesystem::path&)>;
 
 	struct Registrator
 	{
@@ -21,7 +21,10 @@ namespace Solutions
 	requires std::invocable<Func, const std::filesystem::path&>
 	SolutionFunc MakeFunc(Func&& func) {
 		return [func](const std::filesystem::path& input) {
-			return std::format("{}", std::invoke(func, input));
+			Timer timer;
+			const auto result = std::invoke(func, input);
+			const auto duration = timer.Get();
+			return std::pair(std::format("{}", result), duration);
 		};
 	}
 }

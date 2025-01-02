@@ -86,7 +86,7 @@ namespace Solutions
 		{
 			std::string input_file = std::format("{}/day{}/{}.txt", date.year, date.day, in);
 			if (std::filesystem::exists(input_file)) {
-				std::string result = sln.func(input_file);
+				auto [result, time] = sln.func(input_file);
 
 				std::string_view status;
 				if (!res.empty()) {
