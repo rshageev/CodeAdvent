@@ -5,29 +5,14 @@ import utils;
 
 namespace
 {
-    std::pair<Array2D<char>, Point> LoadInput(const std::filesystem::path& input)
-    {
-        auto map = ReadArray2D(input);
-
-        Point start;
-        for (Point pt : to_cell_coords(map)) {
-            if (map[pt] == 'S') {
-                map[pt] = '.';
-                start = pt;
-            }
-        }
-
-        return { map, start };
-    }
-
-    void DoStep(const Array2D<char>& map, const std::set<Point>& current, std::set<Point>& next)
+    void DoStep(const Array2D<char>& map, const std::unordered_set<Point>& current, std::unordered_set<Point>& next)
     {
         for (Point pt : current)
         {
             for (auto [dir, off] : Neighbours4)
             {
                 Point pos = pt + off;
-                if (map.Contains(pos) && map[pos] == '.')
+                if (map.Contains(pos) && map[pos] != '#')
                 {
                     next.insert(pos);
                 }
@@ -37,17 +22,16 @@ namespace
 
     size_t Solve_1(const std::filesystem::path& input)
     {
-        const auto [map, start] = LoadInput(input);
+        const auto map = ReadArray2D(input);
+        const Point start = FindInArray2D(map, 'S');
 
-        std::set<Point> current = { start };
-        std::set<Point> next;
+        std::unordered_set<Point> current = { start };
+        std::unordered_set<Point> next;
 
         for (int i = 0; i < 64; ++i)
         {
             next.clear();
-
             DoStep(map, current, next);
-
             current = std::move(next);
         }
 
@@ -56,7 +40,7 @@ namespace
 
 
 
-    void DoStep2(const Array2D<char>& map, const std::set<Point>& current, std::set<Point>& next)
+    void DoStep2(const Array2D<char>& map, const std::unordered_set<Point>& current, std::unordered_set<Point>& next)
     {
         for (Point pt : current)
         {
@@ -64,7 +48,7 @@ namespace
             {
                 Point npos = pt + off;
                 Point wpos = WrapPoint(npos, map.Area());
-                if (map[wpos] == '.')
+                if (map[wpos] != '#')
                 {
                     next.insert(npos);
                 }
@@ -76,10 +60,11 @@ namespace
     {
         constexpr int Steps = 26501365;
 
-        const auto [map, start] = LoadInput(input);
+        const auto map = ReadArray2D(input);
+        const Point start = FindInArray2D(map, 'S');
 
-        std::set<Point> current = { start };
-        std::set<Point> next;
+        std::unordered_set<Point> current = { start };
+        std::unordered_set<Point> next;
 
         const auto period = map.Width();
 
