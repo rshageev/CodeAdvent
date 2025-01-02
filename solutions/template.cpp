@@ -1,4 +1,3 @@
-#include <scn/scan.h>
 #include "Runner.h"
 
 import std;
@@ -11,12 +10,12 @@ namespace
 
     }
 
-    int Solve_1(const std::filesystem::path& input)
+    auto Solve_1(const std::filesystem::path& input)
     {
         return 0;
     }
 
-    int Solve_2(const std::filesystem::path& input)
+    auto Solve_2(const std::filesystem::path& input)
     {
         return 0;
     }

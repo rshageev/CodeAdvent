@@ -8,13 +8,9 @@ namespace
     std::vector<int> ParseInput(const std::filesystem::path& input)
     {
         std::vector<int> elf_food;
-        for (auto elf_lines : ReadLines(input) | stdv::split(""))
+        for (auto elf_lines : ReadLineBlocks(input))
         {
-            int food = 0;
-            for (auto food_item : elf_lines | stdv::transform(to_int)) {
-                food += food_item;
-            }
-            elf_food.push_back(food);
+            elf_food.push_back(Sum(elf_lines | stdv::transform(to_int)));
         }
         return elf_food;
     }
