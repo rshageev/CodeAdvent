@@ -16,6 +16,8 @@ namespace Solutions
 	void Run(int year);
 	void RunAll();
 
+	void Profile(int year);
+
 	
 	template<typename Func>
 	requires std::invocable<Func, const std::filesystem::path&>

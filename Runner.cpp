@@ -141,4 +141,39 @@ namespace Solutions
 		}
 		std::cout << '\n';
 	}
+
+
+	void Profile(int year)
+	{
+		Timer::Duration total_time = Timer::Duration::zero();
+
+		for (const auto& [date, day_solutions] : GetSolutions())
+		{
+			if (date.year == year)
+			{
+				std::string input_file = std::format("{}/day{}/input.txt", date.year, date.day);
+
+				Timer::Duration best_time[2] = { Timer::Duration::max(), Timer::Duration::max() };
+
+				for (auto& sln : day_solutions) {
+					auto [result, time] = sln.func(input_file);
+					best_time[sln.part - 1] = std::min(best_time[sln.part - 1], time);
+				}
+
+				std::string time_str[2];
+				for (int i = 0; i < 2; ++i) {
+					if (best_time[i] < Timer::Duration::max()) {
+						double msd = std::chrono::duration<double, std::milli>(best_time[i]).count();
+						time_str[i] = std::format("{:.3f} ms", msd);
+						total_time += best_time[i];
+					}
+				}
+
+				std::cout << std::format("{:>2} : {:>12} {:>12}\n", date.day, time_str[0], time_str[1]);
+			}
+		}
+
+		std::chrono::duration<double, std::milli> total_time_ms = total_time;
+		std::cout << std::format("\033[1mTotal time: {}\033[0m\n", total_time_ms);
+	}
 }
