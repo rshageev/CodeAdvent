@@ -68,42 +68,26 @@ namespace
         return quads[0] * quads[1] * quads[2] * quads[3];
     }
 
-    size_t Symmetrical(const Array2D<int>& map)
-    {
-        const auto w = map.Width();
-
-        size_t sym = 0;
-        for (Point pos : to_cell_coords(map))
-        {
-            if (map[pos] > 0) {
-                Point sp = { w - pos.x - 1, pos.y };
-                if (map[sp] > 0) ++sym;
-            }
-        }
-        return sym;
-    }
-
     int64 Solve_2(const std::filesystem::path& input)
     {
         auto robots = LoadData(input);
 
-        const Rect area = (robots.size() > 15) ? Rect{ 0, 0, 101, 103 } : Rect{ 0, 0, 11, 7 };
+        const Rect area = (input.filename() == "input.txt") ? Rect{0, 0, 101, 103} : Rect{0, 0, 11, 7};
 
-        Array2D<int> map(area, 0);
+        Array2D<char> map(area, '.');
+        const std::string search_pattern = "############";
 
-        for (int i = 0; i <= 10000; ++i) {
+        for (int i = 1; i <= std::numeric_limits<int>::max(); ++i) {
             for (auto& r : robots) {
                 r.p = WrapPoint(r.p + r.v, area);
             }
 
-            std::fill(map.begin(), map.end(), 0);
+            std::fill(map.begin(), map.end(), '.');
             for (auto r : robots) {
-                map[r.p]++;
+                map[r.p] = '#';
             }
-
-            if (Symmetrical(map) > robots.size() / 6) {
-                std::cout << std::format("Step: {}\n", i);
-                PrintArray2D(map, [](int c) -> char { return (c > 0) ? '#' : '.'; });
+            if (stdr::contains_subrange(map, search_pattern)) {
+                return i;
             }
         }
 
@@ -111,5 +95,5 @@ namespace
     }
 
     REGISTER_SOLUTION(2024, 14, 1, Solve_1);
-    //REGISTER_SOLUTION(2024, 14, 2, Solve_2);
+    REGISTER_SOLUTION(2024, 14, 2, Solve_2);
 }
