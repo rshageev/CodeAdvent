@@ -97,5 +97,69 @@ namespace
         return ReadValue('z', values);
     }
 
+    std::string Solve_2(const std::filesystem::path& input)
+    {
+        auto [values, gates] = LoadInput(input);
+
+        std::set<std::string> bad_outputs;
+
+        for (const auto& gate : gates)
+        {
+            // all output bits come from a xor operation, with the exception of
+            // the last one whch is basically a carry bit
+            if (gate.rout[0] == 'z' && gate.op != "XOR" && gate.rout != "z45") {
+                bad_outputs.insert(gate.rout);
+            }
+
+            if (gate.op == "XOR" && gate.rout[0] != 'z')
+            {
+                // xor operations are only present between x and y bits, or when calculating the resulting z bit
+                bool is_xy = (gate.r1[0] == 'x' || gate.r1[0] == 'y')
+                    && (gate.r2[0] == 'x' || gate.r2[0] == 'y');
+
+                if (!is_xy)
+                {
+                    bad_outputs.insert(gate.rout);
+                }
+                else
+                {
+                    // the result of the xy xor operation must be consumed by another xor operation, which leads to z bit
+                    bool correct = false;
+                    for (const auto& gate2 : gates) {
+                        if (gate2.op == "XOR" && (gate2.r1 == gate.rout || gate2.r2 == gate.rout)) {
+                            correct = true;
+                            break;
+                        }
+                    }
+                    if (!correct && !gate.r1.ends_with("00") && !gate.r2.ends_with("00")) {
+                        bad_outputs.insert(gate.rout);
+                    }
+                }
+            }
+
+            if (gate.op == "AND")
+            {
+                bool is_xy = (gate.r1[0] == 'x' || gate.r1[0] == 'y')
+                    && (gate.r2[0] == 'x' || gate.r2[0] == 'y');
+
+                if (is_xy) {
+                    bool correct = false;
+                    for (const auto& gate2 : gates) {
+                        if (gate2.op == "OR" && (gate2.r1 == gate.rout || gate2.r2 == gate.rout)) {
+                            correct = true;
+                            break;
+                        }
+                    }
+                    if (!correct && !gate.r1.ends_with("00") && !gate.r2.ends_with("00")) {
+                        bad_outputs.insert(gate.rout);
+                    }
+                }
+            }
+        }
+
+        return bad_outputs | stdv::join_with(',') | stdr::to<std::string>();
+    }
+
     REGISTER_SOLUTION(2024, 24, 1, Solve_1);
+    REGISTER_SOLUTION(2024, 24, 2, Solve_2);
 }
