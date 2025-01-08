@@ -363,6 +363,9 @@
     <ClCompile Include="solutions\2015\Task_2015_13.cpp">
       <Filter>Source Files\solutions\2015</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\2015\Task_2015_14.cpp">
+      <Filter>Source Files\solutions\2015</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs\scnlib\src\scn\impl.h">
