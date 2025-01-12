@@ -19,82 +19,54 @@ namespace
         return data;
     }
 
-    bool Check(uint64 expected_res, std::span<const uint64> values, std::string_view ops)
+    constexpr uint64 Concat(uint64 x, uint64 y)
     {
-        uint64 result = values[0];
-        for (auto [op, val] : stdv::zip(ops, values.subspan(1))) {
-            switch (op) {
-            case '*':
-                result *= val; break;
-            case '|':
-                result = Read<uint64>(std::to_string(result) + std::to_string(val)); break;
-            case '+':
-                result += val; break;
-            }
+        uint64 n = y;
+        while (n != 0) {
+            n = n / 10;
+            x *= 10;
         }
-        return expected_res == result;
+        return x + y;
     }
 
-    bool Check(uint64 expected_res, std::span<const uint64> values, size_t muls, size_t concats = 0)
+    template<int Part>
+    bool CanBeSolved(uint64 expected_res, std::span<const uint64> values, uint64 acc_res)
     {
-        std::string ops;
-        ops.append(muls, '*');
-        ops.append(concats, '|');
-        ops.resize(values.size() - 1, '+');
-        stdr::sort(ops);
+        if (values.empty()) {
+            return acc_res == expected_res;
+        }
 
-        do {
-            if (Check(expected_res, values, ops)) {
-                return true;
-            }
-        } while (stdr::next_permutation(ops).found);
-
-        return false;
+        return CanBeSolved<Part>(expected_res, values.subspan(1), acc_res * values[0])
+            || CanBeSolved<Part>(expected_res, values.subspan(1), acc_res + values[0])
+            || ((Part == 2) && CanBeSolved<Part>(expected_res, values.subspan(1), Concat(acc_res, values[0])));
     }
 
-    bool CanBeSolved1(uint64 result, std::span<const uint64> values)
+    template<int Part>
+    bool CanBeSolved(uint64 expected_res, std::span<const uint64> values)
     {
-        for (size_t mn = 0; mn < values.size(); ++mn) {
-            if (Check(result, values, mn)) {
-                return true;
-            }
-        }
-        return false;
+        return CanBeSolved<Part>(expected_res, values.subspan(1), values[0]);
     }
 
-    bool CanBeSolved2(uint64 result, std::span<const uint64> values)
+    template<int Part>
+    uint64 Solve(const std::filesystem::path& input)
     {
-        for (size_t mn = 0; mn < values.size(); ++mn) {
-            for (size_t cn = 0; cn < values.size() - mn; ++cn) {
-                if (Check(result, values, mn, cn)) {
-                    return true;
-                }
+        uint64 result = 0;
+        for (const auto& [res, vs] : LoadData(input)) {
+            if (CanBeSolved<Part>(res, vs)) {
+                result += res;
             }
         }
-        return false;
+        return result;
     }
 
     uint64 Solve_1(const std::filesystem::path& input)
     {
-        uint64 result = 0;
-        for (const auto& [res, vs] : LoadData(input)) {
-            if (CanBeSolved1(res, vs)) {
-                result += res;
-            }
-        }
-
-        return result;
+        return Solve<1>(input);
     }
 
     uint64 Solve_2(const std::filesystem::path& input)
     {
-        uint64 result = 0;
-        for (const auto& [res, vs] : LoadData(input)) {
-            if (CanBeSolved2(res, vs)) {
-                result += res;
-            }
-        }
-        return result;
+        return Solve<2>(input);
     }
 
     REGISTER_SOLUTION(2024, 7, 1, Solve_1);
