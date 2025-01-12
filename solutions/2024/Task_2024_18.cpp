@@ -66,10 +66,14 @@ namespace
 
         bool is_test = (input.filename() == "test.txt");
         int size = is_test ? 7 : 71;
+        int count = is_test ? 12 : 1024;
 
         Array2D<char> map(size, size, '.');
 
-        for (Point bp : bytes) {
+        for (Point bp : bytes | stdv::take(count)) {
+            map[bp] = '#';
+        }
+        for (Point bp : bytes | stdv::drop(count)) {
             map[bp] = '#';
             if (FindPath(map) == 0) {
                 return std::format("{},{}", bp.x, bp.y);
