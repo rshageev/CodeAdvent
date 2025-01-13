@@ -5,7 +5,6 @@ import utils;
 
 namespace
 {
-
     struct Cell {
         char type = '.';
         Direction visited = 0;
@@ -13,9 +12,9 @@ namespace
         bool operator==(const Cell&) const = default;
     };
 
-    bool Walk(auto& data, Point gpos, Direction gdir = Dir::Up)
+    bool Walk(Array2D<Cell>& data, Point gpos, Direction gdir = Dir::Up)
     {
-        while (data.Contains(gpos))
+        while (data.Contains(gpos) && ((data[gpos].visited & gdir) != gdir))
         {
             data[gpos].visited |= gdir;
 
@@ -24,13 +23,9 @@ namespace
                 gdir = RotateRight(gdir);
                 next = MovePoint(gpos, gdir);
             }
-            gpos = next;
-
-            if (data.Contains(next) && (data[next].visited & gdir) == gdir) {
-                return true;
-            }
+            gpos = next;  
         }
-        return false;
+        return data.Contains(gpos);
     }
 
     size_t Solve_1(const std::filesystem::path& input)
