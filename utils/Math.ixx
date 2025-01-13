@@ -32,6 +32,30 @@ export
 
 
 	template<Number T>
+	struct TVec3
+	{
+		T x = {};
+		T y = {};
+		T z = {};
+
+		constexpr auto operator <=> (const TVec3&) const = default;
+
+		TVec3& operator+= (const TVec3& v) { x += v.x; y += v.y; z += v.z; return *this; }
+		TVec3& operator-= (const TVec3& v) { x -= v.x; y -= v.y; z -= v.z; return *this; }
+
+		TVec3& operator*= (T v) { x *= v; y *= v; z *= v; return *this; }
+		TVec3& operator/= (T v) { x /= v; y /= v; z /= v; return *this; }
+
+		constexpr friend TVec3 operator+ (TVec3 v1, TVec3 v2) { return { v1.x + v2.x, v1.y + v2.y, v1.z + v2.z }; }
+		constexpr friend TVec3 operator- (TVec3 v1, TVec3 v2) { return { v1.x - v2.x, v1.y - v2.y, v1.z - v2.z }; }
+
+		constexpr friend TVec3 operator* (TVec3 vec, T v) { return { vec.x * v, vec.y * v, vec.z * v }; }
+		constexpr friend TVec3 operator* (T v, TVec3 vec) { return { vec.x * v, vec.y * v, vec.z * v }; }
+
+		constexpr friend TVec3 operator/ (TVec3 vec, T v) { return { vec.x / v, vec.y / v, vec.z / v }; }
+	};
+
+	template<Number T>
 	struct TRect
 	{
 		T x = {};
@@ -89,6 +113,11 @@ export
 	template<Number T>
 	constexpr T MDist(TPoint<T> p1, TPoint<T> p2 = {}) {
 		return std::abs(p2.x - p1.x) + std::abs(p2.y - p1.y);
+	}
+
+	template<Number T>
+	constexpr T MDist(TVec3<T> v1, TVec3<T> v2 = {}) {
+		return std::abs(v2.x - v1.x) + std::abs(v2.y - v1.y) + std::abs(v2.z - v1.z);
 	}
 
 	using Point = TPoint<int>;
