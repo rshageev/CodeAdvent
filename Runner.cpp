@@ -61,10 +61,12 @@ namespace Solutions
 		auto filename = std::format("{}/day{}/answers.txt", date.year, date.day);
 		if (std::filesystem::exists(filename)) {
 			for (std::string_view line : ReadLines(filename)) {
-				auto input_name = ReadWord(line); Skip(line, " ");
-				int part = Read<int>(line); Skip(line, " ");
+				if (!line.empty()) {
+					auto input_name = ReadWord(line); Skip(line, " ");
+					int part = Read<int>(line); Skip(line, " ");
 
-				res[part - 1][std::string(input_name)] = std::string(line);
+					res[part - 1][std::string(input_name)] = std::string(line);
+				}
 			}
 		}
 
