@@ -43,8 +43,8 @@ namespace
         str.remove_prefix(1); // remove brackets
         str.remove_suffix(1);
 
-        for (auto rule : str | stdv::split(',')) {
-            out.second.push_back(ParseRule(std::string_view(rule)));
+        for (auto rule : Split(str, ",")) {
+            out.second.push_back(ParseRule(rule));
         }
 
         return out;

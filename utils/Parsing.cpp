@@ -25,3 +25,19 @@ bool Skip(std::string_view& str, std::string_view prefix)
 	str.remove_prefix(prefix.size());
 	return true;
 }
+
+std::vector<std::string_view> Split(std::string_view str, std::string_view delim)
+{
+	std::vector<std::string_view> parts;
+
+	auto pos = str.find(delim);
+	while (pos != std::string_view::npos) {
+		parts.push_back(str.substr(0, pos));
+		str.remove_prefix(pos + delim.size());
+		pos = str.find(delim);
+	}
+
+	parts.push_back(str);
+
+	return parts;
+}

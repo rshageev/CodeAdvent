@@ -36,11 +36,7 @@ namespace
         auto name = ReadWord(str, " ");
         Skip(str, " -> ");
 
-        std::vector<std::string> out;
-        while (!str.empty()) {
-            out.emplace_back(ReadWord(str));
-            Skip(str, ", ");
-        }
+        auto out = Split(str, ", ") | stdr::to<std::vector<std::string>>();
 
         Module module;
         if (name.starts_with('%'))

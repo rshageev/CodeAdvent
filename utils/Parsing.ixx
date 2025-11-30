@@ -23,6 +23,7 @@ export
 	char ReadChar(std::string_view& str);
 	bool Skip(std::string_view& str, std::string_view prefix);
 
+	std::vector<std::string_view> Split(std::string_view str, std::string_view delim);
 
 	struct Parse {
 		std::string_view str;

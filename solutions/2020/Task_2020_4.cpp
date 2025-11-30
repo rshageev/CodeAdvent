@@ -9,11 +9,10 @@ namespace
 
     auto ParseLine(std::string_view line, Passport& pass)
     {
-        for (auto str : line | stdv::split(' ') | stdv::transform(make<std::string_view>)) {
+        for (auto str : Split(line, " ")) {
             auto key = ReadWord(str, ":");
             Skip(str, ":");
-            auto value = str;
-            pass.emplace(key, value);
+            pass.emplace(key, str);
         }
     }
 

@@ -7,9 +7,7 @@ namespace
     {
         auto lines = ReadLines(input);
 
-        std::vector<std::string> parts;
-        std::string_view str = lines[0];
-        do { parts.emplace_back(ReadWord(str)); } while (Skip(str, ", "));
+        auto parts = Split(lines[0], ", ") | stdr::to<std::vector<std::string>>();
 
         lines.erase(lines.begin(), lines.begin() + 2);
 

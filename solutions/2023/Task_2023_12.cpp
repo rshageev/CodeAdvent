@@ -18,10 +18,7 @@ namespace
         Data out;
         out.str = ReadWord(str, " ");
         Skip(str, " ");
-        while (!str.empty()) {
-            out.lengths.push_back(Read<size_t>(str));
-            Skip(str, ",");
-        }
+        out.lengths = Split(str, ",") | stdv::transform(to_uint64) | stdr::to<std::vector>();
         return out;
     }
 
