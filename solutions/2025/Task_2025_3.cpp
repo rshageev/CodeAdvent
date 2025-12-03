@@ -5,7 +5,7 @@ import utils;
 
 namespace
 {
-    uint64 MaxJoltage(std::string_view str)
+    uint64 MaxJoltageBF(std::string_view str)
     {
         uint64 max = 0;
         for (size_t i = 0; i < str.size() - 1; ++i) {
@@ -34,18 +34,17 @@ namespace
         return std::make_pair(maxv, maxp);
     }
 
-    uint64 MaxJoltage12(std::string_view str)
+    template<size_t N>
+    uint64 MaxJoltage(std::string_view str)
     {
-        uint64 pow10 = 100'000'000'000;
         uint64 sum = 0;
         size_t pos = 0;
-        for (size_t i = 12; i > 0; --i) {
+        for (size_t i = N; i > 0; --i) {
             size_t rem = i - 1;
-            std::string_view ss = str.substr(pos, str.size() - rem - pos);
+            auto ss = str.substr(pos, str.size() - rem - pos);
             auto [v, p] = MaxDigit(ss);
             pos += (p + 1);
-            sum += v * pow10;
-            pow10 /= 10;
+            sum = sum * 10 + v;
         }
         return sum;
     }
@@ -60,6 +59,7 @@ namespace
         return sum;
     }
 
-    REGISTER_SOLUTION(2025, 3, 1, std::bind_front(Solve, MaxJoltage));
-    REGISTER_SOLUTION(2025, 3, 2, std::bind_front(Solve, MaxJoltage12));
+    REGISTER_SOLUTION(2025, 3, 1, std::bind_front(Solve, MaxJoltageBF), "brute force");
+    REGISTER_SOLUTION(2025, 3, 1, std::bind_front(Solve, MaxJoltage<2>));
+    REGISTER_SOLUTION(2025, 3, 2, std::bind_front(Solve, MaxJoltage<12>));
 }
