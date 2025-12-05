@@ -13,10 +13,8 @@ namespace
 
         std::vector<Range> ranges;
         for (std::string_view line : blocks[0]) {
-            uint64 first = Read<uint64>(line);
-            Skip(line, "-");
-            uint64 last = Read<uint64>(line);
-            ranges.emplace_back(first, last);
+            auto [first, last] = Split2(line, '-');
+            ranges.emplace_back(to_uint64(first), to_uint64(last));
         }
 
         std::vector<uint64> availableIds;

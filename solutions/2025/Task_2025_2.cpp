@@ -11,9 +11,8 @@ namespace
         auto text = ReadText(input);
         for (auto id : Split(text, ",")) {
             const auto pos = id.find('-');
-            auto first = to_uint64(id.substr(0, pos));
-            auto second = to_uint64(id.substr(pos + 1));
-            ids.emplace_back(first, second);
+            auto [first, second] = Split2(id, '-');
+            ids.emplace_back(to_uint64(first), to_uint64(second));
         }
         return ids;
     }

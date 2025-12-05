@@ -25,6 +25,16 @@ export
 
 	std::vector<std::string_view> Split(std::string_view str, std::string_view delim);
 
+	constexpr std::pair<std::string_view, std::string_view> Split2(std::string_view str, std::string_view delim) {
+		auto pos = str.find(delim);
+		return { str.substr(0, pos), str.substr(pos + delim.size()) };
+	}
+
+	constexpr std::pair<std::string_view, std::string_view> Split2(std::string_view str, char delim) {
+		auto pos = str.find(delim);
+		return { str.substr(0, pos), str.substr(pos + 1) };
+	}
+
 	struct Parse {
 		std::string_view str;
 		bool success = true;
