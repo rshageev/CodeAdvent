@@ -387,6 +387,9 @@
     <ClCompile Include="solutions\2025\Task_2025_4.cpp">
       <Filter>Source Files\solutions\2025</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\2025\Task_2025_5.cpp">
+      <Filter>Source Files\solutions\2025</Filter>
+    </ClCompile>
     <ClCompile Include="solutions\2020\Task_2020_4.cpp">
       <Filter>Source Files\solutions\2020</Filter>
     </ClCompile>
