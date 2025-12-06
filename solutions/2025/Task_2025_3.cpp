@@ -19,32 +19,15 @@ namespace
         return max;
     }
 
-    std::pair<uint64, size_t> MaxDigit(std::string_view str) {
-        uint64 maxv = 0;
-        size_t maxp = 0;
-        size_t pos = 0;
-        for (char ch : str) {
-            uint64 digit = to_uint64(ch);
-            if (digit > maxv) {
-                maxv = digit;
-                maxp = pos;
-            }
-            ++pos;
-        }
-        return std::make_pair(maxv, maxp);
-    }
-
     template<size_t N>
     uint64 MaxJoltage(std::string_view str)
     {
         uint64 sum = 0;
-        size_t pos = 0;
         for (size_t i = N; i > 0; --i) {
-            size_t rem = i - 1;
-            auto ss = str.substr(pos, str.size() - rem - pos);
-            auto [v, p] = MaxDigit(ss);
-            pos += (p + 1);
-            sum = sum * 10 + v;
+            auto ss = str.substr(0, str.size() - i + 1);
+            auto max_itr = stdr::max_element(ss);
+            str.remove_prefix(max_itr - ss.begin() + 1);
+            sum = sum * 10 + to_uint64(*max_itr);
         }
         return sum;
     }
@@ -52,11 +35,7 @@ namespace
     using MaxJoltageFunc = uint64(*) (std::string_view);
     auto Solve(MaxJoltageFunc max_joltage, const std::filesystem::path& input)
     {
-        uint64 sum = 0;
-        for (const auto& line : ReadLines(input)) {
-            sum += max_joltage(line);
-        }
-        return sum;
+        return Sum(ReadLines(input) | stdv::transform(max_joltage));
     }
 
     REGISTER_SOLUTION(2025, 3, 1, std::bind_front(Solve, MaxJoltageBF), "brute force");
