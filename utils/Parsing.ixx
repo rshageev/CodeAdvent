@@ -23,7 +23,7 @@ export
 	char ReadChar(std::string_view& str);
 	bool Skip(std::string_view& str, std::string_view prefix);
 
-	std::vector<std::string_view> Split(std::string_view str, std::string_view delim);
+	std::vector<std::string_view> Split(std::string_view str, std::string_view delim, bool repeat_delim = false);
 
 	constexpr std::pair<std::string_view, std::string_view> Split2(std::string_view str, std::string_view delim) {
 		auto pos = str.find(delim);
