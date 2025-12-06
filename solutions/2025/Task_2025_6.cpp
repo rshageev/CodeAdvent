@@ -20,8 +20,7 @@ namespace
     {
         std::vector<std::vector<std::string_view>> parts;
         for (const auto& line : lines) {
-            parts.push_back(Split(line, " ", true));
-            std::erase(parts.back(), "");
+            parts.push_back(Split(line, " "));
         }
 
         std::vector<Problem> problems(parts[0].size());

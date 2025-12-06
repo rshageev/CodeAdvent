@@ -26,21 +26,22 @@ bool Skip(std::string_view& str, std::string_view prefix)
 	return true;
 }
 
-std::vector<std::string_view> Split(std::string_view str, std::string_view delim, bool repeat_delim)
+std::vector<std::string_view> Split(std::string_view str, std::string_view delim, bool allow_empty_parts)
 {
 	std::vector<std::string_view> parts;
 
 	auto pos = str.find(delim);
 	while (pos != std::string_view::npos) {
-		parts.push_back(str.substr(0, pos));
-		str.remove_prefix(pos + delim.size());
-		while (repeat_delim && str.starts_with(delim)) {
-			str.remove_prefix(delim.size());
+		if (allow_empty_parts || pos > 0) {
+			parts.push_back(str.substr(0, pos));
 		}
+		str.remove_prefix(pos + delim.size());
 		pos = str.find(delim);
 	}
 
-	parts.push_back(str);
+	if (allow_empty_parts || !str.empty()) {
+		parts.push_back(str);
+	}
 
 	return parts;
 }
