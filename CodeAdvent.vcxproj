@@ -121,6 +121,7 @@
     <ClCompile Include="solutions\2025\Task_2025_4.cpp" />
     <ClCompile Include="solutions\2025\Task_2025_5.cpp" />
     <ClCompile Include="solutions\2025\Task_2025_6.cpp" />
+    <ClCompile Include="solutions\2025\Task_2025_7.cpp" />
     <ClCompile Include="utils\Algorithms.cpp" />
     <ClCompile Include="utils\Algorithms.ixx" />
     <ClCompile Include="utils\Array2D.ixx" />
