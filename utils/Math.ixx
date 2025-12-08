@@ -120,6 +120,12 @@ export
 		return std::abs(v2.x - v1.x) + std::abs(v2.y - v1.y) + std::abs(v2.z - v1.z);
 	}
 
+	template<Number T>
+	constexpr T SqDist(TVec3<T> v1, TVec3<T> v2 = {}) {
+		auto dv = v1 - v2;
+		return dv.x * dv.x + dv.y * dv.y + dv.z * dv.z;
+	}
+
 	using Point = TPoint<int>;
 	using Pointf = TPoint<float>;
 	using Rect = TRect<int>;
