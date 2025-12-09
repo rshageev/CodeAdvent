@@ -97,6 +97,17 @@ export
 	}
 
 	template<Number T>
+	constexpr bool Intersects(const TRect<T>& rect1, const TRect<T>& rect2) {
+		auto rt1 = RightTop(rect1);
+		auto rt2 = RightTop(rect2);
+		bool outside = (rect1.x >= rt2.x)
+			|| (rect2.x >= rt1.x)
+			|| (rect1.y >= rt2.y)
+			|| (rect2.y >= rt1.y);
+		return !outside;
+	}
+
+	template<Number T>
 	constexpr TRect<T> Inflated(const TRect<T>& rect, T dx, T dy) {
 		return { rect.x - dx, rect.y - dy, rect.w + dx + dx, rect.h + dy + dy };
 	}
