@@ -189,9 +189,6 @@
     <ClCompile Include="solutions\2024\Task_2024_2.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>
-    <ClCompile Include="libs\scnlib\src\scn\impl.cpp">
-      <Filter>Source Files\libs\scnlib\src</Filter>
-    </ClCompile>
     <ClCompile Include="solutions\2024\Task_2024_3.cpp">
       <Filter>Source Files\solutions\2024</Filter>
     </ClCompile>

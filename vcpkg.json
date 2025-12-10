@@ -1,6 +1,7 @@
 {
   "dependencies": [
+    "nlohmann-json",
     "scnlib",
-    "nlohmann-json"
+    "eigen3"
   ]
 }
