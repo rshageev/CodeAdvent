@@ -20,12 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CodeAdvent.cpp" />
-    <ClCompile Include="libs\scnlib\src\scn\impl.cpp">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/bigobj %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">/bigobj %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
-    </ClCompile>
     <ClCompile Include="Runner.cpp" />
     <ClCompile Include="Runner.h" />
     <ClCompile Include="solutions\2015\Task_2015_1.cpp" />
@@ -142,16 +136,6 @@
     <ClCompile Include="utils\Types.ixx" />
     <ClCompile Include="utils\Utils.ixx" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="libs\scnlib\include\scn\chrono.h" />
-    <ClInclude Include="libs\scnlib\include\scn\fwd.h" />
-    <ClInclude Include="libs\scnlib\include\scn\istream.h" />
-    <ClInclude Include="libs\scnlib\include\scn\ranges.h" />
-    <ClInclude Include="libs\scnlib\include\scn\regex.h" />
-    <ClInclude Include="libs\scnlib\include\scn\scan.h" />
-    <ClInclude Include="libs\scnlib\include\scn\xchar.h" />
-    <ClInclude Include="libs\scnlib\src\scn\impl.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -216,6 +200,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(ProjectDir)libs\json;$(ProjectDir)libs\scnlib\include;$(ProjectDir)libs\eigen-3.4.0;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnableManifest>true</VcpkgEnableManifest>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
