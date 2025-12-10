@@ -13,7 +13,6 @@ namespace
         std::set<Point> ends;
 
         while (!q.empty()) {
-            ;
             Point pos = q.front();
             q.pop();
             int h = map[pos] + 1;
