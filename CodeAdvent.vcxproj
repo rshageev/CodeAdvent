@@ -111,6 +111,7 @@
     <ClCompile Include="solutions\2024\Task_2024_9.cpp" />
     <ClCompile Include="solutions\2025\Task_2025_1.cpp" />
     <ClCompile Include="solutions\2025\Task_2025_10.cpp" />
+    <ClCompile Include="solutions\2025\Task_2025_11.cpp" />
     <ClCompile Include="solutions\2025\Task_2025_2.cpp" />
     <ClCompile Include="solutions\2025\Task_2025_3.cpp" />
     <ClCompile Include="solutions\2025\Task_2025_4.cpp" />
