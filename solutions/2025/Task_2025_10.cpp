@@ -2,6 +2,7 @@
 
 import std;
 import utils;
+import Z3;
 
 namespace
 {
@@ -46,7 +47,9 @@ namespace
         return ReadLines(input) | stdv::transform(ParseLine) | stdr::to<std::vector>();
     }
 
-    uint16 Configure(const Machine& machine)
+    /***************************************************************/
+
+    uint32 Configure1_BFS(const Machine& machine)
     {
         std::queue<std::pair<uint16, uint16>> q;
         q.emplace(0, 0);
@@ -73,14 +76,51 @@ namespace
         return 0;
     }
 
-    auto Solve_1(const std::filesystem::path& input)
+    /***************************************************************/
+
+    uint32 Configure2_Z3(const Machine& machine)
     {
-        uint32 presses = 0;
-        for (const auto& m : ReadData(input)) {
-            presses += Configure(m);
+        z3::context ctx;
+        z3::optimize opt(ctx);
+
+        z3::expr_vector btnPresses(ctx);
+        for (size_t b = 0; b < machine.buttons.size(); ++b) {
+            auto btnName = std::format("button_{}", b);
+            btnPresses.push_back(ctx.int_const(btnName.c_str()));
+            opt.add(btnPresses.back() >= 0);
         }
-        return presses;
+
+        for (size_t j = 0; j < machine.req_joltage.size(); ++j) {
+            z3::expr_vector terms(ctx);
+            for (size_t b = 0; b < machine.buttons.size(); ++b) {
+                if (machine.buttons[b] & (1u << j)) {
+                    terms.push_back(btnPresses[b]);
+                }
+            }
+            z3::expr joltage = z3::sum(terms);
+            z3::expr reqJoltage = ctx.int_val(machine.req_joltage[j]);
+            opt.add(joltage == reqJoltage);
+        }
+
+        opt.minimize(z3::sum(btnPresses));
+        opt.check();
+
+        z3::model m = opt.get_model();
+        uint32 sum = 0;
+        for (const auto& btnVar : btnPresses) {
+			sum += m.eval(btnVar).get_numeral_uint();
+        }
+        return sum;
     }
 
-    REGISTER_SOLUTION(2025, 10, 1, Solve_1);
+    /***************************************************************/
+
+	using ConfigureFunc = uint32(*)(const Machine&);
+    auto Solve(ConfigureFunc configure, const std::filesystem::path& input)
+    {
+        return Sum(ReadData(input) | stdv::transform(configure));
+    }
+
+    REGISTER_SOLUTION(2025, 10, 1, std::bind_front(Solve, Configure1_BFS));
+    REGISTER_SOLUTION(2025, 10, 2, std::bind_front(Solve, Configure2_Z3));
 }
